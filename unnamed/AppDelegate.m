@@ -20,13 +20,44 @@
 @implementation AppDelegate
 
 
+- (void) showFBSessionState{
+    //Debugging purpose to see whether
+    //check this url for details: https://developers.facebook.com/docs/facebook-login/ios/sessions
+    BOOL effectivelyLoggedIn;
+    switch (FBSession.activeSession.state) {
+        case FBSessionStateOpen:
+            NSLog(@"Facebook session state: FBSessionStateOpen");
+            effectivelyLoggedIn = YES;
+            break;
+        case FBSessionStateCreatedTokenLoaded:
+            NSLog(@"Facebook session state: FBSessionStateCreatedTokenLoaded");
+            effectivelyLoggedIn = YES;
+            break;
+        case FBSessionStateOpenTokenExtended:
+            NSLog(@"Facebook session state: FBSessionStateOpenTokenExtended");
+            effectivelyLoggedIn = YES;
+            break;
+        default:
+            NSLog(@"Facebook session state: not of one of the open or openable types.");
+            effectivelyLoggedIn = NO;
+            break;
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [Parse setApplicationId:@"j4MqR9ASYk601tn3xX3vR8nLUyqcoRqjE0UzCqr7" clientKey: @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8"];
+    
     [PFFacebookUtils initializeFacebook];
     
+    BOOL shouldOpenLoginView = NO;
+    
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        NSLog(@"PFUser currentUser is not nil. And currentUser is linked with PFFacebookUtils");
+        
+       [self showFBSessionState];
+        
        if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
             [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"read_stream", @"user_photos"]
                                                allowLoginUI:NO
@@ -35,19 +66,31 @@
                                               // This method will be called EACH time the session state changes,
                                               // also for intermediate states and NOT just when the session open
                                           }];
-            
-            MainViewController *vc = [[MainViewController alloc] init];
-            UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-            self.window.rootViewController = nvc;
+       }else if(FBSession.activeSession.state == FBSessionStateOpen && [[FBSession activeSession] accessTokenData]){
+               NSLog(@"FBSession already opened. And with cached FBAccessTokenData ready to use!");
+       }else{
+           shouldOpenLoginView = YES;
+       }
+    }else {
+        if( [PFUser currentUser] == nil){
+            NSLog(@"PFUser currentUser is nil.");
         }
-    } else {
+        if (![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
+            NSLog(@"PFUser currentUser not linked with PFFacebookUtils.");
+        }
+        shouldOpenLoginView = YES;
+    }
+    
+    if(shouldOpenLoginView){
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         self.window.backgroundColor = [UIColor whiteColor];
-        [self.window makeKeyAndVisible];
+    }else{
+        MainViewController *vc = [[MainViewController alloc] init];
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+        self.window.rootViewController = nvc;
     }
     
     [self.window makeKeyAndVisible];
-    
     // Override point for customization after application launch.
     return YES;
 }
