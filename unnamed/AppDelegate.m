@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "User.h"
 
 @interface AppDelegate ()
 
@@ -26,20 +27,25 @@
     [Parse setApplicationId:@"j4MqR9ASYk601tn3xX3vR8nLUyqcoRqjE0UzCqr7" clientKey: @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8"];
     [PFFacebookUtils initializeFacebook];
     
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-       if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-            [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"read_stream", @"user_photos"]
-                                               allowLoginUI:NO
-                                          completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                              // Handler for session state changes
-                                              // This method will be called EACH time the session state changes,
-                                              // also for intermediate states and NOT just when the session open
-                                          }];
-            
+    User *user = [User currentUser];
+    if (user) {
+//    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+//       if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+//            [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"read_stream", @"user_photos"]
+//                                               allowLoginUI:NO
+//                                          completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+//                                              // Handler for session state changes
+//                                              // This method will be called EACH time the session state changes,
+//                                              // also for intermediate states and NOT just when the session open
+//                                          }];
+        NSLog(@"User name %@", user.name);
+        NSLog(@"User image %@", user.profileImageUrl);
+        NSLog(@"User id %@", user.objectId);
+        
             MainViewController *vc = [[MainViewController alloc] init];
             UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
             self.window.rootViewController = nvc;
-        }
+//        }
     } else {
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         self.window.backgroundColor = [UIColor whiteColor];
