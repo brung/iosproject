@@ -10,6 +10,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "User.h"
 
 @interface MainViewController ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -54,6 +55,11 @@
                                                                     target:self
                                                                     action:@selector(logoutButtonAction:)];
     self.navigationItem.leftBarButtonItem = logoutButton;
+    
+        User *user = [User currentUser];
+    NSLog(@"User name %@", user.name);
+    NSLog(@"User image %@", user.profileImageUrl);
+    NSLog(@"User id %@", user.objectId);
     
     [self _loadData];
 }
