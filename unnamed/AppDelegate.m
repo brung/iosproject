@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "User.h"
 
 @interface AppDelegate ()
 
@@ -53,9 +54,14 @@
     
     BOOL shouldOpenLoginView = NO;
     
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        NSLog(@"PFUser currentUser is not nil. And currentUser is linked with PFFacebookUtils");
+    User *user = [User currentUser];
+
+    if (user) {
         
+        NSLog(@"User name %@", user.name);
+        NSLog(@"User image %@", user.profileImageUrl);
+        NSLog(@"User id %@", user.objectId);
+       
        [self showFBSessionState];
         
        if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
@@ -72,13 +78,7 @@
            shouldOpenLoginView = YES;
        }
     }else {
-        if( [PFUser currentUser] == nil){
-            NSLog(@"PFUser currentUser is nil.");
-        }
-        if (![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
-            NSLog(@"PFUser currentUser not linked with PFFacebookUtils.");
-        }
-        shouldOpenLoginView = YES;
+           shouldOpenLoginView = YES;
     }
     
     if(shouldOpenLoginView){
