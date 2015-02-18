@@ -28,6 +28,7 @@ i# Compiled source #
 
 # OS generated files #
 ######################
+xcuserdata
 .DS_Store
 .DS_Store?
 ._*
