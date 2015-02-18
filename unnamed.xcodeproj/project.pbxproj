@@ -13,6 +13,8 @@
 		B87C15BF1A93113400191823 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87C15BB1A93113400191823 /* MainViewController.xib */; };
 		B8BA93E81A9459B5003BD476 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93E71A9459B5003BD476 /* User.m */; };
 		B8BA93EB1A9464C7003BD476 /* Survey.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93EA1A9464C7003BD476 /* Survey.m */; };
+		B8BA93F41A947718003BD476 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93F31A947718003BD476 /* Answer.m */; };
+		B8BA93F71A947817003BD476 /* Vote.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93F61A947817003BD476 /* Vote.m */; };
 		B8C291B51A930BDD000F2143 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C291B41A930BDD000F2143 /* main.m */; };
 		B8C291B81A930BDD000F2143 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C291B71A930BDD000F2143 /* AppDelegate.m */; };
 		B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8C291BF1A930BDD000F2143 /* Images.xcassets */; };
@@ -45,6 +47,10 @@
 		B8BA93E71A9459B5003BD476 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		B8BA93E91A9464C7003BD476 /* Survey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Survey.h; sourceTree = "<group>"; };
 		B8BA93EA1A9464C7003BD476 /* Survey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Survey.m; sourceTree = "<group>"; };
+		B8BA93F21A947718003BD476 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		B8BA93F31A947718003BD476 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		B8BA93F51A947817003BD476 /* Vote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vote.h; sourceTree = "<group>"; };
+		B8BA93F61A947817003BD476 /* Vote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vote.m; sourceTree = "<group>"; };
 		B8C291AF1A930BDD000F2143 /* unnamed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unnamed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C291B31A930BDD000F2143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8C291B41A930BDD000F2143 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -144,6 +150,10 @@
 				B8BA93E71A9459B5003BD476 /* User.m */,
 				B8BA93E91A9464C7003BD476 /* Survey.h */,
 				B8BA93EA1A9464C7003BD476 /* Survey.m */,
+				B8BA93F21A947718003BD476 /* Answer.h */,
+				B8BA93F31A947718003BD476 /* Answer.m */,
+				B8BA93F51A947817003BD476 /* Vote.h */,
+				B8BA93F61A947817003BD476 /* Vote.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -322,11 +332,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
+				B8BA93F41A947718003BD476 /* Answer.m in Sources */,
 				B8C291B81A930BDD000F2143 /* AppDelegate.m in Sources */,
 				B8C291B51A930BDD000F2143 /* main.m in Sources */,
 				B8BA93EB1A9464C7003BD476 /* Survey.m in Sources */,
 				B87C15BC1A93113400191823 /* LoginViewController.m in Sources */,
 				B87C15BE1A93113400191823 /* MainViewController.m in Sources */,
+				B8BA93F71A947817003BD476 /* Vote.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
