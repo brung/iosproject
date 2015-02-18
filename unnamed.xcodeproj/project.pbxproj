@@ -20,6 +20,12 @@
 		B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8C291BF1A930BDD000F2143 /* Images.xcassets */; };
 		B8C291C31A930BDD000F2143 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8C291C11A930BDD000F2143 /* LaunchScreen.xib */; };
 		B8C291CF1A930BDD000F2143 /* unnamedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C291CE1A930BDD000F2143 /* unnamedTests.m */; };
+		E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF041A9489530074D48B /* TabBarMenuViewController.m */; };
+		E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */; };
+		E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF091A948D870074D48B /* ProfileViewController.m */; };
+		E25DBF0C1A948D870074D48B /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF0A1A948D870074D48B /* ProfileViewController.xib */; };
+		E25DBF101A948E190074D48B /* SurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF0E1A948E190074D48B /* SurveyViewController.m */; };
+		E25DBF111A948E190074D48B /* SurveyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF0F1A948E190074D48B /* SurveyViewController.xib */; };
 		EAB0BC95865217516AEE88BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEAEEA448EAC175BD0FED56 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +67,15 @@
 		B8C291C81A930BDD000F2143 /* unnamedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unnamedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C291CD1A930BDD000F2143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8C291CE1A930BDD000F2143 /* unnamedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = unnamedTests.m; sourceTree = "<group>"; };
+		E25DBF031A9489530074D48B /* TabBarMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarMenuViewController.h; sourceTree = "<group>"; };
+		E25DBF041A9489530074D48B /* TabBarMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarMenuViewController.m; sourceTree = "<group>"; };
+		E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarMenuViewController.xib; sourceTree = "<group>"; };
+		E25DBF081A948D870074D48B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		E25DBF091A948D870074D48B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		E25DBF0A1A948D870074D48B /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		E25DBF0D1A948E190074D48B /* SurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyViewController.h; sourceTree = "<group>"; };
+		E25DBF0E1A948E190074D48B /* SurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyViewController.m; sourceTree = "<group>"; };
+		E25DBF0F1A948E190074D48B /* SurveyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +189,15 @@
 				B87C15B91A93113400191823 /* MainViewController.h */,
 				B87C15BA1A93113400191823 /* MainViewController.m */,
 				B87C15BB1A93113400191823 /* MainViewController.xib */,
+				E25DBF031A9489530074D48B /* TabBarMenuViewController.h */,
+				E25DBF041A9489530074D48B /* TabBarMenuViewController.m */,
+				E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */,
+				E25DBF081A948D870074D48B /* ProfileViewController.h */,
+				E25DBF091A948D870074D48B /* ProfileViewController.m */,
+				E25DBF0A1A948D870074D48B /* ProfileViewController.xib */,
+				E25DBF0D1A948E190074D48B /* SurveyViewController.h */,
+				E25DBF0E1A948E190074D48B /* SurveyViewController.m */,
+				E25DBF0F1A948E190074D48B /* SurveyViewController.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -277,6 +301,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25DBF0C1A948D870074D48B /* ProfileViewController.xib in Resources */,
+				E25DBF111A948E190074D48B /* SurveyViewController.xib in Resources */,
+				E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */,
 				B8C291C31A930BDD000F2143 /* LaunchScreen.xib in Resources */,
 				B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */,
 				B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */,
@@ -332,10 +359,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
+				E25DBF101A948E190074D48B /* SurveyViewController.m in Sources */,
 				B8BA93F41A947718003BD476 /* Answer.m in Sources */,
 				B8C291B81A930BDD000F2143 /* AppDelegate.m in Sources */,
 				B8C291B51A930BDD000F2143 /* main.m in Sources */,
+				E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */,
 				B8BA93EB1A9464C7003BD476 /* Survey.m in Sources */,
+				E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */,
 				B87C15BC1A93113400191823 /* LoginViewController.m in Sources */,
 				B87C15BE1A93113400191823 /* MainViewController.m in Sources */,
 				B8BA93F71A947817003BD476 /* Vote.m in Sources */,

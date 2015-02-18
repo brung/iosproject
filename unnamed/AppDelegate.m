@@ -13,6 +13,9 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "User.h"
+#import "TabBarMenuViewController.h"
+#import "SurveyViewController.h"
+#import "ProfileViewController.h"
 
 @interface AppDelegate ()
 
@@ -85,9 +88,18 @@
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         self.window.backgroundColor = [UIColor whiteColor];
     }else{
-        MainViewController *vc = [[MainViewController alloc] init];
-        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-        self.window.rootViewController = nvc;
+        //here we create the tab bar view controller
+        TabBarMenuViewController * tbmvc = [[TabBarMenuViewController alloc] init];
+        
+        UINavigationController * vc1 = [[UINavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
+        UINavigationController * vc2 = [[UINavigationController alloc] initWithRootViewController:[[SurveyViewController alloc] init]];
+        UINavigationController * vc3 = [[UINavigationController alloc] initWithRootViewController:[[ProfileViewController alloc] init]];
+        
+        //adding sub view controllers
+        NSArray* controllers = [NSArray arrayWithObjects:vc1, vc2, vc3, nil];
+        tbmvc.viewControllers = controllers;
+        
+        self.window.rootViewController = tbmvc;
     }
     
     [self.window makeKeyAndVisible];
