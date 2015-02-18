@@ -31,6 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Home";
+        self.tabBarItem.image = [UIImage imageNamed:@"Home"];
         
         // Create array for table row titles
         _rowTitleArray = @[@"Location", @"Gender", @"Date of Birth", @"Relationship"];

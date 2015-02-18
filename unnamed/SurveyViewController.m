@@ -18,6 +18,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Survey";
+        self.tabBarItem.image = [UIImage imageNamed:@"Poll Topic"];
     }
     return self;
 }
