@@ -16,6 +16,7 @@
 #import "TabBarMenuViewController.h"
 #import "SurveyViewController.h"
 #import "ProfileViewController.h"
+#import "AppNavigationController.h"
 
 NSString * const kParseApplicationId = @"j4MqR9ASYk601tn3xX3vR8nLUyqcoRqjE0UzCqr7";
 NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
@@ -88,15 +89,15 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
     }
     
     if(shouldOpenLoginView){
-        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+        self.window.rootViewController = [[AppNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         self.window.backgroundColor = [UIColor whiteColor];
     }else{
         //here we create the tab bar view controller
         TabBarMenuViewController * tbmvc = [[TabBarMenuViewController alloc] init];
         
-        UINavigationController * vc1 = [[UINavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-        UINavigationController * vc2 = [[UINavigationController alloc] initWithRootViewController:[[SurveyViewController alloc] init]];
-        UINavigationController * vc3 = [[UINavigationController alloc] initWithRootViewController:[[ProfileViewController alloc] init]];
+        AppNavigationController * vc1 = [[AppNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
+        AppNavigationController * vc2 = [[AppNavigationController alloc] initWithRootViewController:[[SurveyViewController alloc] init]];
+        AppNavigationController * vc3 = [[AppNavigationController alloc] initWithRootViewController:[[ProfileViewController alloc] init]];
         
         //adding sub view controllers
         NSArray* controllers = [NSArray arrayWithObjects:vc1, vc2, vc3, nil];
