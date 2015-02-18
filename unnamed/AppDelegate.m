@@ -17,6 +17,9 @@
 #import "SurveyViewController.h"
 #import "ProfileViewController.h"
 
+NSString * const kParseApplicationId = @"j4MqR9ASYk601tn3xX3vR8nLUyqcoRqjE0UzCqr7";
+NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
+
 @interface AppDelegate ()
 
 @end
@@ -51,23 +54,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [Parse setApplicationId:@"j4MqR9ASYk601tn3xX3vR8nLUyqcoRqjE0UzCqr7" clientKey: @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8"];
+    [Parse setApplicationId:kParseApplicationId clientKey:kParseClientId];
     
     [PFFacebookUtils initializeFacebook];
     
     BOOL shouldOpenLoginView = NO;
     
     User *user = [User currentUser];
-
+    
     if (user) {
         
         NSLog(@"User name %@", user.name);
         NSLog(@"User image %@", user.profileImageUrl);
         NSLog(@"User id %@", user.objectId);
-       
-       [self showFBSessionState];
         
-       if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        [self showFBSessionState];
+        
+        if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
             [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"read_stream", @"user_photos"]
                                                allowLoginUI:NO
                                           completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
@@ -75,13 +78,13 @@
                                               // This method will be called EACH time the session state changes,
                                               // also for intermediate states and NOT just when the session open
                                           }];
-       }else if(FBSession.activeSession.state == FBSessionStateOpen && [[FBSession activeSession] accessTokenData]){
-               NSLog(@"FBSession already opened. And with cached FBAccessTokenData ready to use!");
-       }else{
-           shouldOpenLoginView = YES;
-       }
-    }else {
-           shouldOpenLoginView = YES;
+        } else if(FBSession.activeSession.state == FBSessionStateOpen && [[FBSession activeSession] accessTokenData]){
+            NSLog(@"FBSession already opened. And with cached FBAccessTokenData ready to use!");
+        } else {
+            shouldOpenLoginView = YES;
+        }
+    } else {
+        shouldOpenLoginView = YES;
     }
     
     if(shouldOpenLoginView){
@@ -128,7 +131,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
