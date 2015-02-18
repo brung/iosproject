@@ -1,30 +1,25 @@
 //
-//  Survey.m
+//  Vote.m
 //  unnamed
 //
 //  Created by Bruce Ng on 2/17/15.
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
-#import "Survey.h"
-@interface Survey ()<PFSubclassing>
+#import "Vote.h"
 
-@end
-
-@implementation Survey
+@implementation Vote
 @dynamic objectId;
-@dynamic user;
-@dynamic text;
-@dynamic anonymous;
-@dynamic complete;
-@dynamic createdAt;
+@dynamic userId;
+@dynamic surveyId;
+@dynamic answerId;
 
 + (void)load {
     [self registerSubclass];
 }
 
 + (NSString *)parseClassName {
-    return @"Survey";
+    return @"Vote";
 }
 
 @end

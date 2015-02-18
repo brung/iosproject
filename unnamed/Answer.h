@@ -1,5 +1,5 @@
 //
-//  Survey.h
+//  Answer.h
 //  unnamed
 //
 //  Created by Bruce Ng on 2/17/15.
@@ -8,15 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/PFObject+Subclass.h>
+#import "Survey.h"
 
-
-@interface Survey : PFObject
+@interface Answer : PFObject
 + (NSString *)parseClassName;
 @property (nonatomic, strong) NSString *objectId;
-@property (nonatomic, strong) PFUser *user;
+@property (nonatomic, strong) NSString *surveyId;
 @property (nonatomic, strong) NSString *text;
-@property (nonatomic, assign) BOOL anonymous;
-@property (nonatomic, assign) BOOL complete;
-@property (nonatomic, readonly) NSDate *createdAt;
-
+@property (nonatomic, assign) NSInteger count;
 @end
