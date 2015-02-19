@@ -8,11 +8,47 @@
 
 #import "ParseClient.h"
 
-static ParseClient *_instance;
+NSInteger const ResultCount = 20;
 
 @implementation ParseClient
-+ (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
++ (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion{
+    PFQuery *query = [Question query];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"user"];
+    query.skip = page * ResultCount;
+    query.limit = ResultCount;
 
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [ParseClient getAnswersForQuestions:objects withResults:[NSMutableArray array] andCompletion:completion];
+        } else {
+            completion([NSArray array], error);
+        }
+    }];
+}
+
++ (void)getAnswersForQuestions:(NSArray *)questions withResults:(NSMutableArray *)surveys andCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
+    if (questions.count < 1) {
+        completion(surveys, nil);
+        return;
+    }
+    NSMutableArray *mutableQuestions = [NSMutableArray arrayWithArray:questions];
+    Question *question = [mutableQuestions lastObject];
+    [mutableQuestions removeLastObject];
+    PFQuery *query = [Answer query];
+    [query whereKey:@"questionId" equalTo:question.objectId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            Survey *survey = [[Survey alloc] init];
+            survey.question = question;
+            survey.user = [[User alloc] initWithPFUser:question.user];
+            survey.answers = objects;
+            [surveys addObject:survey];
+            [ParseClient getAnswersForQuestions:mutableQuestions withResults:surveys andCompletion:completion];
+        } else {
+            completion([NSArray array], error);
+        }
+    }];    
 }
 
 + (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
