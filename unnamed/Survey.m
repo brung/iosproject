@@ -7,7 +7,8 @@
 //
 
 #import "Survey.h"
-@interface Survey ()<PFSubclassing>
+#import <Parse/Parse.h>
+@interface Survey ()
 
 @end
 
@@ -25,6 +26,11 @@
 
 + (NSString *)parseClassName {
     return @"Survey";
+}
+
+- (void)saveWithCompletion:(void(^)(BOOL succeeded, NSError *error))completion {
+    self.user = [PFUser currentUser];
+    [self saveInBackgroundWithBlock:completion];
 }
 
 @end

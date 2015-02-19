@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/PFObject+Subclass.h>
 
-
-@interface Survey : PFObject
+@interface Survey : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) PFUser *user;
@@ -18,5 +17,7 @@
 @property (nonatomic, assign) BOOL anonymous;
 @property (nonatomic, assign) BOOL complete;
 @property (nonatomic, readonly) NSDate *createdAt;
+
+- (void)saveWithCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 
 @end
