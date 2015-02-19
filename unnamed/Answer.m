@@ -10,7 +10,7 @@
 
 @implementation Answer
 @dynamic objectId;
-@dynamic surveyId;
+@dynamic questionId;
 @dynamic text;
 @dynamic count;
 

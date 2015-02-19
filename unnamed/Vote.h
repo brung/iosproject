@@ -11,7 +11,7 @@
 @interface Vote : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 @property (nonatomic, strong) NSString *userId;
-@property (nonatomic, strong) NSString *surveyId;
+@property (nonatomic, strong) NSString *questionId;
 @property (nonatomic, strong) NSString *answerId;
 
 @end

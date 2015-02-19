@@ -10,6 +10,7 @@
 #import "ComposeAnswerCell.h"
 #import "Answer.h"
 #import "Survey.h"
+#import "ParseClient.h"
 
 NSString * const AnswerCell = @"ComposeAnswerCell";
 NSString * const AskAQuestion = @"Ask a question . . .";
@@ -155,7 +156,19 @@ NSInteger const maxCount = 160;
     }
     if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
         //Submit question
-        }
+        Question *question = [[Question alloc] initWithText:self.questionText.text];
+        Survey *survey = [[Survey alloc] init];
+        survey.question = question;
+        survey.answers = [validAnswers copy];
+        survey.user = [User currentUser];
+        [ParseClient saveSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [self.tabBarController ]
+            } else {
+                [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            }
+        }];
+    }
 }
 
 - (void)onCancelButton {

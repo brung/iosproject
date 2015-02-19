@@ -19,12 +19,24 @@ NSInteger const resultCount = 20;
 @dynamic complete;
 @dynamic createdAt;
 
+- (id)initWithText:(NSString *)text {
+    self = [super init];
+    if (self) {
+        self.text = text;
+        self.user = [PFUser currentUser];
+        self.anonymous = NO;
+        self.complete = NO;
+    }
+    return self;
+}
+
+
 + (void)load {
     [self registerSubclass];
 }
 
 + (NSString *)parseClassName {
-    return @"Survey";
+    return @"Question";
 }
 
 

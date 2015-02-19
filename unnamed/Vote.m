@@ -11,7 +11,7 @@
 @implementation Vote
 @dynamic objectId;
 @dynamic userId;
-@dynamic surveyId;
+@dynamic questionId;
 @dynamic answerId;
 
 + (void)load {

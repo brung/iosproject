@@ -7,7 +7,15 @@
 //
 
 #import <Parse/Parse.h>
+#import "Survey.h"
+#import "Question.h"
+#import "Answer.h"
+#import "Vote.h"
+
 
 @interface ParseClient : Parse
 + (ParseClient *)sharedInstance;
+
++ (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
++ (void)saveAnswerFromNSMutableArray:(NSMutableArray *)answers withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 @end

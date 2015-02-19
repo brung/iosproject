@@ -1,4 +1,4 @@
-//
+    //
 //  ParseClient.m
 //  unnamed
 //
@@ -7,10 +7,6 @@
 //
 
 #import "ParseClient.h"
-#import "Question.h"
-#import "Answer.h"
-#import "Vote.h"
-#import "Survey.h"
 
 static ParseClient *_instance;
 
@@ -23,42 +19,46 @@ static ParseClient *_instance;
 }
 
 + (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
-//    NSMutableArray *validAnswers = [NSMutableArray array];
-//    for (Answer *answer in self.answers) {
-//        if ([answer.text length] >= 1) {
-//            [validAnswers addObject:answer];
-//        }
-//    }
-//    if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
-//        //Submit question
-//        Survey *survey = [[Survey alloc] init];
-//        survey.text = self.questionText.text;
-//        survey.anonymous = NO;
-//        survey.complete = NO;
-//
-//    [survey.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (!error) {
-//            NSString *questionId = survey.question.objectId;
-//            for (int count = 0; count < validAnswers.count; count++) {
-//                Answer *answer = validAnswers[count];
-//                answer.surveyId = surveyId;
-//                [answer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                    if (!error) {
-//                        // NEed to do something
-//                        if(count == validAnswers.count-1) {
-//                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-//                        }
-//                    } else {
-//                        NSLog(@"unable to save answer");
-//                        [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:[NSString stringWithFormat:@"Unable to save this survey at this time. Please try again. (%d)", count] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-//                    }
-//                }];
-//            }
-//        } else {
-//            NSLog(@"unable to save question");
-//            [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-//        }
-//    }];
+    NSMutableArray *validAnswers = [NSMutableArray array];
+    for (Answer *answer in survey.answers) {
+        if ([answer.text length] >= 1) {
+            [validAnswers addObject:answer];
+        }
+    }
+    if ([survey.question.text length] >= 8 && validAnswers.count >= 2) {
+        //Submit question
+        survey.question.anonymous = NO;
+        survey.question.complete = NO;
+        [survey.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                for (Answer *answer in validAnswers) {
+                    answer.questionId = survey.question.objectId;
+                }
+                [ParseClient saveAnswerFromNSMutableArray:validAnswers withCompletion:completion];
+            } else {
+                NSLog(@"unable to save question");
+                completion(NO, error);
+            }
+        }];
+    }
+}
+
++ (void)saveAnswerFromNSMutableArray:(NSMutableArray *)answers withCompletion:(void(^)(BOOL succeeded, NSError *error))completion {
+    if (answers.count < 1) {
+        completion(YES, nil);
+        return;
+    }
+    
+    Answer *answer = [answers lastObject];
+    [answers removeLastObject];
+    [answer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            [ParseClient saveAnswerFromNSMutableArray:answers withCompletion:(completion)];
+        } else {
+            completion(NO, error);
+        }
+    }];
+    
 }
 
 @end

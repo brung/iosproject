@@ -16,4 +16,6 @@
 @property (nonatomic, assign) BOOL anonymous;
 @property (nonatomic, assign) BOOL complete;
 @property (nonatomic, readonly) NSDate *createdAt;
+
+- (id)initWithText:(NSString *)text;
 @end
