@@ -13,6 +13,8 @@
 		3E7C1D501A958BC10046FDE1 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D4E1A958BC10046FDE1 /* HomeViewController.xib */; };
 		3E7C1D541A958D120046FDE1 /* SurveyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7C1D521A958D120046FDE1 /* SurveyCell.m */; };
 		3E7C1D551A958D120046FDE1 /* SurveyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D531A958D120046FDE1 /* SurveyCell.xib */; };
+		3E7C1D591A95AA520046FDE1 /* SurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */; };
+		3E7C1D5A1A95AA520046FDE1 /* SurveyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */; };
 		B87C15BC1A93113400191823 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C15B71A93113400191823 /* LoginViewController.m */; };
 		B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87C15B81A93113400191823 /* LoginViewController.xib */; };
 		B8BA93E81A9459B5003BD476 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93E71A9459B5003BD476 /* User.m */; };
@@ -56,6 +58,9 @@
 		3E7C1D511A958D120046FDE1 /* SurveyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyCell.h; sourceTree = "<group>"; };
 		3E7C1D521A958D120046FDE1 /* SurveyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyCell.m; sourceTree = "<group>"; };
 		3E7C1D531A958D120046FDE1 /* SurveyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyCell.xib; sourceTree = "<group>"; };
+		3E7C1D561A95AA520046FDE1 /* SurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyViewController.h; sourceTree = "<group>"; };
+		3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyViewController.m; sourceTree = "<group>"; };
+		3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyViewController.xib; sourceTree = "<group>"; };
 		4AEAEEA448EAC175BD0FED56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA90E0F57CF5978BEB02DE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B87C15B61A93113400191823 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -230,6 +235,9 @@
 				3E7C1D4C1A958BC10046FDE1 /* HomeViewController.h */,
 				3E7C1D4D1A958BC10046FDE1 /* HomeViewController.m */,
 				3E7C1D4E1A958BC10046FDE1 /* HomeViewController.xib */,
+				3E7C1D561A95AA520046FDE1 /* SurveyViewController.h */,
+				3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */,
+				3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 				E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */,
 				B8C291C31A930BDD000F2143 /* LaunchScreen.xib in Resources */,
 				3E7C1D551A958D120046FDE1 /* SurveyCell.xib in Resources */,
+				3E7C1D5A1A95AA520046FDE1 /* SurveyViewController.xib in Resources */,
 				B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */,
 				B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */,
 				B8C0DBDD1A95138C0023BC39 /* ComposeAnswerCell.xib in Resources */,
@@ -402,6 +411,7 @@
 				B8C291B51A930BDD000F2143 /* main.m in Sources */,
 				E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */,
 				3E7C1D4F1A958BC10046FDE1 /* HomeViewController.m in Sources */,
+				3E7C1D591A95AA520046FDE1 /* SurveyViewController.m in Sources */,
 				B8BA93EB1A9464C7003BD476 /* Survey.m in Sources */,
 				E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */,
 				B8C0DBDC1A95138C0023BC39 /* ComposeAnswerCell.m in Sources */,
