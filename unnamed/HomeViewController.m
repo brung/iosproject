@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "SurveyCell.h"
 #import "SurveyViewController.h"
+#import "ParseClient.h"
 
 NSString * const kSurveyCell = @"SurveyCell";
 
@@ -36,6 +37,13 @@ NSString * const kSurveyCell = @"SurveyCell";
     
     // Setup Objects
     self.surveys = [[NSMutableArray alloc] init];
+    [ParseClient getHomeSurveysOnPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
+        if (!error) {
+            [self.surveys addObjectsFromArray:surveys];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+    }];
     
     // Table Refresh control
     self.tableRefreshControl = [[UIRefreshControl alloc] init];
