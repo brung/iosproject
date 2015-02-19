@@ -11,7 +11,7 @@
 @interface Answer : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 @property (nonatomic, strong) NSString *objectId;
-@property (nonatomic, strong) NSString *surveyId;
+@property (nonatomic, strong) NSString *questionId;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) NSInteger count;
 @end
