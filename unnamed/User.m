@@ -7,7 +7,6 @@
 //
 
 #import "User.h"
-#import <Parse/Parse.h>
 
 NSString * const PFObjectName = @"User";
 

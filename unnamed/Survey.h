@@ -20,4 +20,7 @@
 
 - (void)saveWithCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 
++ (void)getHomeSurveysPage:(NSInteger)page completion:(void(^)(NSArray *objects, NSError *error))completion;
++ (NSArray *)initFromObjectArray:(NSArray *)objects;
+
 @end
