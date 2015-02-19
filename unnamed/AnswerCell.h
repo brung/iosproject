@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Answer.h"
 
 @interface AnswerCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *percentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *answerLabel;
+
+@property (nonatomic, strong) Answer* answer;
+@property (nonatomic, assign) NSInteger total;
+@property (nonatomic, assign) NSInteger index;
 
 @end

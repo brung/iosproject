@@ -127,10 +127,9 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
     AnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kAnswerCell];
     Survey *survey = self.surveys[indexPath.section];
     Answer *ans = survey.answers[indexPath.row];
-    NSInteger total = [self getTotalFromAnswers:survey.answers];
-    cell.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", indexPath.row, ans.text];
-    NSInteger percentage = total <= 0 ? 0 : 100.0f * ans.count / total;
-    cell.percentLabel.text = [NSString stringWithFormat:@"%ld%%", percentage];
+    cell.index = indexPath.row;
+    cell.total = [self getTotalFromAnswers:survey.answers];
+    cell.answer = ans;
     return cell;
 }
 
