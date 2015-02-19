@@ -6,11 +6,9 @@
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <Parse/PFObject+Subclass.h>
-#import "Survey.h"
 
-@interface Answer : PFObject
+@interface Answer : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) NSString *surveyId;

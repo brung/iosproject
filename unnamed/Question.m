@@ -1,25 +1,31 @@
 //
-//  Answer.m
+//  Question.h
 //  unnamed
 //
 //  Created by Bruce Ng on 2/17/15.
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
-#import "Answer.h"
+#import "Question.h"
+#import <Parse/Parse.h>
 
-@implementation Answer
+NSInteger const resultCount = 20;
+
+@implementation Question
 @dynamic objectId;
-@dynamic surveyId;
+@dynamic user;
 @dynamic text;
-@dynamic count;
+@dynamic anonymous;
+@dynamic complete;
+@dynamic createdAt;
 
 + (void)load {
     [self registerSubclass];
 }
 
 + (NSString *)parseClassName {
-    return @"Answer";
+    return @"Survey";
 }
+
 
 @end
