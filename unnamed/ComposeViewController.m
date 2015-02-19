@@ -27,6 +27,16 @@ NSInteger const maxCount = 160;
 @end
 
 @implementation ComposeViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = @"Create";
+        self.tabBarItem.image = [UIImage imageNamed:@"Poll Topic"];
+    }
+    return self;
+}
+
 - (ComposeAnswerCell *)prototypeCell {
     if (!_prototypeCell) {
         _prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:AnswerCell];
@@ -36,8 +46,8 @@ NSInteger const maxCount = 160;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Create";
-    self.navigationController.navigationBar.translucent = NO;
+    
+    // Button
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     UIBarButtonItem *submitButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];

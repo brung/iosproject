@@ -7,13 +7,10 @@
 //
 
 #import "LoginViewController.h"
-#import "MainViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
-#import "ProfileViewController.h"
-#import "TabBarMenuViewController.h"
-#import "SurveyViewController.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController () <FBLoginViewDelegate>
 
@@ -75,20 +72,7 @@
 #pragma mark - Private methods
 
 - (void)presentLoggedInViewController {
-    //here we create the tab bar view controller
-    TabBarMenuViewController * tbmvc = [[TabBarMenuViewController alloc] init];
-    
-    UINavigationController * vc1 = [[UINavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-    UINavigationController * vc2 = [[UINavigationController alloc] initWithRootViewController:[[SurveyViewController alloc] init]];
-    UINavigationController * vc3 = [[UINavigationController alloc] initWithRootViewController:[[ProfileViewController alloc] init]];
-    
-    //adding sub view controllers
-    NSArray* controllers = [NSArray arrayWithObjects:vc1, vc2, vc3, nil];
-    tbmvc.viewControllers = controllers;
-    
-    tbmvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    [self presentViewController:tbmvc animated:YES completion:nil];
+    [self presentViewController:[AppDelegate tabBarMenuViewController] animated:YES completion:nil];
 }
 
 - (IBAction)onLoginButton:(id)sender {
