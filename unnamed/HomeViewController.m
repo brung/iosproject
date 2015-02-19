@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "SurveyCell.h"
+#import "SurveyViewController.h"
 
 NSString * const kSurveyCell = @"SurveyCell";
 
@@ -75,6 +76,8 @@ NSString * const kSurveyCell = @"SurveyCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SurveyViewController *vc = [[SurveyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
