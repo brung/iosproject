@@ -155,34 +155,7 @@ NSInteger const maxCount = 160;
     }
     if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
         //Submit question
-        Survey *survey = [[Survey alloc] init];
-        survey.text = self.questionText.text;
-        survey.anonymous = NO;
-        survey.complete = NO;
-        [survey saveWithCompletion:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-                NSString *surveyId = survey.objectId;
-                for (int count = 0; count < validAnswers.count; count++) {
-                    Answer *answer = validAnswers[count];
-                    answer.surveyId = surveyId;
-                    [answer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                        if (!error) {
-                            // NEed to do something
-                            if(count == validAnswers.count-1) {
-                                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                            }
-                        } else {
-                            NSLog(@"unable to save answer");
-                            [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:[NSString stringWithFormat:@"Unable to save this survey at this time. Please try again. (%d)", count] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                        }
-                    }];
-                }
-            } else {
-                NSLog(@"unable to save survey");
-                [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-            }
-        }];
-    }
+        }
 }
 
 - (void)onCancelButton {

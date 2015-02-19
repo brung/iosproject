@@ -1,15 +1,14 @@
 //
-//  Survey.h
+//  Question.h
 //  unnamed
 //
 //  Created by Bruce Ng on 2/17/15.
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <Parse/PFObject+Subclass.h>
 
-@interface Survey : PFObject
+@interface Question : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) PFUser *user;
@@ -17,10 +16,4 @@
 @property (nonatomic, assign) BOOL anonymous;
 @property (nonatomic, assign) BOOL complete;
 @property (nonatomic, readonly) NSDate *createdAt;
-
-- (void)saveWithCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
-
-+ (void)getHomeSurveysPage:(NSInteger)page completion:(void(^)(NSArray *objects, NSError *error))completion;
-+ (NSArray *)initFromObjectArray:(NSArray *)objects;
-
 @end

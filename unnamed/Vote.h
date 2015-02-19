@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <Parse/PFObject+Subclass.h>
 
 @interface Vote : PFObject<PFSubclassing>
