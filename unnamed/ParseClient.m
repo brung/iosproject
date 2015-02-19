@@ -11,7 +11,47 @@
 NSInteger const ResultCount = 20;
 
 @implementation ParseClient
-+ (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion{
++ (void)getMyAnsweredSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
+    
+    PFQuery *voteQuery = [Vote query];
+    [voteQuery orderByDescending:@"createdAt"];
+    [voteQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+    [voteQuery includeKey:@"question"];
+    voteQuery.skip = page * ResultCount;
+    voteQuery.limit = ResultCount;
+    
+    PFQuery *query = [Question query];
+    [query whereKey:@"objectId" matchesKey:@"questionId" inQuery:voteQuery];
+    [query includeKey:@"user"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [ParseClient getAnswersForQuestions:objects withResults:[NSMutableArray array] andCompletion:completion];            
+        } else {
+            completion([NSArray array], error);
+        }
+    }];
+}
+
++ (void)getMySurveysComplete:(BOOL)complete onPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
+    PFQuery *query = [Question query];
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query includeKey:@"user"];
+    [query whereKey:@"complete" equalTo:complete ? @"true" : @"false"];
+    query.skip = page * ResultCount;
+    query.limit = ResultCount;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [ParseClient getAnswersForQuestions:objects withResults:[NSMutableArray array] andCompletion:completion];
+        } else {
+            completion([NSArray array], error);
+        }
+    }];
+}
+
++ (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"user"];
