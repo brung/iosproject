@@ -8,8 +8,8 @@
 
 #import "Survey.h"
 #import <Parse/Parse.h>
-@interface Survey ()
 
+@interface Survey ()<PFSubclassing>
 @end
 
 @implementation Survey

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/PFObject+Subclass.h>
 
-@interface Survey : PFObject<PFSubclassing>
+@interface Survey : PFObject
 + (NSString *)parseClassName;
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) PFUser *user;

@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "ComposeViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
@@ -51,15 +52,16 @@
     
     // Add logout navigation bar button
     UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
-                                                                     style:UIBarButtonItemStylePlain
+                                                                    style:UIBarButtonItemStylePlain
                                                                     target:self
-                                                                    action:@selector(logoutButtonAction:)];
+                                                                    action:@selector(logoutButtonAction)];
     self.navigationItem.leftBarButtonItem = logoutButton;
     
-        User *user = [User currentUser];
-    NSLog(@"User name %@", user.name);
-    NSLog(@"User image %@", user.profileImageUrl);
-    NSLog(@"User id %@", user.objectId);
+    UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] initWithTitle:@"Create"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                     target:self
+                                                                     action:@selector(createButtonAction)];
+    self.navigationItem.rightBarButtonItem = composeButton;
     
     [self _loadData];
 }
@@ -94,12 +96,18 @@
 
 #pragma mark Actions
 
-- (void)logoutButtonAction:(id)sender {
+- (void)logoutButtonAction {
     // Logout user, this automatically clears the cache
     [PFUser logOut];
     
     // Return to login view controller
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)createButtonAction {
+    ComposeViewController *vc = [[ComposeViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nvc animated:YES completion:nil];
 }
 
 #pragma mark Data
@@ -161,7 +169,7 @@
         } else if ([[[[error userInfo] objectForKey:@"error"] objectForKey:@"type"]
                     isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
             NSLog(@"The facebook session was invalidated");
-            [self logoutButtonAction:nil];
+            [self logoutButtonAction];
         } else {
             NSLog(@"Some other error: %@", error);
         }
