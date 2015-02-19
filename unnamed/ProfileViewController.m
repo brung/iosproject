@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "SurveyCell.h"
+#import "ParseClient.h"
 
 NSString * const kSurveyCellName = @"SurveyCell";
 
@@ -33,6 +34,8 @@ NSString * const kSurveyCellName = @"SurveyCell";
 //############################################################
 @property (nonatomic, strong) UITableViewCell *prototypeCell;
 
+@property (nonatomic, strong) NSMutableArray *surveys;
+
 
 @end
 
@@ -54,6 +57,14 @@ NSString * const kSurveyCellName = @"SurveyCell";
     
     // - set profile image
     [self.profileImageView setImage:[UIImage imageNamed:@"tongue" ]];
+    [ParseClient getMySurveysComplete:NO onPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
+        if (!error) {
+            [self.surveys addObjectsFromArray:surveys];
+            [self.questionTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+    }];
     
     // - tableview related:
     self.questionTableView.dataSource = self;

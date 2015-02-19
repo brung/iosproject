@@ -10,9 +10,9 @@
 
 @implementation Vote
 @dynamic objectId;
-@dynamic userId;
+@dynamic user;
 @dynamic questionId;
-@dynamic answerId;
+@dynamic answer;
 
 + (void)load {
     [self registerSubclass];
