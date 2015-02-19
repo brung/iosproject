@@ -11,11 +11,8 @@
 static ParseClient *_instance;
 
 @implementation ParseClient
-+ (ParseClient *)sharedInstance {
-    if (!_instance) {
-        _instance = [[ParseClient alloc] init];
-    }
-    return _instance;
++ (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
+
 }
 
 + (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{

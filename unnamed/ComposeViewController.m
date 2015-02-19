@@ -163,7 +163,6 @@ NSInteger const maxCount = 160;
         survey.user = [User currentUser];
         [ParseClient saveSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
-                [self.tabBarController ]
             } else {
                 [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }
