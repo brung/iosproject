@@ -36,8 +36,12 @@ NSInteger const maxCount = 160;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Create";
     self.navigationController.navigationBar.translucent = NO;
-    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    UIBarButtonItem *submitButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];
+    self.navigationItem.rightBarButtonItem = submitButton;
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -132,14 +136,14 @@ NSInteger const maxCount = 160;
 
 }
 
-- (IBAction)onSubmitButton:(id)sender {
-    NSInteger validAnswerCount = 0;
+- (void)onSubmitButton {
+    NSMutableArray *validAnswers = [NSMutableArray array];
     for (Answer *answer in self.answers) {
         if ([answer.text length] >= 1) {
-            validAnswerCount++;
+            [validAnswers addObject:answer];
         }
     }
-    if ([self.questionText.text length] >= 8 && validAnswerCount >= 2) {
+    if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
         //Submit question
         Survey *survey = [[Survey alloc] init];
         survey.text = self.questionText.text;
@@ -148,12 +152,15 @@ NSInteger const maxCount = 160;
         [survey saveWithCompletion:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 NSString *surveyId = survey.objectId;
-                for (int count = 0; count < self.answers.count; count++) {
-                    Answer *answer = self.answers[count];
+                for (int count = 0; count < validAnswers.count; count++) {
+                    Answer *answer = validAnswers[count];
                     answer.surveyId = surveyId;
                     [answer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                         if (!error) {
                             // NEed to do something
+                            if(count == validAnswers.count-1) {
+                                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                            }
                         } else {
                             NSLog(@"unable to save answer");
                             [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:[NSString stringWithFormat:@"Unable to save this survey at this time. Please try again. (%d)", count] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
@@ -166,6 +173,10 @@ NSInteger const maxCount = 160;
             }
         }];
     }
+}
+
+- (void)onCancelButton {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
