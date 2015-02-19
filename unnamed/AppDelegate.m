@@ -8,13 +8,13 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-#import "MainViewController.h"
+#import "HomeViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "User.h"
 #import "TabBarMenuViewController.h"
-#import "SurveyViewController.h"
+#import "ComposeViewController.h"
 #import "ProfileViewController.h"
 #import "AppNavigationController.h"
 
@@ -27,6 +27,22 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
 
 @implementation AppDelegate
 
++ (TabBarMenuViewController *)tabBarMenuViewController {
+    static TabBarMenuViewController *instance = nil;
+    
+    instance = [[TabBarMenuViewController alloc] init];
+    
+    AppNavigationController * vc1 = [[AppNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+    AppNavigationController * vc2 = [[AppNavigationController alloc] initWithRootViewController:[[ComposeViewController alloc] init]];
+    AppNavigationController * vc3 = [[AppNavigationController alloc] initWithRootViewController:[[ProfileViewController alloc] init]];
+    
+    //adding sub view controllers
+    NSArray* controllers = [NSArray arrayWithObjects:vc1, vc2, vc3, nil];
+    instance.viewControllers = controllers;
+    //instance.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    return instance;
+}
 
 - (void) showFBSessionState{
     //Debugging purpose to see whether
@@ -89,21 +105,10 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
     }
     
     if(shouldOpenLoginView){
-        self.window.rootViewController = [[AppNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+        self.window.rootViewController = [[LoginViewController alloc] init];
         self.window.backgroundColor = [UIColor whiteColor];
     }else{
-        //here we create the tab bar view controller
-        TabBarMenuViewController * tbmvc = [[TabBarMenuViewController alloc] init];
-        
-        AppNavigationController * vc1 = [[AppNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-        AppNavigationController * vc2 = [[AppNavigationController alloc] initWithRootViewController:[[SurveyViewController alloc] init]];
-        AppNavigationController * vc3 = [[AppNavigationController alloc] initWithRootViewController:[[ProfileViewController alloc] init]];
-        
-        //adding sub view controllers
-        NSArray* controllers = [NSArray arrayWithObjects:vc1, vc2, vc3, nil];
-        tbmvc.viewControllers = controllers;
-        
-        self.window.rootViewController = tbmvc;
+        self.window.rootViewController = [AppDelegate tabBarMenuViewController];
     }
     
     [self.window makeKeyAndVisible];
