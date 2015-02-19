@@ -14,8 +14,7 @@
 
 
 @interface ParseClient : Parse
-+ (ParseClient *)sharedInstance;
-
++ (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 + (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 + (void)saveAnswerFromNSMutableArray:(NSMutableArray *)answers withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 @end
