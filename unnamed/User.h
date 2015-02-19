@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface User : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *profileImageUrl;
 @property (nonatomic, strong) NSString *objectId;
+
+- (id)initWithPFUser:(PFUser *)user;
 
 + (User *)currentUser;
 @end
