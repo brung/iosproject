@@ -70,7 +70,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         if (!error) {
             [self.refreshControl endRefreshing];
             [self.surveys removeAllObjects];
-            [self.surveys addObjectsFromArray:surveys];
+            [self.surveys addObjectsFromArray:[[surveys reverseObjectEnumerator] allObjects]];
             NSLog(@"getting %ld surveys for current user: %@", self.surveys.count, self.currentProfileUser[@"profile"][@"name"]);
             //[self.profileTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
             [self.profileTableView reloadData];
