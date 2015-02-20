@@ -109,7 +109,7 @@ NSInteger const ResultCount = 20;
                 Vote *vote = votesDict[survey.question.objectId];
                 if (vote) {
                     survey.voted = YES;
-                    survey.votedAnswerId = vote.answer.objectId;
+                    survey.vote = vote;
                 } else {
                     survey.voted =NO;
                 }
@@ -164,18 +164,18 @@ NSInteger const ResultCount = 20;
     }];
 }
 
-+ (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(BOOL succeeded, NSError *error))completion {
-    Vote *vote = [[Vote alloc] init];
++ (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(Vote *vote, NSError *error))completion {
+    Vote *vote = (survey.vote) ? survey.vote : [[Vote alloc] init];
     vote.answer = answer;
     vote.user = [PFUser currentUser];
     vote.questionId = survey.question.objectId;
     [vote saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             survey.voted = YES;
-            survey.votedAnswerId = answer.objectId;
-            completion(YES, nil);
+            survey.vote = vote;
+            completion(vote, nil);
         } else {
-            completion(NO, error);
+            completion(nil, error);
         }
     }];
 }
