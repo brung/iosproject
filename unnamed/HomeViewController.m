@@ -73,6 +73,7 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
     [ParseClient getHomeSurveysOnPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
         if (!error) {
             [self.surveys addObjectsFromArray:surveys];
+            [self.tableView reloadData];
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
@@ -140,6 +141,7 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
+    vc.survey = self.surveys[indexPath.section];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

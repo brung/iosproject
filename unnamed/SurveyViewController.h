@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Survey.h"
 
 @interface SurveyViewController : UIViewController
-
+@property (nonatomic, strong) Survey *survey;
 @end
