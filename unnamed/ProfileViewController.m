@@ -10,12 +10,12 @@
 #import "SurveyCell.h"
 #import "ParseClient.h"
 #import "ProfileCell.h"
-#import "SurveyHeaderView.h"
+#import "SurveyHeaderCell.h"
 #import "AnswerCell.h"
 
 NSString * const kAnswerCellName = @"AnswerCell";
 NSString * const kProfileCellName = @"ProfileCell";
-NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
+NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -49,7 +49,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
     self.profileTableView.delegate = self;
     [self.profileTableView registerNib:[UINib nibWithNibName:kProfileCellName bundle:nil] forCellReuseIdentifier:kProfileCellName];
     [self.profileTableView registerNib:[UINib nibWithNibName:kAnswerCellName bundle:nil] forCellReuseIdentifier:kAnswerCellName];
-    [self.profileTableView registerNib:[UINib nibWithNibName:kSurveyHeaderViewName bundle:nil] forHeaderFooterViewReuseIdentifier:kSurveyHeaderViewName];
+    [self.profileTableView registerNib:[UINib nibWithNibName:kSurveyHeaderCellName bundle:nil] forCellReuseIdentifier:kSurveyHeaderCellName];
     self.profileTableView.rowHeight = UITableViewAutomaticDimension;
 
     [self fetchSurveys];
@@ -118,7 +118,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         return 1;
     }
     Survey * s = self.surveys[section-1];
-    NSInteger surveyAnswerCount = s.answers.count;
+    NSInteger surveyAnswerCount = s.answers.count + 1;//Include SurveyHeaderCell
     return surveyAnswerCount;
 }
 
@@ -129,17 +129,17 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
     return _prototypeCell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0){
-        return 255;
-    }
-    //calculate cell height for survey cells
-    //NSLog(@"calculating row height for a survey");
-    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
-    [self.prototypeCell layoutIfNeeded];
-    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height+2;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if(indexPath.section == 0){
+//        return 255;
+//    }
+//    //calculate cell height for survey cells
+//    NSLog(@"calculating row height for a survey");
+//    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+//    [self.prototypeCell layoutIfNeeded];
+//    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+//    return size.height+2;
+//}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -148,10 +148,21 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         [cell updateContentWithPFUser:[PFUser currentUser]];
         //ProfileCell * cell = [[ProfileCell alloc] initWithPFUser: [PFUser currentUser]];
         return cell;
+    } else {
+        Survey *survey = self.surveys[indexPath.section-1];
+        if (indexPath.row == 0) {
+            SurveyHeaderCell *cell = [self.profileTableView dequeueReusableCellWithIdentifier:kSurveyHeaderCellName];
+            cell.survey = survey;
+            return cell;
+        } else {
+            AnswerCell *cell = [self.profileTableView dequeueReusableCellWithIdentifier:kAnswerCellName];
+            Answer *ans = survey.answers[indexPath.row - 1];//For SurveyHeaderCell
+            cell.index = indexPath.row;
+            cell.total = [self getTotalFromAnswers:survey.answers];
+            cell.answer = ans;
+            return cell;
+        }
     }
-    AnswerCell *cell = [self.profileTableView dequeueReusableCellWithIdentifier:kAnswerCellName];
-    [self configureCell:cell forRowAtIndexPath:indexPath];
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,21 +171,22 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
     //[self.navigationController pushViewController:vc animated:YES];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if(section >= 1){
-        SurveyHeaderView *view = [self.profileTableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderViewName];
-        view.survey = self.surveys[section-1];
-        return view;
-    }else{
-        UITableViewHeaderFooterView * view = [[UITableViewHeaderFooterView alloc] init];
-        return view;
-    }
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    if(section >= 1){
+//        SurveyHeaderView *view = [self.profileTableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderViewName];
+//        view.survey = self.surveys[section-1];
+//        return view;
+//    }else{
+//        UITableViewHeaderFooterView * view = [[UITableViewHeaderFooterView alloc] init];
+//        return view;
+//    }
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(section == 0) return 0;
-    SurveyHeaderView *view = [self.profileTableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderViewName];
-    return view.frame.size.height;
+//    if(section == 0) return 0;
+//    SurveyHeaderView *view = [self.profileTableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderViewName];
+//    return view.frame.size.height;
+    return 0;
 }
 
 - (NSInteger)getTotalFromAnswers:(NSArray *)answers {
@@ -190,7 +202,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
     if ([cell isKindOfClass:[AnswerCell class]]) {
         AnswerCell * answerCell = (AnswerCell *)cell;
         Survey *survey = self.surveys[indexPath.section-1];
-        Answer *ans = survey.answers[indexPath.row];
+        Answer *ans = survey.answers[indexPath.row - 1];//For SurveyHeaderCell
         answerCell.index = indexPath.row;
         answerCell.total = [self getTotalFromAnswers:survey.answers];
         answerCell.answer = ans;

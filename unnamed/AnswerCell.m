@@ -7,11 +7,13 @@
 //
 
 #import "AnswerCell.h"
+#import "BarView.h"
 
 @interface AnswerCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *percentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel;
+@property (weak, nonatomic) IBOutlet BarView *barView;
 
 @end
 
@@ -20,6 +22,7 @@
 - (void)awakeFromNib {
     // Initialization code
     self.answerLabel.preferredMaxLayoutWidth = self.answerLabel.frame.size.width;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -31,8 +34,9 @@
 - (void)setAnswer:(Answer *)answer {
     _answer = answer;
     self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", self.index, answer.text];
-    NSInteger percentage = self.total <= 0 ? 0 : 100.0f * answer.count / self.total;
-    self.percentLabel.text = [NSString stringWithFormat:@"%ld%%", percentage];
+    CGFloat percentage = self.total <= 0 ? 0.0 : 1.0f * answer.count / self.total;
+    self.percentLabel.text = [NSString stringWithFormat:@"%.1f%%", percentage * 100.0];
+    self.barView.percentage = percentage;
 }
 
 @end

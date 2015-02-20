@@ -9,17 +9,17 @@
 #import "HomeViewController.h"
 #import "AnswerCell.h"
 #import "SurveyViewController.h"
-#import "SurveyHeaderView.h"
+#import "SurveyHeaderCell.h"
 #import "ParseClient.h"
 
 NSString * const kAnswerCell = @"AnswerCell";
-NSString * const kSurveyHeaderView = @"SurveyHeaderView";
+NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
-
-@property (nonatomic,strong) NSMutableArray *surveys;
+@property (nonatomic, strong) NSMutableArray *surveys;
+@property (nonatomic, assign) NSInteger pageIndex;
 
 - (NSInteger)getTotalFromAnswers:(NSArray *)answers;
 
@@ -28,8 +28,7 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
 @implementation HomeViewController
 
 - (void) setupTestData {
-    [self.surveys removeAllObjects];
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<20; i++) {
         Survey *survey = [[Survey alloc] init];
         survey.question = [[Question alloc] init];
         survey.question.text = [NSString stringWithFormat:@"Question %d?", i];
@@ -40,7 +39,7 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
         survey.user.name = [NSString stringWithFormat:@"Name %d", i];
         
         NSMutableArray *answers = [[NSMutableArray alloc] init];
-        for (int j=0; j < i % 4 +1; j++) {
+        for (int j=0; j < ((i % 4) + 2); j++) {
             Answer *answer = [[Answer alloc] init];
             answer.count = i * j;
             answer.text = [NSString stringWithFormat:@"Answer %d - %d", i, j];
@@ -48,12 +47,9 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
         }
         survey.answers = [NSArray arrayWithArray:answers];
         survey.voted = (i%2 == 0)?YES:NO;
-        //survey.votedIndex = i%4;
         
         [self.surveys addObject:survey];
     }
-    [self.tableView reloadData];
-    [self.tableRefreshControl endRefreshing];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -69,6 +65,7 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
     [super viewDidLoad];
     
     // Setup Objects
+    self.pageIndex = 0;
     self.surveys = [[NSMutableArray alloc] init];
     [ParseClient getHomeSurveysOnPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
         if (!error) {
@@ -88,7 +85,7 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:kAnswerCell bundle:nil] forCellReuseIdentifier:kAnswerCell];
-    [self.tableView registerNib:[UINib nibWithNibName:kSurveyHeaderView bundle:nil] forHeaderFooterViewReuseIdentifier:kSurveyHeaderView];
+    [self.tableView registerNib:[UINib nibWithNibName:kSurveryHeaderCell bundle:nil] forCellReuseIdentifier:kSurveryHeaderCell];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     [self onTableRefresh];
@@ -101,17 +98,21 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
 
 #pragma mark - RefreshControl
 - (void)onTableRefresh {
-//    [ParseClient getHomeSurveysOnPage:1 withCompletion:^(NSArray *surveys, NSError *error) {
-//        if (error == nil) {
-//            [self.surveys removeAllObjects];
-//            [self.surveys addObjectsFromArray:surveys];
-//            [self.tableView reloadData];
-//        } else {
-//            NSLog(@"%@", error);
-//        }
-//        [self.tableRefreshControl endRefreshing];
-//    }];
-    [self setupTestData];
+    [ParseClient getHomeSurveysOnPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
+        if (error == nil) {
+            self.pageIndex = 0;
+            [self.surveys removeAllObjects];
+            [self.surveys addObjectsFromArray:surveys];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error);
+        }
+        [self.tableRefreshControl endRefreshing];
+    }];
+//    [self.surveys removeAllObjects];
+//    [self setupTestData];
+//    [self.tableView reloadData];
+//    [self.tableRefreshControl endRefreshing];
 }
 
 #pragma mark - TableViewDelegate Methods
@@ -121,17 +122,39 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     Survey *survey = self.surveys[section];
-    return survey.answers.count;
+    return survey.answers.count + 1;//Include Header Cell
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kAnswerCell];
     Survey *survey = self.surveys[indexPath.section];
-    Answer *ans = survey.answers[indexPath.row];
-    cell.index = indexPath.row;
-    cell.total = [self getTotalFromAnswers:survey.answers];
-    cell.answer = ans;
-    return cell;
+    
+    if (indexPath.section >= self.surveys.count - 1) {
+        [ParseClient getHomeSurveysOnPage:self.pageIndex + 1 withCompletion:^(NSArray *surveys, NSError *error) {
+            if (error == nil) {
+                self.pageIndex++;
+                [self.surveys addObjectsFromArray:surveys];
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"%@", error);
+            }
+        }];
+        
+//        [self setupTestData];
+//        [self.tableView reloadData];
+    }
+    
+    if (indexPath.row == 0) {
+        SurveyHeaderCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveryHeaderCell];
+        cell.survey = survey;
+        return cell;
+    } else {
+        AnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kAnswerCell];
+        Answer *ans = survey.answers[indexPath.row - 1];//Row index include SurveyHeaderCell
+        cell.index = indexPath.row;
+        cell.total = [self getTotalFromAnswers:survey.answers];
+        cell.answer = ans;
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -145,15 +168,8 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    SurveyHeaderView *view = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderView];
-    view.survey = self.surveys[section];
-    return view;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    SurveyHeaderView *view = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderView];
-    return view.frame.size.height;
+    return 0;
 }
 
 #pragma mark - Private Methods
