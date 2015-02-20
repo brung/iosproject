@@ -101,10 +101,8 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
         [ParseClient getHomeSurveysOnPage:self.pageIndex withCompletion:^(NSArray *surveys, NSError *error) {
             if (error == nil) {
                 if (self.pageIndex == 0) {
-                    NSLog(@"creating new surveys");
                     self.surveys = [NSMutableArray arrayWithArray:surveys];
                 } else {
-                    NSLog(@"appending new surveys");
                     [self.surveys addObjectsFromArray:surveys];
                 }
                 [self.tableView reloadData];
@@ -132,7 +130,7 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Survey *survey = self.surveys[indexPath.section];
     
-    if (indexPath.section >= self.surveys.count - 1) {
+    if (indexPath.section == self.surveys.count - 1 && !self.isUpdating) {
         self.pageIndex++;
         if (self.surveys.count == (self.pageIndex * ResultCount)) {
             [self fetchSurveys];

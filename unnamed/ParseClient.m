@@ -52,7 +52,6 @@ NSInteger const ResultCount = 6;
 }
 
 + (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
-    NSLog(@"Calling gethomesurveys %ld", page);
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"user"];
