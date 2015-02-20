@@ -8,7 +8,7 @@
 
 #import "ParseClient.h"
 
-NSInteger const ResultCount = 6;
+NSInteger const ResultCount = 20;
 
 @implementation ParseClient
 + (void)getMyAnsweredSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
