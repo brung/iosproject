@@ -69,6 +69,7 @@ NSInteger const ResultCount = 20;
 
 + (void)getAnswersForQuestions:(NSArray *)questions withResults:(NSMutableArray *)surveys andCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     if (questions.count < 1) {
+        [ParseClient getVotesForSurveys:surveys withCompletion:completion];
         completion(surveys, nil);
         return;
     }
@@ -79,16 +80,46 @@ NSInteger const ResultCount = 20;
     [query whereKey:@"questionId" equalTo:question.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            Survey *survey = [[Survey alloc] init];
-            survey.question = question;
-            survey.user = [[User alloc] initWithPFUser:question.user];
+            Survey *survey = [[Survey alloc] initWithQuestion:question andPFUser:question.user];
             survey.answers = objects;
             [surveys addObject:survey];
             [ParseClient getAnswersForQuestions:mutableQuestions withResults:surveys andCompletion:completion];
         } else {
-            completion([NSArray array], error);
+            completion(surveys, error);
         }
     }];    
+}
+
++ (void)getVotesForSurveys:(NSArray *)surveys withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
+    NSMutableArray *questionIds = [NSMutableArray array];
+    for (Survey *survey in surveys) {
+        [questionIds addObject:survey.question.objectId];
+    }
+    PFQuery *query = [Vote query];
+    [query whereKey:@"questionId" containedIn:questionIds];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query includeKey:@"answer"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSMutableDictionary *votesDict = [NSMutableDictionary dictionary];
+            for (Vote *vote in objects) {
+                [votesDict setObject:vote forKey:vote.questionId];
+            }
+            for (Survey *survey in surveys) {
+                Vote *vote = votesDict[survey.question.objectId];
+                if (vote) {
+                    survey.voted = YES;
+                    survey.votedAnswerId = vote.answer.objectId;
+                } else {
+                    survey.voted =NO;
+                }
+            }
+            completion(surveys, nil);
+            
+        } else {
+            completion(surveys, error);
+        }
+    }];
 }
 
 + (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
@@ -131,7 +162,22 @@ NSInteger const ResultCount = 20;
             completion(NO, error);
         }
     }];
-    
+}
+
++ (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(BOOL succeeded, NSError *error))completion {
+    Vote *vote = [[Vote alloc] init];
+    vote.answer = answer;
+    vote.user = [PFUser currentUser];
+    vote.questionId = survey.question.objectId;
+    [vote saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            survey.voted = YES;
+            survey.votedAnswerId = answer.objectId;
+            completion(YES, nil);
+        } else {
+            completion(NO, error);
+        }
+    }];
 }
 
 @end

@@ -17,5 +17,10 @@
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSArray *answers;
 @property (nonatomic, assign) BOOL voted;
-@property (nonatomic, assign) NSInteger votedIndex;
+@property (nonatomic, strong) NSString *votedAnswerId;
+
+- (id)initWithQuestion:(Question *)question;
+- (id)initWithQuestion:(Question *)question andUser:(User *)user;
+- (id)initWithQuestion:(Question *)question andPFUser:(PFUser *)user;
+
 @end
