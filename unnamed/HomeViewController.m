@@ -48,7 +48,7 @@ NSString * const kSurveyHeaderView = @"SurveyHeaderView";
         }
         survey.answers = [NSArray arrayWithArray:answers];
         survey.voted = (i%2 == 0)?YES:NO;
-        survey.votedIndex = i%4;
+        //survey.votedIndex = i%4;
         
         [self.surveys addObject:survey];
     }
