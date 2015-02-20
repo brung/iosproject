@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="167" id="KGk-i7-Jjw" customClass="DetailQuestionCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="167"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mBC-qR-wwf">
+                        <rect key="frame" x="8" y="8" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="Iqn-u7-aPV"/>
+                            <constraint firstAttribute="height" constant="64" id="MNd-p6-12b"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Michael Moore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hA-ye-iPO">
+                        <rect key="frame" x="80" y="8" width="98" height="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="asks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwF-f0-RFn">
+                        <rect key="frame" x="182" y="8" width="30" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Should I run away and join the circus?" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-6b-65e">
+                        <rect key="frame" x="80" y="33" width="232" height="39"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="iwF-f0-RFn" firstAttribute="leading" secondItem="3hA-ye-iPO" secondAttribute="trailing" constant="8" id="4oP-eX-X3X"/>
+                    <constraint firstItem="Afq-6b-65e" firstAttribute="top" secondItem="3hA-ye-iPO" secondAttribute="bottom" constant="8" id="9Eu-jc-aoL"/>
+                    <constraint firstItem="iwF-f0-RFn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Bca-O0-95s"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iwF-f0-RFn" secondAttribute="trailing" constant="8" id="HhU-qa-FpN"/>
+                    <constraint firstItem="3hA-ye-iPO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="K4b-h9-VEL"/>
+                    <constraint firstAttribute="trailing" secondItem="Afq-6b-65e" secondAttribute="trailing" constant="8" id="LMb-om-kPB"/>
+                    <constraint firstItem="3hA-ye-iPO" firstAttribute="leading" secondItem="mBC-qR-wwf" secondAttribute="trailing" constant="8" id="V53-iR-MIZ"/>
+                    <constraint firstItem="Afq-6b-65e" firstAttribute="top" secondItem="3hA-ye-iPO" secondAttribute="bottom" constant="8" id="VMW-TK-hF6"/>
+                    <constraint firstItem="iwF-f0-RFn" firstAttribute="leading" secondItem="3hA-ye-iPO" secondAttribute="trailing" constant="4" id="WbW-wa-HaP"/>
+                    <constraint firstItem="3hA-ye-iPO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ajY-1z-rgt"/>
+                    <constraint firstItem="3hA-ye-iPO" firstAttribute="leading" secondItem="mBC-qR-wwf" secondAttribute="trailing" constant="8" id="dKr-I4-8jK"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mBC-qR-wwf" secondAttribute="bottom" constant="8" id="e77-S2-QtS"/>
+                    <constraint firstItem="mBC-qR-wwf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="g3s-20-Frw"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Afq-6b-65e" secondAttribute="bottom" constant="8" id="jWM-Jm-Vmk"/>
+                    <constraint firstItem="mBC-qR-wwf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="udK-To-z5v"/>
+                    <constraint firstItem="Afq-6b-65e" firstAttribute="leading" secondItem="mBC-qR-wwf" secondAttribute="trailing" constant="8" id="uk5-4f-HvZ"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="V53-iR-MIZ"/>
+                        <exclude reference="ajY-1z-rgt"/>
+                        <exclude reference="VMW-TK-hF6"/>
+                        <exclude reference="4oP-eX-X3X"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nameLabel" destination="3hA-ye-iPO" id="uWB-oK-IQz"/>
+                <outlet property="profileImageView" destination="mBC-qR-wwf" id="q5W-u6-AZX"/>
+                <outlet property="questionLabel" destination="Afq-6b-65e" id="HaC-ad-Zap"/>
+            </connections>
+            <point key="canvasLocation" x="516" y="442.5"/>
+        </tableViewCell>
+    </objects>
+</document>

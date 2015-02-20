@@ -9,6 +9,9 @@
 #import "Survey.h"
 
 @implementation Survey
+- (BOOL)isCurrentVoteAnswer:(Answer *)answer {
+    return (self.vote.answer == answer);
+}
 
 - (id)initWithQuestion:(Question *)question {
     self = [super init];

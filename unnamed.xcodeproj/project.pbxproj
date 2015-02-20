@@ -20,6 +20,8 @@
 		3E7C1D5A1A95AA520046FDE1 /* SurveyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */; };
 		3E7C1D681A966CBA0046FDE1 /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7C1D661A966CBA0046FDE1 /* AnswerCell.m */; };
 		3E7C1D691A966CBA0046FDE1 /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D671A966CBA0046FDE1 /* AnswerCell.xib */; };
+		B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B862A88A1A970E25008B2310 /* DetailAnswerCell.m */; };
+		B862A88D1A970E25008B2310 /* DetailAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */; };
 		B87C15BC1A93113400191823 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C15B71A93113400191823 /* LoginViewController.m */; };
 		B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87C15B81A93113400191823 /* LoginViewController.xib */; };
 		B8BA93E81A9459B5003BD476 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93E71A9459B5003BD476 /* User.m */; };
@@ -37,6 +39,8 @@
 		B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8C291BF1A930BDD000F2143 /* Images.xcassets */; };
 		B8C291C31A930BDD000F2143 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8C291C11A930BDD000F2143 /* LaunchScreen.xib */; };
 		B8C291CF1A930BDD000F2143 /* unnamedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C291CE1A930BDD000F2143 /* unnamedTests.m */; };
+		B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C704A81A97065600243C3B /* DetailQuestionCell.m */; };
+		B8C704AB1A97065600243C3B /* DetailQuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8C704A91A97065600243C3B /* DetailQuestionCell.xib */; };
 		E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF041A9489530074D48B /* TabBarMenuViewController.m */; };
 		E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */; };
 		E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF091A948D870074D48B /* ProfileViewController.m */; };
@@ -80,6 +84,9 @@
 		3E7C1D671A966CBA0046FDE1 /* AnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerCell.xib; sourceTree = "<group>"; };
 		4AEAEEA448EAC175BD0FED56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA90E0F57CF5978BEB02DE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B862A8891A970E25008B2310 /* DetailAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailAnswerCell.h; sourceTree = "<group>"; };
+		B862A88A1A970E25008B2310 /* DetailAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailAnswerCell.m; sourceTree = "<group>"; };
+		B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailAnswerCell.xib; sourceTree = "<group>"; };
 		B87C15B61A93113400191823 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B87C15B71A93113400191823 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B87C15B81A93113400191823 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -111,6 +118,9 @@
 		B8C291C81A930BDD000F2143 /* unnamedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unnamedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C291CD1A930BDD000F2143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8C291CE1A930BDD000F2143 /* unnamedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = unnamedTests.m; sourceTree = "<group>"; };
+		B8C704A71A97065600243C3B /* DetailQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailQuestionCell.h; sourceTree = "<group>"; };
+		B8C704A81A97065600243C3B /* DetailQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailQuestionCell.m; sourceTree = "<group>"; };
+		B8C704A91A97065600243C3B /* DetailQuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailQuestionCell.xib; sourceTree = "<group>"; };
 		E25DBF031A9489530074D48B /* TabBarMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarMenuViewController.h; sourceTree = "<group>"; };
 		E25DBF041A9489530074D48B /* TabBarMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarMenuViewController.m; sourceTree = "<group>"; };
 		E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarMenuViewController.xib; sourceTree = "<group>"; };
@@ -260,6 +270,12 @@
 				E2C6FF1B1A96C178005AEDA9 /* ProfileCell.h */,
 				E2C6FF1C1A96C178005AEDA9 /* ProfileCell.m */,
 				E2C6FF1D1A96C178005AEDA9 /* ProfileCell.xib */,
+				B8C704A71A97065600243C3B /* DetailQuestionCell.h */,
+				B8C704A81A97065600243C3B /* DetailQuestionCell.m */,
+				B8C704A91A97065600243C3B /* DetailQuestionCell.xib */,
+				B862A8891A970E25008B2310 /* DetailAnswerCell.h */,
+				B862A88A1A970E25008B2310 /* DetailAnswerCell.m */,
+				B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -389,12 +405,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E25DBF0C1A948D870074D48B /* ProfileViewController.xib in Resources */,
+				B8C704AB1A97065600243C3B /* DetailQuestionCell.xib in Resources */,
 				3E2BB7E11A94FF0000E78B3A /* AppNavigationController.xib in Resources */,
 				E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */,
 				E2C6FF1F1A96C178005AEDA9 /* ProfileCell.xib in Resources */,
 				B8C291C31A930BDD000F2143 /* LaunchScreen.xib in Resources */,
 				3E7C1D551A958D120046FDE1 /* SurveyCell.xib in Resources */,
 				3E7C1D5A1A95AA520046FDE1 /* SurveyViewController.xib in Resources */,
+				B862A88D1A970E25008B2310 /* DetailAnswerCell.xib in Resources */,
 				B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */,
 				3E7C1D691A966CBA0046FDE1 /* AnswerCell.xib in Resources */,
 				B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */,
@@ -455,6 +473,7 @@
 				B8C0DBF41A95C2D60023BC39 /* ParseClient.m in Sources */,
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
 				B8C0DBF11A95C1DA0023BC39 /* Survey.m in Sources */,
+				B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */,
 				3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */,
 				3E312E011A970EBC00DC747B /* BarView.m in Sources */,
 				B8BA93F41A947718003BD476 /* Answer.m in Sources */,
@@ -472,6 +491,7 @@
 				B8C0DBDC1A95138C0023BC39 /* ComposeAnswerCell.m in Sources */,
 				3E7C1D681A966CBA0046FDE1 /* AnswerCell.m in Sources */,
 				B87C15BC1A93113400191823 /* LoginViewController.m in Sources */,
+				B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */,
 				B8BA93F71A947817003BD476 /* Vote.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

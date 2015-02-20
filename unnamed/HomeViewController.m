@@ -70,6 +70,7 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
     [ParseClient getHomeSurveysOnPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
         if (!error) {
             [self.surveys addObjectsFromArray:surveys];
+            [self.tableView reloadData];
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
@@ -121,7 +122,7 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     Survey *survey = self.surveys[section];
-    return survey.answers.count;
+    return survey.answers.count + 1;//Include Header Cell
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -148,7 +149,7 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
         return cell;
     } else {
         AnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kAnswerCell];
-        Answer *ans = survey.answers[indexPath.row];
+        Answer *ans = survey.answers[indexPath.row - 1];//Row index include SurveyHeaderCell
         cell.index = indexPath.row;
         cell.total = [self getTotalFromAnswers:survey.answers];
         cell.answer = ans;
@@ -163,6 +164,7 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
+    vc.survey = self.surveys[indexPath.section];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
