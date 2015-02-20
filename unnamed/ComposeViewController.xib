@@ -33,21 +33,6 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5L-FV-cxN">
-                    <rect key="frame" x="8" y="153" width="138" height="40"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="fR4-Hc-JlL"/>
-                        <constraint firstAttribute="width" constant="138" id="kGE-JF-OYj"/>
-                    </constraints>
-                    <state key="normal" title="Add An Answer">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onAddAnswerButton:" destination="-1" eventType="touchUpInside" id="JC9-cU-QmU"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eW-Cr-3wD">
                     <rect key="frame" x="8" y="16" width="304" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -55,29 +40,27 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="86v-la-mTY">
-                    <rect key="frame" x="8" y="201" width="304" height="359"/>
+                    <rect key="frame" x="8" y="153" width="304" height="407"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.87228954079999999" green="0.87228954079999999" blue="0.87228954079999999" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="86v-la-mTY" firstAttribute="top" secondItem="x5L-FV-cxN" secondAttribute="bottom" constant="8" id="1n7-qY-Puw"/>
                 <constraint firstItem="rbk-if-DMU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="3Pl-KS-xiJ"/>
                 <constraint firstAttribute="trailing" secondItem="ty4-5D-Pxu" secondAttribute="trailing" constant="16" id="EPn-vd-mmH"/>
                 <constraint firstAttribute="trailing" secondItem="rbk-if-DMU" secondAttribute="trailing" constant="8" id="J3K-QT-phS"/>
-                <constraint firstItem="x5L-FV-cxN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="JuL-Ae-dct"/>
                 <constraint firstItem="2eW-Cr-3wD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="P36-AT-jde"/>
+                <constraint firstAttribute="bottom" secondItem="86v-la-mTY" secondAttribute="bottom" constant="8" id="UOF-lu-c2Q"/>
                 <constraint firstItem="86v-la-mTY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="V8Y-Wy-Ydw"/>
-                <constraint firstAttribute="bottom" secondItem="86v-la-mTY" secondAttribute="bottom" constant="8" id="YUI-EN-8hI"/>
+                <constraint firstItem="86v-la-mTY" firstAttribute="top" secondItem="ty4-5D-Pxu" secondAttribute="bottom" constant="16" id="Zf0-Mj-Wtm"/>
                 <constraint firstAttribute="trailing" secondItem="86v-la-mTY" secondAttribute="trailing" constant="8" id="aJb-fO-5iA"/>
-                <constraint firstItem="86v-la-mTY" firstAttribute="top" secondItem="ty4-5D-Pxu" secondAttribute="bottom" constant="64" id="mAr-WP-1I1"/>
+                <constraint firstItem="rbk-if-DMU" firstAttribute="bottom" secondItem="ty4-5D-Pxu" secondAttribute="bottom" constant="8" id="fgd-rw-fug"/>
                 <constraint firstAttribute="trailing" secondItem="2eW-Cr-3wD" secondAttribute="trailing" constant="8" id="oAC-pl-KzV"/>
                 <constraint firstItem="2eW-Cr-3wD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="sjn-Tc-zEa"/>
                 <constraint firstItem="rbk-if-DMU" firstAttribute="top" secondItem="2eW-Cr-3wD" secondAttribute="bottom" constant="8" id="voE-ja-KC5"/>
-                <constraint firstItem="x5L-FV-cxN" firstAttribute="top" secondItem="rbk-if-DMU" secondAttribute="bottom" constant="8" id="yN4-HM-VnS"/>
             </constraints>
-            <point key="canvasLocation" x="140" y="154"/>
+            <point key="canvasLocation" x="144" y="161"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

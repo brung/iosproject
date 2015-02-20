@@ -68,6 +68,7 @@
 - (IBAction)onEditingChanged:(id)sender {
     self.answerLabel.text = self.answerText.text;
     self.answer.text = self.answerText.text;
+    [self.delegate composeAnswerCell:self changedAnswer:self.answer];
 }
 
 #pragma mark - Private methods

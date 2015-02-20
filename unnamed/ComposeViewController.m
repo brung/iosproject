@@ -20,11 +20,10 @@ NSInteger const maxCount = 160;
 @property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
 @property (weak, nonatomic) IBOutlet UITextView *questionText;
 @property (weak, nonatomic) IBOutlet UILabel *questionTextCountLabel;
-@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIButton *addAnswerButton;
 @property (nonatomic, strong) NSMutableArray *answers;
 @property (nonatomic, strong) ComposeAnswerCell *prototypeCell;
+@property (nonatomic, assign) BOOL isUpdating;
 @end
 
 @implementation ComposeViewController
@@ -47,7 +46,7 @@ NSInteger const maxCount = 160;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.isUpdating = NO;
     // Button
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -58,8 +57,8 @@ NSInteger const maxCount = 160;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCell bundle:nil] forCellReuseIdentifier:AnswerCell];
     
-    self.addAnswerButton.alpha = 0;
-    self.answers = [NSMutableArray array];
+    self.tableView.alpha = 0;
+    self.answers = [NSMutableArray arrayWithObject:[[Answer alloc] init]];
     
     self.questionText.delegate = self;
     
@@ -99,6 +98,23 @@ NSInteger const maxCount = 160;
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 32;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UILabel *footer = [[UILabel alloc] init];
+    footer.contentMode = UIViewContentModeCenter;
+    if (self.answers.count < 4) {
+        footer.text = (self.answers.count < 4) ? @"+ Add an Answer" : @"";
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddAnswerButton:)];
+        footer.userInteractionEnabled = YES;
+        [footer addGestureRecognizer:tapGesture];
+        footer.backgroundColor = [UIColor lightGrayColor];
+    }
+    return footer;
+}
+
 #pragma mark - ComposeAnswerCellDelegate methods
 - (void)composeAnswerCell:(ComposeAnswerCell *)cell changedAnswer:(Answer *)answer {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -121,14 +137,13 @@ NSInteger const maxCount = 160;
 
 #pragma mark - Add An Answer Button
 - (void) showAddAnswerButton:(BOOL)show {
-    self.addAnswerButton.enabled = show;
     if (show) {
         [UIView animateWithDuration:0.5 animations:^{
-            self.addAnswerButton.alpha = 1;
+            self.tableView.alpha = 1;
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
-            self.addAnswerButton.alpha = 0;
+            self.tableView.alpha = 0;
         }];
     }
 }
@@ -136,42 +151,57 @@ NSInteger const maxCount = 160;
 - (IBAction)onAddAnswerButton:(id)sender {
     [self.questionText endEditing:YES];
     if (self.answers.count < 4) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.answers.count inSection:0];
         [self.answers addObject:[[Answer alloc] init]];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.tableView beginUpdates];
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView endUpdates];
-        }];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
     }
 
 }
 
+
 - (void)onSubmitButton {
-    NSMutableArray *validAnswers = [NSMutableArray array];
-    for (Answer *answer in self.answers) {
-        if ([answer.text length] >= 1) {
-            [validAnswers addObject:answer];
-        }
-    }
-    if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
-        //Submit question
-        Question *question = [[Question alloc] initWithText:self.questionText.text];
-        Survey *survey = [[Survey alloc] init];
-        survey.question = question;
-        survey.answers = [validAnswers copy];
-        survey.user = [User currentUser];
-        [ParseClient saveSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-            } else {
-                [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    if (!self.isUpdating) {
+        self.isUpdating = YES;
+        
+        NSMutableArray *validAnswers = [NSMutableArray array];
+        for (Answer *answer in self.answers) {
+            if ([answer.text length] >= 1) {
+                [validAnswers addObject:answer];
             }
-        }];
+        }
+        if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
+            //Submit question
+            Question *question = [[Question alloc] initWithText:self.questionText.text];
+            Survey *survey = [[Survey alloc] init];
+            survey.question = question;
+            survey.answers = [validAnswers copy];
+            survey.user = [User currentUser];
+            [ParseClient saveSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    [self resetForm];
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                }
+                self.isUpdating = NO;
+            }];
+        }
     }
 }
 
 - (void)onCancelButton {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self resetForm];
+}
+
+- (void)resetForm {
+    self.answers = [NSMutableArray array];
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        self.questionText.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.questionText.text = @"";
+        self.questionTextCountLabel.text = [NSString stringWithFormat:@"%ld", maxCount];
+        self.questionText.alpha = 1;
+    }];
+
 }
 
 /*
