@@ -25,7 +25,6 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
 @property (nonatomic, strong) AnswerCell * prototypeCell;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) NSInteger pageIndex;
-@property (nonatomic, assign) NSInteger oldPageIndex;
 
 @property (nonatomic, assign) BOOL isUpdating;
 
@@ -48,7 +47,6 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.pageIndex = 0;
-    self.oldPageIndex = 0;
     // - tableview related:
     self.profileTableView.dataSource = self;
     self.profileTableView.delegate = self;
@@ -86,9 +84,6 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
                 NSLog(@"getting %ld surveys for current user: %@", self.surveys.count, self.currentProfileUser[@"profile"][@"name"]);
                 [self.profileTableView reloadData];
             } else {
-                if(self.pageIndex>0){
-                    self.oldPageIndex--;
-                }
                 [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }
             [self.refreshControl endRefreshing];
@@ -169,8 +164,6 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
     
     if (indexPath.section == self.surveys.count && !self.isUpdating) {
         if (self.surveys.count == (self.pageIndex * ResultCount)) {
-            self.oldPageIndex++;
-            self.pageIndex=self.oldPageIndex;
             [self fetchSurveys];
         }
     }
