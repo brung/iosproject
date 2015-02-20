@@ -14,7 +14,7 @@ NSInteger const ResultCount = 20;
 + (void)getMyAnsweredSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     
     PFQuery *voteQuery = [Vote query];
-    [voteQuery orderByDescending:@"createdAt"];
+    [voteQuery orderByAscending:@"createdAt"];
     [voteQuery whereKey:@"user" equalTo:[PFUser currentUser]];
     [voteQuery includeKey:@"question"];
     voteQuery.skip = page * ResultCount;
@@ -35,7 +35,7 @@ NSInteger const ResultCount = 20;
 
 + (void)getMySurveysComplete:(BOOL)complete onPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     PFQuery *query = [Question query];
-    [query orderByDescending:@"createdAt"];
+    [query orderByAscending:@"createdAt"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query includeKey:@"user"];
     [query whereKey:@"complete" equalTo:@(complete)];
@@ -53,7 +53,7 @@ NSInteger const ResultCount = 20;
 
 + (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     PFQuery *query = [Question query];
-    [query orderByDescending:@"createdAt"];
+    [query orderByAscending:@"createdAt"];
     [query includeKey:@"user"];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
