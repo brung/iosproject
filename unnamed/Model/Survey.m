@@ -7,7 +7,6 @@
 //
 
 #import "Survey.h"
-#import "ParseClient.h"
 
 @implementation Survey
 
