@@ -23,6 +23,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
 @property (nonatomic, strong) NSMutableArray *surveys;
 @property (nonatomic, strong) PFUser * currentProfileUser;
 @property (nonatomic, strong) AnswerCell * prototypeCell;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -34,6 +35,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         self.title = @"Profile";
         self.tabBarItem.image = [UIImage imageNamed:@"User Male"];
         self.currentProfileUser = [PFUser currentUser];
+        self.surveys = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -49,22 +51,54 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
     [self.profileTableView registerNib:[UINib nibWithNibName:kAnswerCellName bundle:nil] forCellReuseIdentifier:kAnswerCellName];
     [self.profileTableView registerNib:[UINib nibWithNibName:kSurveyHeaderViewName bundle:nil] forHeaderFooterViewReuseIdentifier:kSurveyHeaderViewName];
     self.profileTableView.rowHeight = UITableViewAutomaticDimension;
+
+    [self fetchSurveys];
     
-    self.surveys = [[NSMutableArray alloc] init];
+    // - refresh table content
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.profileTableView insertSubview:self.refreshControl atIndex:1];
+    
+}
+
+- (void) onRefresh{
+    [self fetchSurveys];
+}
+
+- (void)fetchSurveys{
     [ParseClient getMySurveysComplete:NO onPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
         if (!error) {
+            [self.refreshControl endRefreshing];
+            [self.surveys removeAllObjects];
             [self.surveys addObjectsFromArray:surveys];
             NSLog(@"getting %ld surveys for current user: %@", self.surveys.count, self.currentProfileUser[@"profile"][@"name"]);
             //[self.profileTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
             [self.profileTableView reloadData];
         } else {
+            [self.refreshControl endRefreshing];
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
     }];
-    
-    // - refresh table content
-    //[self.profileTableView reloadData];
 }
+
+/*
+ //this function needs to be extended to do what it is supposed to do:
+ //even for same objectId, should check other attributes...
+- (NSMutableArray *) getDiffSurveys:(NSMutableArray*)oldSurveys withNewSurveys:(NSMutableArray *)newSurveys{
+    //assuming newest survey at start of array
+    
+    Survey * firstOldSurvey = oldSurveys[0];
+    Survey * firstNewSurvey = newSurveys[0];
+    if(firstOldSurvey.question.objectId == firstNewSurvey.question.objectId){
+        NSLog(@"no new survey been created yet.");
+        return nil;
+    }
+    NSMutableArray * diffSurveys = [[NSMutableArray alloc] init];
+    NSInteger diffCount = newSurveys.count - oldSurveys.count;
+    [diffSurveys addObjectsFromArray:[newSurveys subarrayWithRange:NSMakeRange(0, diffCount)]];
+    return diffSurveys;
+}*/
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -73,7 +107,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSLog(@"return number of sectios in tableView as: %ld", self.surveys.count);
+    NSLog(@"return number of sectios in tableView as: %ld", self.surveys.count+1);
     return self.surveys.count+1;
 }
 
@@ -100,7 +134,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         return 255;
     }
     //calculate cell height for survey cells
-    NSLog(@"calculating row height for a survey");
+    //NSLog(@"calculating row height for a survey");
     [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
     [self.prototypeCell layoutIfNeeded];
     CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
