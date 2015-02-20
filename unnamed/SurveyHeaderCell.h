@@ -1,5 +1,5 @@
 //
-//  SurveyHeaderView.h
+//  SurveyHeaderCell.h
 //  unnamed
 //
 //  Created by Casing Chu on 2/19/15.
@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Survey.h"
 
-@interface SurveyHeaderView : UITableViewHeaderFooterView
+@interface SurveyHeaderCell : UITableViewCell
 
-@property (nonatomic, strong) Survey* survey;
+@property (nonatomic,strong) Survey* survey;
 
 @end
