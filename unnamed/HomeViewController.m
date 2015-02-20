@@ -47,7 +47,6 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
         }
         survey.answers = [NSArray arrayWithArray:answers];
         survey.voted = (i%2 == 0)?YES:NO;
-        survey.votedIndex = i%5;
         
         [self.surveys addObject:survey];
     }

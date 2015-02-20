@@ -10,5 +10,30 @@
 
 @implementation Survey
 
+- (id)initWithQuestion:(Question *)question {
+    self = [super init];
+    if (self) {
+        self.question = question;
+    }
+    return self;
+}
 
+- (id)initWithQuestion:(Question *)question andPFUser:(PFUser *)user {
+    self = [super init];
+    if (self) {
+        self.question = question;
+        self.user = [[User alloc] initWithPFUser:user];
+    }
+    return self;
+}
+
+
+- (id)initWithQuestion:(Question *)question andUser:(User *)user {
+    self = [super init];
+    if (self) {
+        self.question = question;
+        self.user = user;
+    }
+    return self;
+}
 @end
