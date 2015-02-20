@@ -24,6 +24,10 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
 @property (nonatomic, strong) PFUser * currentProfileUser;
 @property (nonatomic, strong) AnswerCell * prototypeCell;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, assign) NSInteger oldPageIndex;
+
+@property (nonatomic, assign) BOOL isUpdating;
 
 @end
 
@@ -43,7 +47,8 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+    self.pageIndex = 0;
+    self.oldPageIndex = 0;
     // - tableview related:
     self.profileTableView.dataSource = self;
     self.profileTableView.delegate = self;
@@ -62,23 +67,34 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
 }
 
 - (void) onRefresh{
+    self.pageIndex=0;
     [self fetchSurveys];
 }
 
 - (void)fetchSurveys{
-    [ParseClient getMySurveysComplete:NO onPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
-        if (!error) {
+    if (!self.isUpdating) {
+        self.isUpdating = YES;
+        [ParseClient getMySurveysComplete:NO onPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
+            if (!error) {
+                if (self.pageIndex == 0) {
+                    self.surveys = [NSMutableArray arrayWithArray:surveys];
+                } else {
+                    [self.surveys addObjectsFromArray:surveys];
+                    //reverse survey order if new survey not on top of screen
+                    //[self.surveys addObjectsFromArray:[[surveys reverseObjectEnumerator] allObjects]];
+                }
+                NSLog(@"getting %ld surveys for current user: %@", self.surveys.count, self.currentProfileUser[@"profile"][@"name"]);
+                [self.profileTableView reloadData];
+            } else {
+                if(self.pageIndex>0){
+                    self.oldPageIndex--;
+                }
+                [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            }
             [self.refreshControl endRefreshing];
-            [self.surveys removeAllObjects];
-            [self.surveys addObjectsFromArray:[[surveys reverseObjectEnumerator] allObjects]];
-            NSLog(@"getting %ld surveys for current user: %@", self.surveys.count, self.currentProfileUser[@"profile"][@"name"]);
-            //[self.profileTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
-            [self.profileTableView reloadData];
-        } else {
-            [self.refreshControl endRefreshing];
-            [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }
-    }];
+            self.isUpdating = NO;
+        }];
+    }
 }
 
 /*
@@ -141,7 +157,23 @@ NSString * const kSurveyHeaderCellName = @"SurveyHeaderCell";
 //    return size.height+2;
 //}
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 0){
+        return 255;
+    }
+    return UITableViewAutomaticDimension;
+}
+
+
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == self.surveys.count && !self.isUpdating) {
+        if (self.surveys.count == (self.pageIndex * ResultCount)) {
+            self.oldPageIndex++;
+            self.pageIndex=self.oldPageIndex;
+            [self fetchSurveys];
+        }
+    }
     
     if(indexPath.section == 0){
         ProfileCell * cell = [self.profileTableView dequeueReusableCellWithIdentifier:kProfileCellName];
