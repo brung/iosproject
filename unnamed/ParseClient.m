@@ -38,7 +38,7 @@ NSInteger const ResultCount = 20;
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query includeKey:@"user"];
-    [query whereKey:@"complete" equalTo:complete ? @"true" : @"false"];
+    [query whereKey:@"complete" equalTo:@(complete)];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
     
