@@ -22,6 +22,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
 @property (weak, nonatomic) IBOutlet UITableView *profileTableView;
 @property (nonatomic, strong) NSMutableArray *surveys;
 @property (nonatomic, strong) PFUser * currentProfileUser;
+@property (nonatomic, strong) AnswerCell * prototypeCell;
 
 @end
 
@@ -40,8 +41,7 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    
+
     // - tableview related:
     self.profileTableView.dataSource = self;
     self.profileTableView.delegate = self;
@@ -50,20 +50,20 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
     [self.profileTableView registerNib:[UINib nibWithNibName:kSurveyHeaderViewName bundle:nil] forHeaderFooterViewReuseIdentifier:kSurveyHeaderViewName];
     self.profileTableView.rowHeight = UITableViewAutomaticDimension;
     
-    
-    
+    self.surveys = [[NSMutableArray alloc] init];
     [ParseClient getMySurveysComplete:NO onPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
         if (!error) {
             [self.surveys addObjectsFromArray:surveys];
-            NSLog(@"getting %ld surveys for current user: %@", surveys.count, self.currentProfileUser[@"profile"][@"name"]);
+            NSLog(@"getting %ld surveys for current user: %@", self.surveys.count, self.currentProfileUser[@"profile"][@"name"]);
             //[self.profileTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+            [self.profileTableView reloadData];
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
     }];
     
     // - refresh table content
-    [self.profileTableView reloadData];
+    //[self.profileTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,7 +73,8 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    NSLog(@"return number of sectios in tableView as: %ld", self.surveys.count);
+    return self.surveys.count+1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -82,10 +83,16 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         //title and other profile related info
         return 1;
     }
-    //section # >= 1 will present surveys of current user
-    //NSInteger actualSurveyCount = self.surveys.count;
-    NSInteger fakeAnswerCount = 3;
-    return fakeAnswerCount;
+    Survey * s = self.surveys[section-1];
+    NSInteger surveyAnswerCount = s.answers.count;
+    return surveyAnswerCount;
+}
+
+- (AnswerCell *)prototypeCell {
+    if (!_prototypeCell) {
+        _prototypeCell = [self.profileTableView dequeueReusableCellWithIdentifier:kAnswerCellName];
+    }
+    return _prototypeCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,7 +100,11 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         return 255;
     }
     //calculate cell height for survey cells
-    return 18;
+    NSLog(@"calculating row height for a survey");
+    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+    [self.prototypeCell layoutIfNeeded];
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height+2;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -104,14 +115,21 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
         //ProfileCell * cell = [[ProfileCell alloc] initWithPFUser: [PFUser currentUser]];
         return cell;
     }
-    AnswerCell * cell = [self.profileTableView dequeueReusableCellWithIdentifier:kAnswerCellName];
+    AnswerCell *cell = [self.profileTableView dequeueReusableCellWithIdentifier:kAnswerCellName];
+    [self configureCell:cell forRowAtIndexPath:indexPath];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //SurveyViewController *vc = [[SurveyViewController alloc] init];
+    //[self.navigationController pushViewController:vc animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if(section >= 1){
         SurveyHeaderView *view = [self.profileTableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderViewName];
-        //view.survey = self.surveys[section];
+        view.survey = self.surveys[section-1];
         return view;
     }else{
         UITableViewHeaderFooterView * view = [[UITableViewHeaderFooterView alloc] init];
@@ -124,6 +142,27 @@ NSString * const kSurveyHeaderViewName = @"SurveyHeaderView";
     SurveyHeaderView *view = [self.profileTableView dequeueReusableHeaderFooterViewWithIdentifier:kSurveyHeaderViewName];
     return view.frame.size.height;
 }
+
+- (NSInteger)getTotalFromAnswers:(NSArray *)answers {
+    NSInteger total = 0;
+    
+    for (Answer *ans in answers) {
+        total += ans.count;
+    }
+    return total;
+}
+
+- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell isKindOfClass:[AnswerCell class]]) {
+        AnswerCell * answerCell = (AnswerCell *)cell;
+        Survey *survey = self.surveys[indexPath.section-1];
+        Answer *ans = survey.answers[indexPath.row];
+        answerCell.index = indexPath.row;
+        answerCell.total = [self getTotalFromAnswers:survey.answers];
+        answerCell.answer = ans;
+    }
+}
+
 /*
 #pragma mark - Navigation
 
