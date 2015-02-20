@@ -8,7 +8,7 @@
 
 #import "ParseClient.h"
 
-NSInteger const ResultCount = 20;
+NSInteger const ResultCount = 6;
 
 @implementation ParseClient
 + (void)getMyAnsweredSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
@@ -52,6 +52,7 @@ NSInteger const ResultCount = 20;
 }
 
 + (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
+    NSLog(@"Calling gethomesurveys %ld", page);
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"user"];
@@ -70,7 +71,6 @@ NSInteger const ResultCount = 20;
 + (void)getAnswersForQuestions:(NSArray *)questions withResults:(NSMutableArray *)surveys andCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     if (questions.count < 1) {
         [ParseClient getVotesForSurveys:surveys withCompletion:completion];
-        completion(surveys, nil);
         return;
     }
     NSMutableArray *mutableQuestions = [NSMutableArray arrayWithArray:questions];

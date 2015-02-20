@@ -20,6 +20,7 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
 @property (nonatomic, strong) NSMutableArray *surveys;
 @property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, assign) BOOL isUpdating;
 
 - (NSInteger)getTotalFromAnswers:(NSArray *)answers;
 
@@ -67,14 +68,6 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
     // Setup Objects
     self.pageIndex = 0;
     self.surveys = [[NSMutableArray alloc] init];
-    [ParseClient getHomeSurveysOnPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
-        if (!error) {
-            [self.surveys addObjectsFromArray:surveys];
-            [self.tableView reloadData];
-        } else {
-            [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        }
-    }];
     
     // Table Refresh control
     self.tableRefreshControl = [[UIRefreshControl alloc] init];
@@ -98,21 +91,32 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
 
 #pragma mark - RefreshControl
 - (void)onTableRefresh {
-    [ParseClient getHomeSurveysOnPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
-        if (error == nil) {
-            self.pageIndex = 0;
-            [self.surveys removeAllObjects];
-            [self.surveys addObjectsFromArray:surveys];
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error);
-        }
-        [self.tableRefreshControl endRefreshing];
-    }];
-//    [self.surveys removeAllObjects];
-//    [self setupTestData];
-//    [self.tableView reloadData];
-//    [self.tableRefreshControl endRefreshing];
+    self.pageIndex = 0;
+    [self fetchSurveys];
+}
+
+- (void)fetchSurveys {
+    if (!self.isUpdating) {
+        self.isUpdating = YES;
+        [ParseClient getHomeSurveysOnPage:self.pageIndex withCompletion:^(NSArray *surveys, NSError *error) {
+            if (error == nil) {
+                if (self.pageIndex == 0) {
+                    NSLog(@"creating new surveys");
+                    self.surveys = [NSMutableArray arrayWithArray:surveys];
+                } else {
+                    NSLog(@"appending new surveys");
+                    [self.surveys addObjectsFromArray:surveys];
+                }
+                [self.tableView reloadData];
+                self.isUpdating = NO;
+            } else {
+                NSLog(@"%@", error);
+                [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to retrieve surveys. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                self.isUpdating = NO;
+            }
+            [self.tableRefreshControl endRefreshing];
+        }];
+    }
 }
 
 #pragma mark - TableViewDelegate Methods
@@ -129,18 +133,10 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
     Survey *survey = self.surveys[indexPath.section];
     
     if (indexPath.section >= self.surveys.count - 1) {
-        [ParseClient getHomeSurveysOnPage:self.pageIndex + 1 withCompletion:^(NSArray *surveys, NSError *error) {
-            if (error == nil) {
-                self.pageIndex++;
-                [self.surveys addObjectsFromArray:surveys];
-                [self.tableView reloadData];
-            } else {
-                NSLog(@"%@", error);
-            }
-        }];
-        
-//        [self setupTestData];
-//        [self.tableView reloadData];
+        self.pageIndex++;
+        if (self.surveys.count == (self.pageIndex * ResultCount)) {
+            [self fetchSurveys];
+        }
     }
     
     if (indexPath.row == 0) {

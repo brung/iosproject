@@ -12,6 +12,7 @@
 #import "Answer.h"
 #import "Vote.h"
 
+extern NSInteger const ResultCount;
 
 @interface ParseClient : Parse
 + (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion;
