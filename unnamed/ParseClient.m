@@ -70,7 +70,6 @@ NSInteger const ResultCount = 20;
 + (void)getAnswersForQuestions:(NSArray *)questions withResults:(NSMutableArray *)surveys andCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     if (questions.count < 1) {
         [ParseClient getVotesForSurveys:surveys withCompletion:completion];
-        completion(surveys, nil);
         return;
     }
     NSMutableArray *mutableQuestions = [NSMutableArray arrayWithArray:questions];
