@@ -59,6 +59,7 @@ NSInteger const maxCount = 160;
     
     self.tableView.alpha = 0;
     self.answers = [NSMutableArray arrayWithObject:[[Answer alloc] init]];
+    [self.answers addObject:[[Answer alloc] init]];
     
     self.questionText.delegate = self;
     
@@ -192,10 +193,12 @@ NSInteger const maxCount = 160;
 }
 
 - (void)resetForm {
-    self.answers = [NSMutableArray array];
+    self.answers = [NSMutableArray arrayWithObject:[[Answer alloc] init]];
+    [self.answers addObject:[[Answer alloc] init]];
     [UIView animateWithDuration:0.25 animations:^{
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         self.questionText.alpha = 0;
+        self.tableView.alpha = 0;
     } completion:^(BOOL finished) {
         self.questionText.text = @"";
         self.questionTextCountLabel.text = [NSString stringWithFormat:@"%ld", maxCount];
