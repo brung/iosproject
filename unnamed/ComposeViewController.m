@@ -20,9 +20,7 @@ NSInteger const maxCount = 160;
 @property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
 @property (weak, nonatomic) IBOutlet UITextView *questionText;
 @property (weak, nonatomic) IBOutlet UILabel *questionTextCountLabel;
-@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIButton *addAnswerButton;
 @property (nonatomic, strong) NSMutableArray *answers;
 @property (nonatomic, strong) ComposeAnswerCell *prototypeCell;
 @property (nonatomic, assign) BOOL isUpdating;
@@ -59,7 +57,6 @@ NSInteger const maxCount = 160;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCell bundle:nil] forCellReuseIdentifier:AnswerCell];
     
-    self.addAnswerButton.alpha = 0;
     self.tableView.alpha = 0;
     self.answers = [NSMutableArray arrayWithObject:[[Answer alloc] init]];
     
@@ -140,16 +137,13 @@ NSInteger const maxCount = 160;
 
 #pragma mark - Add An Answer Button
 - (void) showAddAnswerButton:(BOOL)show {
-    self.addAnswerButton.enabled = show;
     if (show) {
         [UIView animateWithDuration:0.5 animations:^{
             self.tableView.alpha = 1;
-            self.addAnswerButton.alpha = 1;
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
             self.tableView.alpha = 0;
-            self.addAnswerButton.alpha = 0;
         }];
     }
 }
