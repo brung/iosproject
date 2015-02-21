@@ -8,7 +8,8 @@
 
 #import "ParseClient.h"
 
-NSInteger const ResultCount = 20;
+NSString * const UserDidPostNewSurveyNotification = @"kUserDidPostNewSurveyNotification";
+NSInteger const ResultCount = 8;
 
 @implementation ParseClient
 + (void)getMyAnsweredSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
@@ -149,7 +150,7 @@ NSInteger const ResultCount = 20;
 
 + (void)saveAnswerFromNSMutableArray:(NSMutableArray *)answers withCompletion:(void(^)(BOOL succeeded, NSError *error))completion {
     if (answers.count < 1) {
-        completion(YES, nil);
+        completion(YES, nil);        
         return;
     }
     

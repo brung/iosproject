@@ -12,6 +12,7 @@
 #import "Answer.h"
 #import "Vote.h"
 
+extern NSString * const UserDidPostNewSurveyNotification;
 extern NSInteger const ResultCount;
 
 @interface ParseClient : Parse

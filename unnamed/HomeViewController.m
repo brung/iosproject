@@ -19,6 +19,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @property (nonatomic, strong) NSMutableArray *surveys;
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) BOOL isUpdating;
+@property (nonatomic, assign) BOOL isInsertingNewPost;
 
 - (NSInteger)getTotalFromAnswers:(NSArray *)answers;
 
@@ -62,6 +63,9 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Setup Notification listener
+    self.isInsertingNewPost = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewPost:) name:UserDidPostNewSurveyNotification object:nil];
     
     // Setup Objects
     self.pageIndex = 0;
@@ -79,6 +83,18 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     [self onTableRefresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if (self.isInsertingNewPost) {
+        self.isInsertingNewPost = NO;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [UIView animateWithDuration:1 animations:^{
+                [self.tableView beginUpdates];
+                [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+                [self.tableView endUpdates];
+            }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -139,6 +155,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     return UITableViewAutomaticDimension;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
@@ -153,6 +170,17 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
         total += ans.count;
     }
     return total;
+}
+
+- (void)onNewPost:(NSNotification *)notification {
+    Survey *survey = notification.userInfo[@"survey"];
+    if (survey) {
+        NSMutableArray *newSurveys = [NSMutableArray arrayWithObject:survey];
+        [newSurveys addObjectsFromArray:self.surveys];
+        self.surveys = newSurveys;
+        self.isInsertingNewPost = YES;
+    }
+    
 }
 
 @end
