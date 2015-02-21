@@ -58,6 +58,7 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     // - tableview related:
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor appBgColor];
     [self.tableView registerNib:[UINib nibWithNibName:kProfileCellName bundle:nil] forCellReuseIdentifier:kProfileCellName];
     [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCellName bundle:nil] forCellReuseIdentifier:kSurveyViewCellName];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -181,7 +182,7 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 - (void)fetchSurveys{
     if (!self.isUpdating) {
         self.isUpdating = YES;
-        [ParseClient getMySurveysComplete:NO onPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
+        [ParseClient getUser:self.user surveysComplete:NO onPage:0 withCompletion:^(NSArray *surveys, NSError *error) {
             if (!error) {
                 if (self.pageIndex == 0) {
                     self.surveys = [NSMutableArray arrayWithArray:surveys];

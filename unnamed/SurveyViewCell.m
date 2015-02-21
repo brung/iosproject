@@ -12,8 +12,7 @@
 #import "UIColor+AppBgColor.h"
 #import "NSDate+MinimalTimeAgo.h"
 
-@interface SurveyViewCell ()
-
+@interface SurveyViewCell () <ProfileImageViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *createdByLabel;
@@ -36,6 +35,7 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor appBgColor];
+    self.profileImageView.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -54,4 +54,7 @@
     self.answerCollectionView.answers = survey.answers;
 }
 
+- (void)profileImageView:(ProfileImageView *)view tappedUser:(User *)user {
+    [self.delegate surveyViewCell:self didClickOnUser:user];
+}
 @end
