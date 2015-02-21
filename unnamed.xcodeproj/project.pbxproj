@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BB7DE1A94FF0000E78B3A /* AppNavigationController.m */; };
 		3E2BB7E11A94FF0000E78B3A /* AppNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2BB7DF1A94FF0000E78B3A /* AppNavigationController.xib */; };
-		3E312E011A970EBC00DC747B /* BarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E312E001A970EBC00DC747B /* BarView.m */; };
 		3E58B4CB1A98229200AA14D4 /* SurveyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E58B4C91A98229200AA14D4 /* SurveyViewCell.m */; };
 		3E58B4CC1A98229200AA14D4 /* SurveyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E58B4CA1A98229200AA14D4 /* SurveyViewCell.xib */; };
 		3E58B4CF1A98300C00AA14D4 /* AnswerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E58B4CE1A98300C00AA14D4 /* AnswerCollectionView.m */; };
@@ -68,8 +67,6 @@
 		3E2BB7DD1A94FF0000E78B3A /* AppNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppNavigationController.h; sourceTree = "<group>"; };
 		3E2BB7DE1A94FF0000E78B3A /* AppNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppNavigationController.m; sourceTree = "<group>"; };
 		3E2BB7DF1A94FF0000E78B3A /* AppNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppNavigationController.xib; sourceTree = "<group>"; };
-		3E312DFF1A970EBC00DC747B /* BarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarView.h; sourceTree = "<group>"; };
-		3E312E001A970EBC00DC747B /* BarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarView.m; sourceTree = "<group>"; };
 		3E58B4C81A98229200AA14D4 /* SurveyViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyViewCell.h; sourceTree = "<group>"; };
 		3E58B4C91A98229200AA14D4 /* SurveyViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyViewCell.m; sourceTree = "<group>"; };
 		3E58B4CA1A98229200AA14D4 /* SurveyViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyViewCell.xib; sourceTree = "<group>"; };
@@ -272,8 +269,6 @@
 				B8C0DBD91A95138C0023BC39 /* ComposeAnswerCell.h */,
 				B8C0DBDA1A95138C0023BC39 /* ComposeAnswerCell.m */,
 				B8C0DBDB1A95138C0023BC39 /* ComposeAnswerCell.xib */,
-				3E312DFF1A970EBC00DC747B /* BarView.h */,
-				3E312E001A970EBC00DC747B /* BarView.m */,
 				E2C6FF1B1A96C178005AEDA9 /* ProfileCell.h */,
 				E2C6FF1C1A96C178005AEDA9 /* ProfileCell.m */,
 				E2C6FF1D1A96C178005AEDA9 /* ProfileCell.xib */,
@@ -494,7 +489,6 @@
 				3E58B4CB1A98229200AA14D4 /* SurveyViewCell.m in Sources */,
 				B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */,
 				3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */,
-				3E312E011A970EBC00DC747B /* BarView.m in Sources */,
 				B8BA93F41A947718003BD476 /* Answer.m in Sources */,
 				B827A9EB1A9823DF00AB43CE /* UIColor+AppTintColor.m in Sources */,
 				B8C0DBCD1A94F71A0023BC39 /* ComposeViewController.m in Sources */,
