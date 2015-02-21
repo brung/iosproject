@@ -10,6 +10,8 @@
 #import "ParseClient.h"
 #import "ProfileCell.h"
 #import "SurveyViewCell.h"
+#import "UIColor+AppBgColor.h"
+#import "UIColor+AppTintColor.h"
 
 NSString * const kProfileCellName = @"ProfileCell";
 NSString * const kSurveyViewCellName = @"SurveyViewCell";
@@ -18,7 +20,6 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *surveys;
-@property (nonatomic, strong) PFUser * currentProfileUser;
 @property (nonatomic, strong) ProfileCell * prototypeProfileCell;
 @property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -36,7 +37,6 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     if (self) {
         self.title = @"Profile";
         self.tabBarItem.image = [UIImage imageNamed:@"User Male"];
-        self.currentProfileUser = [PFUser currentUser];
         self.surveys = [NSMutableArray array];
     }
     return self;
@@ -49,6 +49,11 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 
     // Do any additional setup after loading the view from its nib.
     self.pageIndex = 0;
+    self.view.backgroundColor = [UIColor appBgColor];
+    if (!self.user) {
+        self.user = [User currentUser];
+    }
+    
     // - tableview related:
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -154,7 +159,7 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
         cell.survey = self.surveys[indexPath.row];
     } else if ([pCell isKindOfClass:[ProfileCell class]]) {
         ProfileCell *cell = (ProfileCell *)pCell;
-        [cell updateContentWithPFUser:[PFUser currentUser]];
+        cell.user = self.user;
     }
 }
 

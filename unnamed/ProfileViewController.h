@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface ProfileViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) User *user;
 
 @end

@@ -8,17 +8,14 @@
 
 #import "ProfileCell.h"
 #import "ProfileImageView.h"
+#import "UIColor+AppBgColor.h"
+#import "UIColor+AppTintColor.h"
 
 @interface ProfileCell()
 
 //############################################################
 @property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *profileTitleLabel;
-
-//############################################################
-@property (weak, nonatomic) IBOutlet UILabel *postCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *answersCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *answeredCountLabel;
 
 //############################################################
 //surveyOrderControl decides the order questions of a user is shown in the
@@ -35,16 +32,16 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.backgroundColor = [UIColor appBgColor];
+    self.profileTitleLabel.textColor = [UIColor appTintColor];
 }
 
-- (void)updateContentWithPFUser:(PFUser *)user{
-    self.profileUser = [[User alloc] initWithPFUser: user];
-    self.profileImageView.user = self.profileUser;
-    self.profileTitleLabel.text = self.profileUser.name;
+- (void)setUser:(User *)user {
+    self.profileImageView.user = self.user;
+    self.profileTitleLabel.text = self.user.name;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
 

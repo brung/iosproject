@@ -48,7 +48,14 @@
 }
 */
 
-- (IBAction)onImageTap:(id)sender {
+- (IBAction)onImageTap:(UITapGestureRecognizer *)sender {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }];
+    }];
     [self.delegate profileImageView:self tappedUser:self.user];
 }
 

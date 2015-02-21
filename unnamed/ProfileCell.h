@@ -10,8 +10,5 @@
 #import "User.h"
 
 @interface ProfileCell : UITableViewCell
-@property (nonatomic, strong) User * profileUser;
-
-- (void)updateContentWithPFUser:(PFUser *)user;
-
+@property (nonatomic, strong) User * user;
 @end
