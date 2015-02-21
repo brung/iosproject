@@ -46,7 +46,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="R6c-5O-Ip8" firstAttribute="centerY" secondItem="6zp-Vs-ovw" secondAttribute="centerY" id="AzX-HI-mZd"/>
                 <constraint firstItem="R6c-5O-Ip8" firstAttribute="centerY" secondItem="O7j-Bf-ACJ" secondAttribute="centerY" id="FzZ-ed-C5P"/>

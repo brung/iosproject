@@ -29,8 +29,8 @@
 
 - (void)baseInit {
     UINib *nib = [UINib nibWithNibName:@"AnswerView" bundle:nil];
-    [nib instantiateWithOwner:self options:nil];
-    
+    NSArray *objects = [nib instantiateWithOwner:self options:nil];
+    NSLog(@"Nib Objects Count: %ld", objects.count);
     self.containerView.frame = self.bounds;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:self.containerView];
@@ -60,6 +60,12 @@
     self.barView.percentage = percentage;
     
     [self setNeedsLayout];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.containerView.frame = self.bounds;
 }
 
 @end
