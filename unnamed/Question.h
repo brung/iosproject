@@ -13,9 +13,14 @@
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) PFUser *user;
 @property (nonatomic, strong) NSString *text;
+@property (nonatomic, assign) NSInteger numAnswers;
+@property (nonatomic, strong) NSArray *answerTexts;
+@property (nonatomic, strong) NSArray *answerVoteCounts;
 @property (nonatomic, assign) BOOL anonymous;
 @property (nonatomic, assign) BOOL complete;
 @property (nonatomic, readonly) NSDate *createdAt;
 
 - (id)initWithText:(NSString *)text;
+- (NSArray *)createAnswersFromQuestion;
+- (NSInteger)getTotalVotes;
 @end

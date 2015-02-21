@@ -6,12 +6,10 @@
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
-#import <Parse/PFObject+Subclass.h>
+#import <Foundation/Foundation.h>
 
-@interface Answer : PFObject<PFSubclassing>
-+ (NSString *)parseClassName;
-@property (nonatomic, strong) NSString *objectId;
-@property (nonatomic, strong) NSString *questionId;
+@interface Answer : NSObject
+@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) NSInteger count;
 @end

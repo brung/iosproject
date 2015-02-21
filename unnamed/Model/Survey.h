@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Question.h"
 #import "User.h"
-#import "Answer.h"
 #import "Vote.h"
+#import "Answer.h"
 
 @interface Survey : NSObject
 @property (nonatomic, strong) Question *question;
@@ -18,10 +18,8 @@
 @property (nonatomic, strong) NSArray *answers;
 @property (nonatomic, assign) BOOL voted;
 @property (nonatomic, strong) Vote *vote;
+@property (nonatomic, assign) NSInteger totalVotes;
 
 - (BOOL)isCurrentVoteAnswer:(Answer *)answer;
 - (id)initWithQuestion:(Question *)question;
-- (id)initWithQuestion:(Question *)question andUser:(User *)user;
-- (id)initWithQuestion:(Question *)question andPFUser:(PFUser *)user;
-
 @end

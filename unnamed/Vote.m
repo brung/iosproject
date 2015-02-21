@@ -12,7 +12,7 @@
 @dynamic objectId;
 @dynamic user;
 @dynamic questionId;
-@dynamic answer;
+@dynamic answerIndex;
 
 + (void)load {
     [self registerSubclass];

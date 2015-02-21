@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AnswerCollectionView : UIView
-
-@property (nonatomic, strong) NSArray *answers;
-
+- (void) setAnswers:(NSArray *)answers andTotal:(NSInteger)total;
 @end

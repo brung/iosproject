@@ -51,7 +51,7 @@
     self.nameLabel.text = survey.user.name;
     self.createdByLabel.text = [survey.question.createdAt timeAgo];
     self.questionLabel.text = survey.question.text;
-    self.answerCollectionView.answers = survey.answers;
+    [self.answerCollectionView setAnswers:survey.answers andTotal:survey.totalVotes];
 }
 
 - (void)profileImageView:(ProfileImageView *)view tappedUser:(User *)user {
