@@ -54,8 +54,12 @@
     _answers = answers;
     _total = [self getTotalFromAnswers:answers];
     
-    int count = 1;
+    for (AnswerView *view in self.answerViews) {
+        [view removeFromSuperview];
+    }
     [self.answerViews removeAllObjects];
+    
+    int count = 1;
     for (Answer *answer in self.answers) {
         AnswerView *view = [[AnswerView alloc] init];
         view.index = count;
@@ -74,7 +78,7 @@
     
     for (int i=0;i<self.answerViews.count;i++) {
         AnswerView *view = self.answerViews[i];
-        CGRect imageFrame = CGRectMake(0, view.frame.size.height * i, self.frame.size.width, self.frame.size.height);
+        CGRect imageFrame = CGRectMake(0, 15.0 * i, self.frame.size.width, self.frame.size.height);
         view.frame = imageFrame;
     }
     
