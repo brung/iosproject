@@ -10,8 +10,30 @@
 
 @implementation BarView
 
+- (void)baseInit {
+    self.percentage = 0.0;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self baseInit];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self baseInit];
+    }
+    return self;
+}
+
 - (void)setPercentage:(CGFloat)percentage {
     _percentage = percentage;
+    
+    [self setNeedsLayout];
 }
 
 /*

@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.0%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5O-T8-rF8">
-                        <rect key="frame" x="51" y="2" width="36.5" height="14.5"/>
+                        <rect key="frame" x="51" y="2" width="37" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="36.5" id="2gR-L4-GNm"/>
                             <constraint firstAttribute="width" constant="28" id="dKF-Hk-6ab"/>
@@ -29,7 +29,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. The Answer Is" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R64-le-eDB">
-                        <rect key="frame" x="95.5" y="3" width="78" height="12"/>
+                        <rect key="frame" x="96" y="3" width="78" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
