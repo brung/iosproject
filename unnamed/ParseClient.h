@@ -11,13 +11,14 @@
 #import "Question.h"
 #import "Answer.h"
 #import "Vote.h"
+#import "User.h"
 
 extern NSString * const UserDidPostNewSurveyNotification;
 extern NSInteger const ResultCount;
 
 @interface ParseClient : Parse
 + (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion;
-+ (void)getMySurveysComplete:(BOOL)complete onPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion;
++ (void)getUser:(User *)user surveysComplete:(BOOL)complete onPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion;
 + (void)getMyAnsweredSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion;
 + (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 + (void)saveAnswerFromNSMutableArray:(NSMutableArray *)answers withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;

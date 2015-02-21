@@ -8,12 +8,13 @@
 
 #import "HomeViewController.h"
 #import "SurveyViewController.h"
+#import "ProfileViewController.h"
 #import "SurveyViewCell.h"
 #import "ParseClient.h"
 
 NSString * const kSurveyViewCell = @"SurveyViewCell";
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, SurveyViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
 @property (nonatomic, strong) NSMutableArray *surveys;
@@ -148,6 +149,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     
     SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
     cell.survey = self.surveys[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
@@ -160,6 +162,13 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
     vc.survey = self.surveys[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - SurveyViewCellDelegate methods
+- (void)surveyViewCell:(SurveyViewCell *)cell didClickOnUser:(User *)user {
+    ProfileViewController *vc = [[ProfileViewController alloc] init];
+    vc.user = user;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

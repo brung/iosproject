@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Survey.h"
+#import "User.h"
+
+@class SurveyViewCell;
+@protocol SurveyViewCellDelegate <NSObject>
+-(void)surveyViewCell:(SurveyViewCell *)cell didClickOnUser:(User *)user;
+@end
 
 @interface SurveyViewCell : UITableViewCell
-
 @property (nonatomic, strong) Survey *survey;
-
+@property (nonatomic, strong) id<SurveyViewCellDelegate> delegate;
 @end
