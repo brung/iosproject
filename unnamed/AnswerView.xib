@@ -14,7 +14,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="m8k-6m-S8c">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="24"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="21.5"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.0%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6c-5O-Ip8">
@@ -48,18 +48,16 @@
             </subviews>
             <constraints>
                 <constraint firstItem="R6c-5O-Ip8" firstAttribute="centerY" secondItem="6zp-Vs-ovw" secondAttribute="centerY" id="AzX-HI-mZd"/>
-                <constraint firstItem="R6c-5O-Ip8" firstAttribute="centerY" secondItem="O7j-Bf-ACJ" secondAttribute="centerY" id="FzZ-ed-C5P"/>
                 <constraint firstItem="6zp-Vs-ovw" firstAttribute="leading" secondItem="R6c-5O-Ip8" secondAttribute="trailing" constant="3" id="NXq-7s-fxT"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6zp-Vs-ovw" secondAttribute="trailing" constant="8" id="aqr-RD-inv"/>
                 <constraint firstItem="O7j-Bf-ACJ" firstAttribute="centerY" secondItem="6zp-Vs-ovw" secondAttribute="centerY" id="b9l-Fr-vO8"/>
                 <constraint firstItem="O7j-Bf-ACJ" firstAttribute="top" secondItem="m8k-6m-S8c" secondAttribute="top" constant="5" id="dpT-8x-DnB"/>
                 <constraint firstItem="O7j-Bf-ACJ" firstAttribute="centerY" secondItem="R6c-5O-Ip8" secondAttribute="centerY" id="f0l-31-lgq"/>
-                <constraint firstItem="R6c-5O-Ip8" firstAttribute="leading" secondItem="O7j-Bf-ACJ" secondAttribute="trailing" constant="3" id="fJp-K3-wkR"/>
                 <constraint firstItem="O7j-Bf-ACJ" firstAttribute="leading" secondItem="m8k-6m-S8c" secondAttribute="leading" constant="8" id="ikq-q4-iQg"/>
                 <constraint firstItem="R6c-5O-Ip8" firstAttribute="leading" secondItem="O7j-Bf-ACJ" secondAttribute="trailing" constant="3" id="onP-rZ-joU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="145" y="-203"/>
+            <point key="canvasLocation" x="145" y="-204.25"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -31,6 +31,7 @@
     UINib *nib = [UINib nibWithNibName:@"AnswerView" bundle:nil];
     NSArray *objects = [nib instantiateWithOwner:self options:nil];
     NSLog(@"Nib Objects Count: %ld", objects.count);
+    NSLog(@"Height: %f, Width: %f", self.containerView.frame.size.height, self.containerView.frame.size.width);
     self.containerView.frame = self.bounds;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:self.containerView];
