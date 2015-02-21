@@ -6,4 +6,5 @@ pod "BDBOAuth1Manager"
 pod 'Parse'
 pod 'ParseFacebookUtils'
 pod 'NSDateMinimalTimeAgo'
+pod 'GRKBarGraphView'
 

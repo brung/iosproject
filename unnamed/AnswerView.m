@@ -7,10 +7,11 @@
 //
 
 #import "AnswerView.h"
-#import "BarView.h"
+#import "GRKBarGraphView.h"
+#import "UIColor+AppTintColor.h"
 
 @interface AnswerView ()
-@property (weak, nonatomic) IBOutlet BarView *barView;
+@property (weak, nonatomic) IBOutlet GRKBarGraphView *barView;
 @property (weak, nonatomic) IBOutlet UILabel *percentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
@@ -30,8 +31,15 @@
 - (void)baseInit {
     UINib *nib = [UINib nibWithNibName:@"AnswerView" bundle:nil];
     NSArray *objects = [nib instantiateWithOwner:self options:nil];
-    NSLog(@"Nib Objects Count: %ld", objects.count);
-    NSLog(@"Height: %f, Width: %f", self.containerView.frame.size.height, self.containerView.frame.size.width);
+//    NSLog(@"Nib Objects Count: %ld", objects.count);
+//    NSLog(@"Height: %f, Width: %f", self.containerView.frame.size.height, self.containerView.frame.size.width);
+    
+    // Setup GKBarGraphView
+    self.barView.barStyle = GRKBarStyleFromRight;
+    self.barView.barColor = [UIColor appTintColor];
+    self.barView.tintColor = [UIColor appTintColor];
+    
+    // Setup ContainerView
     self.containerView.frame = self.bounds;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:self.containerView];
@@ -61,7 +69,7 @@
     }
     CGFloat percentage = self.total <= 0 ? 0.0 : 1.0f * answer.count / self.total;
     self.percentLabel.text = [NSString stringWithFormat:@"%.1f%%", percentage * 100.0];
-    self.barView.percentage = percentage;
+    self.barView.percent = percentage;
     
     [self setNeedsLayout];
 }

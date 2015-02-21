@@ -26,6 +26,7 @@ PODS:
   - Bolts (1.1.3)
   - Facebook-iOS-SDK (3.23.0):
     - Bolts (~> 1.0)
+  - GRKBarGraphView (1.1.2)
   - NSDateMinimalTimeAgo (0.1.0)
   - Parse (1.6.3):
     - Bolts (~> 1.1)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
   - Facebook-iOS-SDK
+  - GRKBarGraphView
   - NSDateMinimalTimeAgo
   - Parse
   - ParseFacebookUtils
@@ -46,6 +48,7 @@ SPEC CHECKSUMS:
   BDBOAuth1Manager: 274574557077abc873fc5688abe8b991e782749c
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   Facebook-iOS-SDK: 3d65f685348b789e46a9aacf92bfa85b60b63755
+  GRKBarGraphView: 6ead425d94de2cddb91b984017cad5199d6f09a6
   NSDateMinimalTimeAgo: 11f443d88edcfc2af23309b2641fd063c3d3a125
   Parse: f725f76ef200c5127420690fc6882e57c3813923
   ParseFacebookUtils: bb14e63862f920cc3f3864b0e373d6771b765255

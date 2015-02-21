@@ -66,6 +66,12 @@
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 23
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 0
 
+// GRKBarGraphView
+#define COCOAPODS_POD_AVAILABLE_GRKBarGraphView
+#define COCOAPODS_VERSION_MAJOR_GRKBarGraphView 1
+#define COCOAPODS_VERSION_MINOR_GRKBarGraphView 1
+#define COCOAPODS_VERSION_PATCH_GRKBarGraphView 2
+
 // NSDateMinimalTimeAgo
 #define COCOAPODS_POD_AVAILABLE_NSDateMinimalTimeAgo
 #define COCOAPODS_VERSION_MAJOR_NSDateMinimalTimeAgo 0
