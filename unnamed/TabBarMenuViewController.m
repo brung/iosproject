@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.tabBar setTintColor:[UIColor appTintColor]];
+    self.tabBar.translucent = NO;
 }
 
 - (void)didReceiveMemoryWarning {
