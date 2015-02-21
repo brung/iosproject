@@ -7,6 +7,7 @@
 //
 
 #import "TabBarMenuViewController.h"
+#import "UIColor+AppTintColor.h"
 
 @interface TabBarMenuViewController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.tabBar setTintColor:[UIColor appTintColor]];
 }
 
 - (void)didReceiveMemoryWarning {

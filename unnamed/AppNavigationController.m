@@ -7,6 +7,7 @@
 //
 
 #import "AppNavigationController.h"
+#import "UIColor+AppTintColor.h"
 
 @interface AppNavigationController ()
 
@@ -18,6 +19,10 @@
     [super viewDidLoad];
     self.navigationBar.translucent = NO;
     self.navigationBar.barTintColor = [UIColor whiteColor];
+    [self.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                 [UIColor appTintColor],
+                                                 NSForegroundColorAttributeName,
+                                                 nil]];
 }
 
 - (void)didReceiveMemoryWarning {
