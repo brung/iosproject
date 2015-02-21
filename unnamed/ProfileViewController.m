@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "SurveyViewController.h"
 #import "ParseClient.h"
 #import "ProfileCell.h"
 #import "SurveyViewCell.h"
@@ -165,8 +166,9 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //SurveyViewController *vc = [[SurveyViewController alloc] init];
-    //[self.navigationController pushViewController:vc animated:YES];
+    SurveyViewController *vc = [[SurveyViewController alloc] init];
+    vc.survey = self.surveys[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
