@@ -17,6 +17,7 @@
 #import "ComposeViewController.h"
 #import "ProfileViewController.h"
 #import "AppNavigationController.h"
+#import "UIColor+AppTintColor.h"
 
 NSString * const kParseApplicationId = @"j4MqR9ASYk601tn3xX3vR8nLUyqcoRqjE0UzCqr7";
 NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
@@ -75,10 +76,15 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
     
     [PFFacebookUtils initializeFacebook];
     
+    [[UINavigationBar appearance] setTintColor:[UIColor appTintColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor appTintColor],
+                                                          NSForegroundColorAttributeName,
+                                                          nil]];
+    
     BOOL shouldOpenLoginView = NO;
     
     User *user = [User currentUser];
-    
     if (user) {
         
         NSLog(@"User name %@", user.name);

@@ -14,6 +14,7 @@
 #import "DetailAnswerCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppBgColor.h"
+#import "UIColor+AppTintColor.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
@@ -32,6 +33,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor appBgColor];
+        
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

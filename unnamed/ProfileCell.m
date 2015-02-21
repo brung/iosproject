@@ -34,9 +34,11 @@
     // Initialization code
     self.backgroundColor = [UIColor appBgColor];
     self.profileTitleLabel.textColor = [UIColor appTintColor];
+    self.profileImageView.isEnabled = NO;
 }
 
 - (void)setUser:(User *)user {
+    _user = user;
     self.profileImageView.user = self.user;
     self.profileTitleLabel.text = self.user.name;
 }

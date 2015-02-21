@@ -19,5 +19,6 @@
 @interface ProfileImageView : UIImageView
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) id<ProfileImageViewDelegate> delegate;
+@property (nonatomic, assign) BOOL isEnabled;
 
 @end
