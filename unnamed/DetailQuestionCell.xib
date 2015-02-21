@@ -16,6 +16,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mBC-qR-wwf" customClass="ProfileImageView">
                         <rect key="frame" x="8" y="8" width="64" height="64"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="64" id="Iqn-u7-aPV"/>
                             <constraint firstAttribute="height" constant="64" id="MNd-p6-12b"/>

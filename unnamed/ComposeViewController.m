@@ -99,6 +99,7 @@ NSInteger const maxCount = 160;
         answerCell.answer = self.answers[indexPath.row];
         answerCell.answerIndex = indexPath.row;
         //answerCell.delegate = self;
+        answerCell.backgroundColor = [UIColor appBgColor];
     }
 }
 
