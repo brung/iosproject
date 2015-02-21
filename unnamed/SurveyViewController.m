@@ -24,7 +24,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 @property (nonatomic, assign) NSInteger voteTotal;
 @property (nonatomic, strong) DetailQuestionCell *prototypeQuestionCell;
 @property (nonatomic, strong) DetailAnswerCell *prototypeAnswerCell;
-@property (nonatomic, strong) DetailAnswerCell *currentVotedAnswerCell;
+@property (nonatomic, strong) NSIndexPath *currentSelectedIndexPath;
 
 @end
 
@@ -112,9 +112,9 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         Answer *answer = (Answer *)self.surveyContents[indexPath.row];
         cell.answer = answer;
         cell.index = indexPath.row;
-        if (answer == self.survey.vote.answer) {
-            self.currentVotedAnswerCell = cell;
+        if ([self.survey isCurrentVoteAnswer:answer]) {
             cell.isCurrentVote = YES;
+            self.currentSelectedIndexPath = indexPath;
         } else {
             cell.isCurrentVote = NO;
         }
@@ -126,10 +126,11 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [ParseClient saveVoteOnSurvey:self.survey withAnswer:self.surveyContents[indexPath.row] withCompletion:^(Vote *vote, NSError *error) {
         if (!error) {
-//            if (self.currentVotedAnswerCell) {
-//                NSIndexPath *currentVote = [self.tableView indexPathForCell:self.currentVotedAnswerCell];
-//            }
-            [self.tableView reloadData];
+            NSArray *array = [NSArray arrayWithObjects:indexPath,
+                                    self.currentSelectedIndexPath,
+                                    nil];
+            self.currentSelectedIndexPath = indexPath;
+            [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to vote. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
