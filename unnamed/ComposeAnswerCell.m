@@ -25,6 +25,7 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     tapGesture.delegate = self;
+    self.answerLabel.userInteractionEnabled = YES;
     [self.answerLabel addGestureRecognizer:tapGesture];
     
 }
@@ -46,23 +47,18 @@
     self.valueLabel.text = self.valueLabels[answerIndex];
 }
 
-- (void)submitText {
+#pragma mark - Gesture Recognizers
+- (IBAction)onTap:(UITapGestureRecognizer *)sender {
+    [self showTextField:YES];
+}
+
+- (IBAction)onEditingEnd:(id)sender {
     if ([self.answerText.text length] > 0) {
         [self showTextField:NO];
     } else {
         [self showTextField:YES];
     }
     [self.delegate composeAnswerCell:self changedAnswer:self.answer];
-}
-
-#pragma mark - Gesture Recognizers
-- (IBAction)onTap:(UITapGestureRecognizer *)sender {
-    [self showTextField:YES];
-    
-}
-
-- (IBAction)onEditingEnd:(id)sender {
-    [self submitText];
 }
 
 - (IBAction)onEditingChanged:(id)sender {
@@ -76,9 +72,11 @@
     [UIView animateWithDuration:0.2 animations:^{
         if (show) {
             self.answerLabel.alpha = 0;
+            self.answerText.text = self.answerLabel.text;
             self.answerText.alpha = 1;
         } else {
             self.answerLabel.alpha = 1;
+            self.answerLabel.text = self.answerText.text;
             self.answerText.alpha = 0;
         }
     }];
