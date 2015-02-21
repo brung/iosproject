@@ -19,7 +19,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.valueLabels = @[@"A", @"B", @"C", @"D", @"E", @"F"];
+    self.valueLabels = @[@"1.", @"2.", @"3.", @"4.", @"5.", @"6."];
     self.answerLabel.alpha = 0;
     self.answerText.alpha = 1;
     

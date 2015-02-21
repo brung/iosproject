@@ -11,6 +11,8 @@
 #import "Answer.h"
 #import "Survey.h"
 #import "ParseClient.h"
+#import "GrayBarButtonItem.h"
+#import "UIColor+AppBgColor.h"
 
 NSString * const AnswerCell = @"ComposeAnswerCell";
 NSString * const AskAQuestion = @"Ask a question . . .";
@@ -34,6 +36,7 @@ NSInteger const maxCount = 160;
         self.title = @"Create";
         self.tabBarItem.image = [UIImage imageNamed:@"Poll Topic"];
     }
+    self.view.backgroundColor = [UIColor appBgColor];
     return self;
 }
 
@@ -48,9 +51,9 @@ NSInteger const maxCount = 160;
     [super viewDidLoad];
     self.isUpdating = NO;
     // Button
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
+    GrayBarButtonItem *cancelButton = [[GrayBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    UIBarButtonItem *submitButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];
+    GrayBarButtonItem *submitButton = [[GrayBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];
     self.navigationItem.rightBarButtonItem = submitButton;
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
@@ -106,12 +109,14 @@ NSInteger const maxCount = 160;
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UILabel *footer = [[UILabel alloc] init];
     footer.contentMode = UIViewContentModeCenter;
+    footer.textAlignment = NSTextAlignmentCenter;
+    footer.textColor = [UIColor lightGrayColor];
     if (self.answers.count < 4) {
         footer.text = (self.answers.count < 4) ? @"+ Add an Answer" : @"";
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddAnswerButton:)];
         footer.userInteractionEnabled = YES;
         [footer addGestureRecognizer:tapGesture];
-        footer.backgroundColor = [UIColor lightGrayColor];
+        footer.backgroundColor = [UIColor whiteColor];
     }
     return footer;
 }
