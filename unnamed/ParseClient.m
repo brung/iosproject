@@ -76,6 +76,7 @@ NSInteger const ResultCount = 20;
     Question *question = [mutableQuestions lastObject];
     [mutableQuestions removeLastObject];
     PFQuery *query = [Answer query];
+    [query orderByDescending:@"createdAt"];
     [query whereKey:@"questionId" equalTo:question.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
