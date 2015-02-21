@@ -10,7 +10,7 @@
 
 @implementation Survey
 - (BOOL)isCurrentVoteAnswer:(Answer *)answer {
-    return (self.vote.answer == answer);
+    return [self.vote.answer.objectId isEqualToString:answer.objectId];
 }
 
 - (id)initWithQuestion:(Question *)question {
