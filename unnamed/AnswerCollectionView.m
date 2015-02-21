@@ -76,9 +76,14 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    CGFloat height = self.frame.size.height / self.answerViews.count;
     for (int i=0;i<self.answerViews.count;i++) {
         AnswerView *view = self.answerViews[i];
-        CGRect imageFrame = CGRectMake(0, 15.0 * i, self.frame.size.width, self.frame.size.height);
+        NSLog(@"Height: %f, Width: %f", view.frame.size.height, view.frame.size.width);
+        NSLog(@"Height: %f, Width: %f", self.frame.size.height, self.frame.size.width);
+        CGFloat y = height * i;
+        NSLog(@"y pos: %f", y);
+        CGRect imageFrame = CGRectMake(0, y, self.frame.size.width, height);
         view.frame = imageFrame;
     }
     
