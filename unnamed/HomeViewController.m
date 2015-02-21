@@ -7,13 +7,11 @@
 //
 
 #import "HomeViewController.h"
-#import "AnswerCell.h"
 #import "SurveyViewController.h"
-#import "SurveyHeaderCell.h"
+#import "SurveyViewCell.h"
 #import "ParseClient.h"
 
-NSString * const kAnswerCell = @"AnswerCell";
-NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
+NSString * const kSurveyViewCell = @"SurveyViewCell";
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -77,8 +75,7 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
     // TableView Setup
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:kAnswerCell bundle:nil] forCellReuseIdentifier:kAnswerCell];
-    [self.tableView registerNib:[UINib nibWithNibName:kSurveryHeaderCell bundle:nil] forCellReuseIdentifier:kSurveryHeaderCell];
+    [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCell bundle:nil] forCellReuseIdentifier:kSurveyViewCell];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     [self onTableRefresh];
@@ -114,41 +111,28 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
             }
             [self.tableRefreshControl endRefreshing];
         }];
+//        [self setupTestData];
+//        [self.tableView reloadData];
+//        [self.tableRefreshControl endRefreshing];
     }
 }
 
 #pragma mark - TableViewDelegate Methods
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.surveys.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    Survey *survey = self.surveys[section];
-    return survey.answers.count + 1;//Include Header Cell
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Survey *survey = self.surveys[indexPath.section];
-    
-    if (indexPath.section == self.surveys.count - 1 && !self.isUpdating) {
+    if (indexPath.row == self.surveys.count - 1 && !self.isUpdating) {
         self.pageIndex++;
         if (self.surveys.count == (self.pageIndex * ResultCount)) {
             [self fetchSurveys];
         }
     }
     
-    if (indexPath.row == 0) {
-        SurveyHeaderCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveryHeaderCell];
-        cell.survey = survey;
-        return cell;
-    } else {
-        AnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kAnswerCell];
-        Answer *ans = survey.answers[indexPath.row - 1];//Row index include SurveyHeaderCell
-        cell.index = indexPath.row;
-        cell.total = [self getTotalFromAnswers:survey.answers];
-        cell.answer = ans;
-        return cell;
-    }
+    SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
+    cell.survey = self.surveys[indexPath.row];
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,22 +142,16 @@ NSString * const kSurveryHeaderCell = @"SurveyHeaderCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
-    vc.survey = self.surveys[indexPath.section];
+    vc.survey = self.surveys[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0;
 }
 
 #pragma mark - Private Methods
 - (NSInteger)getTotalFromAnswers:(NSArray *)answers {
     NSInteger total = 0;
-    
     for (Answer *ans in answers) {
         total += ans.count;
     }
-    
     return total;
 }
 
