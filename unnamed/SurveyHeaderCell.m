@@ -7,11 +7,11 @@
 //
 
 #import "SurveyHeaderCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "ProfileImageView.h"
 
 @interface SurveyHeaderCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 
@@ -24,8 +24,6 @@
     // But was this fix in the latest version?
     self.questionLabel.preferredMaxLayoutWidth = self.questionLabel.frame.size.width;
     
-    self.profileImageView.layer.cornerRadius = 5;
-    self.profileImageView.clipsToBounds = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -38,7 +36,7 @@
 - (void)setSurvey:(Survey *)survey {
     _survey = survey;
     
-    [self.profileImageView setImageWithURL:[NSURL URLWithString:survey.user.profileImageUrl]];
+    self.profileImageView.user = survey.user;
     self.nameLabel.text = survey.user.name;
     self.questionLabel.text = survey.question.text;
     

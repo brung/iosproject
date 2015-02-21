@@ -7,12 +7,12 @@
 //
 
 #import "ProfileCell.h"
-#import  "UIImageView+AFNetworking.h"
+#import "ProfileImageView.h"
 
 @interface ProfileCell()
 
 //############################################################
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *profileTitleLabel;
 
 //############################################################
@@ -27,7 +27,6 @@
 //[1]Open - still time order but only questions that hasn't been closed yet
 //[2]Popular - based on the number of participants of a question
 @property (weak, nonatomic) IBOutlet UISegmentedControl *surveyOrderControl;
-@property (nonatomic, strong) User * profileUser;
 
 @end
 
@@ -40,8 +39,7 @@
 
 - (void)updateContentWithPFUser:(PFUser *)user{
     self.profileUser = [[User alloc] initWithPFUser: user];
-    [self.profileImageView setImageWithURL: [NSURL URLWithString:self.profileUser.profileImageUrl]];
-    NSLog(@"set image with string as %@",self.profileUser.profileImageUrl);
+    self.profileImageView.user = self.profileUser;
     self.profileTitleLabel.text = self.profileUser.name;
 }
 

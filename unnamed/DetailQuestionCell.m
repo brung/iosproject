@@ -7,10 +7,10 @@
 //
 
 #import "DetailQuestionCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "ProfileImageView.h"
 
 @interface DetailQuestionCell()
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 
@@ -23,9 +23,7 @@
 }
 
 - (void) layoutSubviews {
-    self.profileImageView.layer.cornerRadius = 3;
-    self.profileImageView.clipsToBounds = YES;
-    [self.profileImageView setImageWithURL:[NSURL URLWithString:self.user.profileImageUrl]];
+    self.profileImageView.user = self.user;
     self.nameLabel.text = self.user.name;
     self.questionLabel.text = self.question.text;
 }
