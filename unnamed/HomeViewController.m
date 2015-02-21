@@ -167,9 +167,13 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 
 #pragma mark - SurveyViewCellDelegate methods
 - (void)surveyViewCell:(SurveyViewCell *)cell didClickOnUser:(User *)user {
-    ProfileViewController *vc = [[ProfileViewController alloc] init];
-    vc.user = user;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([user.objectId isEqualToString:[User currentUser].objectId]) {
+        [self.tabBarController setSelectedIndex:2];
+    } else {
+        ProfileViewController *vc = [[ProfileViewController alloc] init];
+        vc.user = user;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - Private Methods
