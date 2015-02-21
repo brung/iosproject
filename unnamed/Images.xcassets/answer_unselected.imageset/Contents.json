@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "iconmonstr-circle-outline-icon-32.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "iconmonstr-circle-outline-icon-64.png"
+      "filename" : "iconmonstr-star-7-icon-64 (2).png"
     },
     {
       "idiom" : "universal",
