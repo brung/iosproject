@@ -21,6 +21,7 @@
                     <rect key="frame" x="51" y="2" width="43.5" height="14.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="3rh-hP-pRR"/>
+                        <constraint firstAttribute="width" constant="43.5" id="NeE-Gv-5Wt"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

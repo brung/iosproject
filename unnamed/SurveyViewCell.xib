@@ -32,11 +32,16 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkA-uR-bqS" customClass="AnswerCollectionView">
                                 <rect key="frame" x="8" y="72" width="406" height="66.5"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Should I stay or should I go What should happen in this case?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8L-k8-rka">
                                 <rect key="frame" x="56" y="31" width="358" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59 m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiE-FA-Ca8">
+                                <rect key="frame" x="385.5" y="9" width="28" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -46,16 +51,24 @@
                             <constraint firstItem="JkA-uR-bqS" firstAttribute="leading" secondItem="6Jp-aC-bqY" secondAttribute="leading" constant="8" id="3Ni-ZW-07N"/>
                             <constraint firstItem="JkA-uR-bqS" firstAttribute="top" secondItem="X8L-k8-rka" secondAttribute="bottom" constant="8" id="7Te-60-7Lj"/>
                             <constraint firstItem="X8L-k8-rka" firstAttribute="leading" secondItem="t1P-hQ-FPG" secondAttribute="trailing" constant="8" id="GVa-tc-2oy"/>
+                            <constraint firstItem="ub5-3g-3ic" firstAttribute="centerY" secondItem="BiE-FA-Ca8" secondAttribute="centerY" id="GnM-EG-aEx"/>
                             <constraint firstItem="ub5-3g-3ic" firstAttribute="top" secondItem="6Jp-aC-bqY" secondAttribute="top" constant="8" id="JOJ-hh-ELY"/>
+                            <constraint firstItem="BiE-FA-Ca8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ub5-3g-3ic" secondAttribute="trailing" constant="8" id="JWS-gx-bwT"/>
                             <constraint firstAttribute="trailing" secondItem="JkA-uR-bqS" secondAttribute="trailing" constant="8" id="M9l-3B-m9m"/>
                             <constraint firstItem="t1P-hQ-FPG" firstAttribute="leading" secondItem="6Jp-aC-bqY" secondAttribute="leading" constant="8" id="TvV-YA-5SX"/>
                             <constraint firstItem="X8L-k8-rka" firstAttribute="top" secondItem="ub5-3g-3ic" secondAttribute="bottom" constant="6" id="X9K-iK-npN"/>
+                            <constraint firstAttribute="trailing" secondItem="BiE-FA-Ca8" secondAttribute="trailing" constant="8" id="ZSW-1H-A48"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ub5-3g-3ic" secondAttribute="trailing" constant="8" id="bjZ-dd-kdO"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X8L-k8-rka" secondAttribute="trailing" constant="8" id="cDj-ox-OaE"/>
                             <constraint firstAttribute="bottom" secondItem="JkA-uR-bqS" secondAttribute="bottom" constant="8" id="mcB-Ar-vVe"/>
                             <constraint firstItem="t1P-hQ-FPG" firstAttribute="top" secondItem="6Jp-aC-bqY" secondAttribute="top" constant="8" id="pO6-wB-q4u"/>
                             <constraint firstItem="ub5-3g-3ic" firstAttribute="leading" secondItem="t1P-hQ-FPG" secondAttribute="trailing" constant="8" id="q8F-Op-URV"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="bjZ-dd-kdO"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>
@@ -68,6 +81,8 @@
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="answerCollectionView" destination="JkA-uR-bqS" id="VxH-3k-BHk"/>
+                <outlet property="containerView" destination="6Jp-aC-bqY" id="B7a-kv-2SQ"/>
+                <outlet property="createdByLabel" destination="BiE-FA-Ca8" id="r55-fY-Jpq"/>
                 <outlet property="nameLabel" destination="ub5-3g-3ic" id="VBz-e2-VEc"/>
                 <outlet property="profileImageView" destination="t1P-hQ-FPG" id="glE-I0-Hea"/>
                 <outlet property="questionLabel" destination="X8L-k8-rka" id="RtW-Jb-4VO"/>
