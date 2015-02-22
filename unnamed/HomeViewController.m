@@ -11,6 +11,7 @@
 #import "ProfileViewController.h"
 #import "SurveyViewCell.h"
 #import "ParseClient.h"
+#import "UIColor+AppBgColor.h"
 
 NSString * const kSurveyViewCell = @"SurveyViewCell";
 
@@ -29,28 +30,28 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @implementation HomeViewController
 
 - (void) setupTestData {
-    for (int i=0; i<20; i++) {
-        Survey *survey = [[Survey alloc] init];
-        survey.question = [[Question alloc] init];
-        survey.question.text = [NSString stringWithFormat:@"Question %d?", i];
-        survey.question.anonymous = (i%2==0)?YES:NO;
-        survey.question.complete = (i%2==0)?NO:YES;
-        
-        survey.user = [[User alloc] init];
-        survey.user.name = [NSString stringWithFormat:@"Name %d", i];
-        
-        NSMutableArray *answers = [[NSMutableArray alloc] init];
-        for (int j=0; j < ((i % 4) + 2); j++) {
-            Answer *answer = [[Answer alloc] init];
-            answer.count = i * j;
-            answer.text = [NSString stringWithFormat:@"Answer %d - %d", i, j];
-            [answers addObject:answer];
-        }
-        survey.answers = [NSArray arrayWithArray:answers];
-        survey.voted = (i%2 == 0)?YES:NO;
-        
-        [self.surveys addObject:survey];
-    }
+//    for (int i=0; i<20; i++) {
+//        Survey *survey = [[Survey alloc] init];
+//        survey.question = [[Question alloc] init];
+//        survey.question.text = [NSString stringWithFormat:@"Question %d?", i];
+//        survey.question.anonymous = (i%2==0)?YES:NO;
+//        survey.question.complete = (i%2==0)?NO:YES;
+//        
+//        survey.user = [[User alloc] init];
+//        survey.user.name = [NSString stringWithFormat:@"Name %d", i];
+//        
+//        NSMutableArray *answers = [[NSMutableArray alloc] init];
+//        for (int j=0; j < ((i % 4) + 2); j++) {
+//            Answer *answer = [[Answer alloc] init];
+//            answer.count = i * j;
+//            answer.text = [NSString stringWithFormat:@"Answer %d - %d", i, j];
+//            [answers addObject:answer];
+//        }
+//        survey.answers = [NSArray arrayWithArray:answers];
+//        survey.voted = (i%2 == 0)?YES:NO;
+//        
+//        [self.surveys addObject:survey];
+//    }
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -64,6 +65,8 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor appBgColor];
+    
     //Setup Notification listener
     self.isInsertingNewPost = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewPost:) name:UserDidPostNewSurveyNotification object:nil];
@@ -82,6 +85,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCell bundle:nil] forCellReuseIdentifier:kSurveyViewCell];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.backgroundColor = [UIColor appBgColor];
 
     [self onTableRefresh];
 }
@@ -177,14 +181,6 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 }
 
 #pragma mark - Private Methods
-- (NSInteger)getTotalFromAnswers:(NSArray *)answers {
-    NSInteger total = 0;
-    for (Answer *ans in answers) {
-        total += ans.count;
-    }
-    return total;
-}
-
 - (void)onNewPost:(NSNotification *)notification {
     Survey *survey = notification.userInfo[@"survey"];
     if (survey) {

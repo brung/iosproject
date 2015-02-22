@@ -8,6 +8,7 @@
 
 #import "Question.h"
 #import <Parse/Parse.h>
+#import "Answer.h"
 
 NSInteger const resultCount = 20;
 
@@ -15,6 +16,9 @@ NSInteger const resultCount = 20;
 @dynamic objectId;
 @dynamic user;
 @dynamic text;
+@dynamic numAnswers;
+@dynamic answerTexts;
+@dynamic answerVoteCounts;
 @dynamic anonymous;
 @dynamic complete;
 @dynamic createdAt;
@@ -39,5 +43,24 @@ NSInteger const resultCount = 20;
     return @"Question";
 }
 
+- (NSArray *)createAnswersFromQuestion {
+    NSMutableArray *answers = [NSMutableArray array];
+    for (int i = 0; i < self.numAnswers; i++) {
+        Answer *answer = [[Answer alloc] init];
+        answer.index = i;
+        answer.count = [self.answerVoteCounts[i] integerValue];
+        answer.text = self.answerTexts[i];
+        [answers addObject:answer];
+    }
+    return answers;
+}
+
+- (NSInteger)getTotalVotes {
+    NSInteger totalVotes = 0;
+    for (int i = 0; i < self.numAnswers; i++) {
+        totalVotes += [self.answerVoteCounts[i] integerValue];
+    }
+    return totalVotes;
+}
 
 @end

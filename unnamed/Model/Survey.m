@@ -10,32 +10,16 @@
 
 @implementation Survey
 - (BOOL)isCurrentVoteAnswer:(Answer *)answer {
-    return [self.vote.answer.objectId isEqualToString:answer.objectId];
+    return self.vote.answerIndex  == answer.index;
 }
 
 - (id)initWithQuestion:(Question *)question {
     self = [super init];
     if (self) {
         self.question = question;
-    }
-    return self;
-}
-
-- (id)initWithQuestion:(Question *)question andPFUser:(PFUser *)user {
-    self = [super init];
-    if (self) {
-        self.question = question;
-        self.user = [[User alloc] initWithPFUser:user];
-    }
-    return self;
-}
-
-
-- (id)initWithQuestion:(Question *)question andUser:(User *)user {
-    self = [super init];
-    if (self) {
-        self.question = question;
-        self.user = user;
+        self.user = [[User alloc] initWithPFUser:question.user];
+        self.answers = [question createAnswersFromQuestion];
+        self.totalVotes = [question getTotalVotes];
     }
     return self;
 }

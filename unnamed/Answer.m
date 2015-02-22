@@ -9,17 +9,5 @@
 #import "Answer.h"
 
 @implementation Answer
-@dynamic objectId;
-@dynamic questionId;
-@dynamic text;
-@dynamic count;
-
-+ (void)load {
-    [self registerSubclass];
-}
-
-+ (NSString *)parseClassName {
-    return @"Answer";
-}
 
 @end

@@ -8,12 +8,11 @@
 
 #import <Parse/PFObject+Subclass.h>
 #import "Question.h"
-#import "Answer.h"
 
 @interface Vote : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
 @property (nonatomic, strong) PFUser *user;
 @property (nonatomic, strong) NSString *questionId;
-@property (nonatomic, strong) Answer *answer;
+@property (nonatomic, assign) NSInteger answerIndex;
 
 @end

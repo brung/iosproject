@@ -11,12 +11,9 @@
 #import "Answer.h"
 
 @interface AnswerCollectionView ()
-
+@property (nonatomic, strong) NSArray *answers;
 @property (nonatomic, assign) NSInteger total;
 @property (nonatomic, strong) NSMutableArray *answerViews;
-
-- (NSInteger)getTotalFromAnswers:(NSArray *)answers;
-
 @end
 
 @implementation AnswerCollectionView
@@ -50,10 +47,9 @@
     return self;
 }
 
-- (void)setAnswers:(NSArray *)answers {
+- (void)setAnswers:(NSArray *)answers andTotal:(NSInteger)total {
     _answers = answers;
-    _total = [self getTotalFromAnswers:answers];
-    
+    _total = total;
     for (AnswerView *view in self.answerViews) {
         [view removeFromSuperview];
     }
@@ -90,12 +86,5 @@
 }
 
 #pragma mark - Private Methods
-- (NSInteger)getTotalFromAnswers:(NSArray *)answers {
-    NSInteger total = 0;
-    for (Answer *ans in answers) {
-        total += ans.count;
-    }
-    return total;
-}
 
 @end

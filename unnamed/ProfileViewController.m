@@ -199,16 +199,6 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     }
 }
 
-
-- (NSInteger)getTotalFromAnswers:(NSArray *)answers {
-    NSInteger total = 0;
-    
-    for (Answer *ans in answers) {
-        total += ans.count;
-    }
-    return total;
-}
-
 - (void)onNewPost:(NSNotification *)notification {
     Survey *survey = notification.userInfo[@"survey"];
     if (survey) {
