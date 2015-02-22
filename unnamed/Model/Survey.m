@@ -10,7 +10,7 @@
 
 @implementation Survey
 - (BOOL)isCurrentVoteAnswer:(Answer *)answer {
-    return self.vote.answerIndex  == answer.index;
+    return (self.voted && self.vote.answerIndex  == answer.index);
 }
 
 - (id)initWithQuestion:(Question *)question {
