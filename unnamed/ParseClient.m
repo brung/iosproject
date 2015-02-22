@@ -35,6 +35,9 @@ NSInteger const ResultCount = 8;
 //}
 
 + (void)getUser:(User *)user surveysComplete:(BOOL)complete onPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
+    if (!user) {
+        completion([NSArray array], [[NSError alloc] initWithDomain:@"No user found" code:909 userInfo:nil]);
+    }
     PFQuery *userQuery = [PFUser query];
     [userQuery whereKey:@"objectId" equalTo:user.objectId];
     PFQuery *query = [Question query];
