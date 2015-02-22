@@ -22,8 +22,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) BOOL isUpdating;
 @property (nonatomic, assign) BOOL isInsertingNewPost;
-
-- (NSInteger)getTotalFromAnswers:(NSArray *)answers;
+@property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
 
 @end
 
@@ -139,6 +138,13 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 }
 
 #pragma mark - TableViewDelegate Methods
+- (SurveyViewCell *)prototypeSurveyCell {
+    if (!_prototypeSurveyCell) {
+        _prototypeSurveyCell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
+    }
+    return _prototypeSurveyCell;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.surveys.count;
 }
@@ -161,12 +167,19 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     return UITableViewAutomaticDimension;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
     vc.survey = self.surveys[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
+    [self.prototypeSurveyCell layoutIfNeeded];
+    CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+    return size.height;
 }
 
 #pragma mark - SurveyViewCellDelegate methods
@@ -190,6 +203,13 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
         self.isInsertingNewPost = YES;
     }
     
+}
+
+- (void)configureCell:(UITableViewCell *)pCell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([pCell isKindOfClass:[SurveyViewCell class]]) {
+        SurveyViewCell *cell = (SurveyViewCell *)pCell;
+        cell.survey = self.surveys[indexPath.row];
+    }
 }
 
 @end
