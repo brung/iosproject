@@ -27,46 +27,21 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XiZ-ai-8eH">
-                        <rect key="frame" x="16" y="201" width="288" height="2"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="ejE-QF-GIZ"/>
-                        </constraints>
-                    </view>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1VQ-eh-TPn">
-                        <rect key="frame" x="40" y="211" width="240" height="29"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="240" id="4LX-qP-xkh"/>
-                        </constraints>
-                        <segments>
-                            <segment title="Recent"/>
-                            <segment title="Open"/>
-                        </segments>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    </segmentedControl>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="rW0-yC-q6s" secondAttribute="bottom" constant="16" id="2ra-E8-Tq4"/>
                     <constraint firstAttribute="centerX" secondItem="Jxd-pD-TVR" secondAttribute="centerX" id="IH3-Jt-93b"/>
-                    <constraint firstItem="1VQ-eh-TPn" firstAttribute="top" secondItem="XiZ-ai-8eH" secondAttribute="bottom" constant="8" id="Ief-0I-apX"/>
                     <constraint firstItem="rW0-yC-q6s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="P2H-P3-aSa"/>
                     <constraint firstItem="Jxd-pD-TVR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="UI8-E0-oB3"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="1VQ-eh-TPn" secondAttribute="bottom" constant="8" id="WxD-TV-ssM"/>
-                    <constraint firstAttribute="centerX" secondItem="1VQ-eh-TPn" secondAttribute="centerX" id="cfL-Pl-JKT"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rW0-yC-q6s" secondAttribute="trailing" constant="8" id="eCt-fy-a9A"/>
                     <constraint firstItem="rW0-yC-q6s" firstAttribute="top" secondItem="Jxd-pD-TVR" secondAttribute="bottom" constant="8" id="klF-co-YI2"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="XiZ-ai-8eH" secondAttribute="trailing" constant="8" id="ltT-Mf-sS2"/>
-                    <constraint firstItem="XiZ-ai-8eH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rW0-yC-q6s" secondAttribute="bottom" constant="16" id="uju-g2-dPx"/>
-                    <constraint firstItem="XiZ-ai-8eH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="zLP-FT-avd"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.026506696430000001" green="0.025706745999999999" blue="0.025623465750000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="profileImageView" destination="Jxd-pD-TVR" id="NTX-wa-Vae"/>
                 <outlet property="profileTitleLabel" destination="rW0-yC-q6s" id="ekx-NW-mk3"/>
-                <outlet property="surveyOrderControl" destination="1VQ-eh-TPn" id="BH6-WE-7IG"/>
             </connections>
             <point key="canvasLocation" x="243" y="370.5"/>
         </tableViewCell>
