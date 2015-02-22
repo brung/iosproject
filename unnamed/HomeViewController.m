@@ -178,7 +178,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
     [self.prototypeSurveyCell layoutIfNeeded];
     CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+//    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
     return size.height;
 }
 
