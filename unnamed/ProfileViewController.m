@@ -133,6 +133,21 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     return UITableViewAutomaticDimension;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        [self configureCell:self.prototypeProfileCell forRowAtIndexPath:indexPath];
+        [self.prototypeProfileCell layoutIfNeeded];
+        CGSize size = [self.prototypeProfileCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        return size.height;
+    }
+
+    [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
+    [self.prototypeSurveyCell layoutIfNeeded];
+    CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height;
+
+}
+
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == self.surveys.count && !self.isUpdating) {
         if (self.surveys.count == (self.pageIndex * ResultCount)) {

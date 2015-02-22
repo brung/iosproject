@@ -75,11 +75,12 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.answerHeight * self.answerViews.count);
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width,
+                            self.answerHeight * (self.answerViews.count + 1));// +1 to account additional height
     
     for (int i=0;i<self.answerViews.count;i++) {
         AnswerView *view = self.answerViews[i];
-//        NSLog(@"Height: %f, Width: %f", view.frame.size.height, view.frame.size.width);
+        NSLog(@"Height: %f, Width: %f", view.frame.size.height, view.frame.size.width);
         NSLog(@"Height: %f, Width: %f", self.frame.size.height, self.frame.size.width);
         CGFloat y = self.answerHeight * i;
         NSLog(@"y pos: %f", y);
@@ -88,7 +89,5 @@
     }
     
 }
-
-#pragma mark - Private Methods
 
 @end
