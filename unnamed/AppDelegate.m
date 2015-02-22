@@ -35,7 +35,10 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
     
     AppNavigationController * vc1 = [[AppNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
     AppNavigationController * vc2 = [[AppNavigationController alloc] initWithRootViewController:[[ComposeViewController alloc] init]];
-    AppNavigationController * vc3 = [[AppNavigationController alloc] initWithRootViewController:[[ProfileViewController alloc] init]];
+    ProfileViewController *pvc = [[ProfileViewController alloc] init];
+    pvc.user = [User currentUser];
+    AppNavigationController * vc3 = [[AppNavigationController alloc] initWithRootViewController:pvc];
+    
     
     //adding sub view controllers
     NSArray* controllers = [NSArray arrayWithObjects:vc1, vc2, vc3, nil];
