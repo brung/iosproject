@@ -26,6 +26,7 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 @property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, strong) GrayBarButtonItem *logOutButton;
 
 @property (nonatomic, assign) BOOL isUpdating;
 @property (nonatomic, assign) BOOL isInsertingNewPost;
@@ -57,8 +58,7 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     }
     
     // Setup
-    GrayBarButtonItem *logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
-    self.navigationItem.rightBarButtonItem = logOutButton;
+    self.logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
     
     // - tableview related:
     self.tableView.dataSource = self;
@@ -77,6 +77,13 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    // If the User isn't current User don't show the logoutButton
+    if (self.user == [User currentUser]) {
+        self.navigationItem.rightBarButtonItem = self.logOutButton;
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
     if (self.isInsertingNewPost) {
         self.isInsertingNewPost = NO;
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
