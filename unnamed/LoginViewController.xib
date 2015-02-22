@@ -14,26 +14,55 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9v-kA-Xyy">
-                    <rect key="frame" x="8" y="530" width="143" height="30"/>
-                    <state key="normal" title="Login with Facebook">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="tYM-mw-Q7c">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9v-kA-Xyy">
+                    <rect key="frame" x="70" y="464" width="180" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="8Ou-w4-OhD"/>
+                        <constraint firstAttribute="height" constant="40" id="M5b-Bu-uUY"/>
+                    </constraints>
+                    <state key="normal" image="login_facebook">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onLoginButton:" destination="-1" eventType="touchUpInside" id="X7M-81-gb9"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surv" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NL2-UR-jHb">
+                    <rect key="frame" x="112" y="59" width="97" height="49.5"/>
+                    <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="40"/>
+                    <color key="textColor" red="0.66666666669999997" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What questions do you have on your mind?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1T-6b-kA3">
+                    <rect key="frame" x="12" y="123" width="296" height="22"/>
+                    <fontDescription key="fontDescription" name="SinhalaSangamMN" family="Sinhala Sangam MN" pointSize="20"/>
+                    <color key="textColor" red="0.66666666669999997" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="W9v-kA-Xyy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="1Hp-AD-9qk"/>
-                <constraint firstAttribute="bottom" secondItem="W9v-kA-Xyy" secondAttribute="bottom" constant="8" id="5KD-p1-yuH"/>
-                <constraint firstItem="W9v-kA-Xyy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="FSJ-Sp-og5"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W9v-kA-Xyy" secondAttribute="trailing" constant="8" id="r2Q-4n-Tzp"/>
+                <constraint firstAttribute="centerX" secondItem="h1T-6b-kA3" secondAttribute="centerX" id="4MU-KV-QgD"/>
+                <constraint firstAttribute="trailing" secondItem="tYM-mw-Q7c" secondAttribute="trailing" id="9bm-2w-T7Y"/>
+                <constraint firstAttribute="centerX" secondItem="NL2-UR-jHb" secondAttribute="centerX" id="CQz-uB-Ez7"/>
+                <constraint firstAttribute="bottom" secondItem="tYM-mw-Q7c" secondAttribute="bottom" id="Eon-WL-xRI"/>
+                <constraint firstAttribute="centerY" secondItem="W9v-kA-Xyy" secondAttribute="centerY" constant="-200" id="HhK-me-Afd"/>
+                <constraint firstItem="tYM-mw-Q7c" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="N8s-Po-ZDJ"/>
+                <constraint firstAttribute="centerY" secondItem="h1T-6b-kA3" secondAttribute="centerY" constant="150" id="SaD-UH-AgD"/>
+                <constraint firstAttribute="centerY" secondItem="NL2-UR-jHb" secondAttribute="centerY" constant="200" id="naD-CK-eQ1"/>
+                <constraint firstItem="tYM-mw-Q7c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qE3-lj-Rfz"/>
+                <constraint firstAttribute="centerX" secondItem="W9v-kA-Xyy" secondAttribute="centerX" id="ytR-aQ-E4S"/>
             </constraints>
-            <point key="canvasLocation" x="337" y="346"/>
+            <point key="canvasLocation" x="338" y="318"/>
         </view>
     </objects>
+    <resources>
+        <image name="login" width="371" height="323"/>
+        <image name="login_facebook" width="256" height="55"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
