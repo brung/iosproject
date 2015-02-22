@@ -34,7 +34,7 @@
                                 <rect key="frame" x="8" y="72" width="303" height="66.5"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Should I stay or should I go What should happen in this case?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8L-k8-rka">
-                                <rect key="frame" x="56" y="31" width="219" height="33.5"/>
+                                <rect key="frame" x="56" y="31" width="255" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                             <constraint firstItem="X8L-k8-rka" firstAttribute="top" secondItem="ub5-3g-3ic" secondAttribute="bottom" constant="6" id="X9K-iK-npN"/>
                             <constraint firstAttribute="trailing" secondItem="BiE-FA-Ca8" secondAttribute="trailing" constant="8" id="ZSW-1H-A48"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ub5-3g-3ic" secondAttribute="trailing" constant="8" id="bjZ-dd-kdO"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X8L-k8-rka" secondAttribute="trailing" constant="8" id="cDj-ox-OaE"/>
+                            <constraint firstAttribute="trailing" secondItem="X8L-k8-rka" secondAttribute="trailing" constant="8" id="cDj-ox-OaE"/>
                             <constraint firstAttribute="bottom" secondItem="JkA-uR-bqS" secondAttribute="bottom" constant="8" id="mcB-Ar-vVe"/>
                             <constraint firstItem="t1P-hQ-FPG" firstAttribute="top" secondItem="6Jp-aC-bqY" secondAttribute="top" constant="8" id="pO6-wB-q4u"/>
                             <constraint firstItem="ub5-3g-3ic" firstAttribute="leading" secondItem="t1P-hQ-FPG" secondAttribute="trailing" constant="8" id="q8F-Op-URV"/>
