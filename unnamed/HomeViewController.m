@@ -24,8 +24,6 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @property (nonatomic, assign) BOOL isInsertingNewPost;
 @property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
 
-- (NSInteger)getTotalFromAnswers:(NSArray *)answers;
-
 @end
 
 @implementation HomeViewController
