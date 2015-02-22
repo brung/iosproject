@@ -13,6 +13,7 @@
 #import "SurveyViewCell.h"
 #import "UIColor+AppBgColor.h"
 #import "UIColor+AppTintColor.h"
+#import "GrayBarButtonItem.h"
 
 NSString * const kProfileCellName = @"ProfileCell";
 NSString * const kSurveyViewCellName = @"SurveyViewCell";
@@ -54,6 +55,10 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     if (!self.user) {
         self.user = [User currentUser];
     }
+    
+    // Setup
+    GrayBarButtonItem *logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
+    self.navigationItem.rightBarButtonItem = logOutButton;
     
     // - tableview related:
     self.tableView.dataSource = self;
@@ -191,6 +196,11 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
         self.surveys = newSurveys;
         self.isInsertingNewPost = YES;
     }
+}
+
+- (void)onLogOutButton {
+    NSLog(@"Logging out");
+    [User logout];
 }
 
 @end

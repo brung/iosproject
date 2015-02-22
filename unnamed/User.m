@@ -9,6 +9,7 @@
 #import "User.h"
 
 NSString * const PFObjectName = @"User";
+NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
 @interface User ()
 
@@ -27,6 +28,19 @@ static User * _currentUser = nil;
     return _currentUser;
 }
 
++ (void)setCurrentUser:(User *)user {
+    if (user == nil) {
+        [PFUser logOut];
+        _currentUser = nil;
+    } else {
+        _currentUser = user;
+    }
+}
+
++ (void)logout {
+    [User setCurrentUser:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
+}
 
 //+ (User *)getUserById:(NSString *)userId {
 //    PFQuery *query = [PFQuery queryWithClassName:PFObjectName];

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
+extern NSString * const UserDidLogoutNotification;
+
 @interface User : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *profileImageUrl;
@@ -17,4 +19,6 @@
 - (id)initWithPFUser:(PFUser *)user;
 
 + (User *)currentUser;
++ (void)setCurrentUser:(User *)user;
++ (void)logout;
 @end
