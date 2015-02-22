@@ -80,10 +80,10 @@
     
     for (int i=0;i<self.answerViews.count;i++) {
         AnswerView *view = self.answerViews[i];
-        NSLog(@"Height: %f, Width: %f", view.frame.size.height, view.frame.size.width);
-        NSLog(@"Height: %f, Width: %f", self.frame.size.height, self.frame.size.width);
+//        NSLog(@"Height: %f, Width: %f", view.frame.size.height, view.frame.size.width);
+//        NSLog(@"Height: %f, Width: %f", self.frame.size.height, self.frame.size.width);
         CGFloat y = self.answerHeight * i;
-        NSLog(@"y pos: %f", y);
+//        NSLog(@"y pos: %f", y);
         CGRect imageFrame = CGRectMake(0, y, self.frame.size.width, self.answerHeight);
         view.frame = imageFrame;
     }

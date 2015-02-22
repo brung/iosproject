@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkA-uR-bqS" customClass="AnswerCollectionView">
-                                <rect key="frame" x="8" y="72" width="303" height="66.5"/>
+                                <rect key="frame" x="8" y="72.5" width="303" height="65.5"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Should I stay or should I go What should happen in this case?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8L-k8-rka">
                                 <rect key="frame" x="56" y="31" width="255" height="33.5"/>
