@@ -35,10 +35,16 @@
 
 - (void)setAnswer:(Answer *)answer {
     _answer = answer;
+    
+    self.answerLabel.text = answer.text;
+    self.answerText.text = answer.text;
+    
     if ([answer.text length] > 0) {
-        self.answerLabel.text = answer.text;
         self.answerLabel.alpha = 1;
         self.answerText.alpha = 0;
+    } else {
+        self.answerLabel.alpha = 0;
+        self.answerText.alpha = 1;
     }
 }
 

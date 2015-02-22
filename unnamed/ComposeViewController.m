@@ -139,7 +139,7 @@ NSInteger const maxCount = 160;
     }
     self.questionTextCountLabel.text = [NSString stringWithFormat:@"%ld",(long)count];
     
-    [self showAddAnswerButton:(count >= 8)];
+    [self showAddAnswerButton:(count >= 0 && count < maxCount)];//Lets fold up the Answer table if No Question
 }
 
 #pragma mark - Add An Answer Button
