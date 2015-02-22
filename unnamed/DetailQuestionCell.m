@@ -19,7 +19,9 @@
 @implementation DetailQuestionCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    // In here to fix TableCell layout issue when using UITableViewAutomaticDimension
+    // But was this fix in the latest version?
+    self.questionLabel.preferredMaxLayoutWidth = self.questionLabel.frame.size.width;
 }
 
 - (void) layoutSubviews {
