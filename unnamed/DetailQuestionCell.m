@@ -8,11 +8,19 @@
 
 #import "DetailQuestionCell.h"
 #import "ProfileImageView.h"
+#import "NSDate+MinimalTimeAgo.h"
+
 
 @interface DetailQuestionCell()
+@property (nonatomic, strong) Question *question;
+@property (nonatomic, strong) User *user;
+@property (nonatomic, assign) NSInteger totalVoteCount;
+
 @property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *voteCountLabel;
 
 @end
 
@@ -28,7 +36,16 @@
     self.profileImageView.user = self.user;
     self.nameLabel.text = self.user.name;
     self.questionLabel.text = self.question.text;
+    self.timeLabel.text = [self.question.createdAt timeAgo];
+    self.voteCountLabel.text = [NSString stringWithFormat:@"%ld", self.totalVoteCount];
 }
+
+- (void) initWithQuestion:(Question *)question user:(User *)user totalCount:(NSInteger)count {
+    _question = question;
+    _user = user;
+    _totalVoteCount = count;
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 }

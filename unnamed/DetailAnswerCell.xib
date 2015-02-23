@@ -14,9 +14,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xh-Ul-rC5">
-                        <rect key="frame" x="8" y="26" width="31" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xh-Ul-rC5">
+                        <rect key="frame" x="8" y="26" width="11" height="15"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Some answer" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLX-L2-SWI">
+                        <rect key="frame" x="27" y="25" width="209" height="15"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -28,32 +34,61 @@
                             <constraint firstAttribute="height" constant="32" id="doC-qN-PGf"/>
                         </constraints>
                     </imageView>
+                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ZA-wD-E7p" customClass="GRKBarGraphView">
+                        <rect key="frame" x="23" y="17" width="249" height="33"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="33" id="0c6-Wz-Dor"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diZ-94-6g0">
+                        <rect key="frame" x="244" y="26" width="26" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="1Xh-Ul-rC5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="5te-vN-Yzl"/>
-                    <constraint firstItem="xwf-pX-8Wb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1Xh-Ul-rC5" secondAttribute="trailing" constant="8" id="62C-bf-ugZ"/>
+                    <constraint firstItem="xwf-pX-8Wb" firstAttribute="leading" secondItem="1Xh-Ul-rC5" secondAttribute="trailing" constant="8" id="62C-bf-ugZ"/>
+                    <constraint firstAttribute="centerY" secondItem="mLX-L2-SWI" secondAttribute="centerY" id="8zP-8l-AbE"/>
                     <constraint firstItem="xwf-pX-8Wb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Ah3-Cz-EwZ"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1Xh-Ul-rC5" secondAttribute="bottom" constant="8" id="BKo-kS-9tO"/>
                     <constraint firstItem="xwf-pX-8Wb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="CQ8-cC-v1W"/>
                     <constraint firstAttribute="centerY" secondItem="xwf-pX-8Wb" secondAttribute="centerY" id="FJA-UK-3J9"/>
+                    <constraint firstAttribute="centerY" secondItem="diZ-94-6g0" secondAttribute="centerY" id="IJB-Zv-cmh"/>
+                    <constraint firstItem="xwf-pX-8Wb" firstAttribute="leading" secondItem="4ZA-wD-E7p" secondAttribute="trailing" constant="8" id="IWm-Pc-nU9"/>
+                    <constraint firstItem="diZ-94-6g0" firstAttribute="leading" secondItem="mLX-L2-SWI" secondAttribute="trailing" constant="8" id="Lmf-wU-qH5"/>
+                    <constraint firstItem="4ZA-wD-E7p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="PgD-Ge-KyA"/>
+                    <constraint firstItem="4ZA-wD-E7p" firstAttribute="leading" secondItem="mLX-L2-SWI" secondAttribute="leading" id="Uud-v2-Sqb"/>
                     <constraint firstAttribute="bottomMargin" secondItem="xwf-pX-8Wb" secondAttribute="bottom" constant="8" id="WRA-yx-9Ea"/>
+                    <constraint firstAttribute="centerY" secondItem="4ZA-wD-E7p" secondAttribute="centerY" id="bKU-98-gDw"/>
+                    <constraint firstItem="4ZA-wD-E7p" firstAttribute="leading" secondItem="1Xh-Ul-rC5" secondAttribute="trailing" constant="4" id="c5l-NG-lpM"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xwf-pX-8Wb" secondAttribute="bottom" constant="4" id="d94-Bf-tTx"/>
+                    <constraint firstItem="mLX-L2-SWI" firstAttribute="leading" secondItem="1Xh-Ul-rC5" secondAttribute="trailing" constant="8" id="h6s-fE-vvC"/>
                     <constraint firstAttribute="centerY" secondItem="1Xh-Ul-rC5" secondAttribute="centerY" id="jOP-LW-StK"/>
                     <constraint firstAttribute="trailing" secondItem="xwf-pX-8Wb" secondAttribute="trailing" constant="8" id="sSw-UB-2aH"/>
+                    <constraint firstItem="xwf-pX-8Wb" firstAttribute="leading" secondItem="diZ-94-6g0" secondAttribute="trailing" constant="10" id="tlj-pm-1Vi"/>
                     <constraint firstItem="1Xh-Ul-rC5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="yv0-89-TJV"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="PgD-Ge-KyA"/>
+                        <exclude reference="Uud-v2-Sqb"/>
+                        <exclude reference="62C-bf-ugZ"/>
                         <exclude reference="Ah3-Cz-EwZ"/>
                         <exclude reference="WRA-yx-9Ea"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="answerLabel" destination="1Xh-Ul-rC5" id="3VB-PQ-E6B"/>
+                <outlet property="answerIndexLabel" destination="1Xh-Ul-rC5" id="fmA-Jr-8Fh"/>
+                <outlet property="answerLabel" destination="mLX-L2-SWI" id="YbB-Wm-kGB"/>
+                <outlet property="barGraph" destination="4ZA-wD-E7p" id="6rK-8Y-Y2C"/>
+                <outlet property="percentLabel" destination="diZ-94-6g0" id="wUY-yF-KUh"/>
                 <outlet property="selectionImage" destination="xwf-pX-8Wb" id="uVj-MO-gWS"/>
             </connections>
-            <point key="canvasLocation" x="140" y="163.5"/>
+            <point key="canvasLocation" x="140" y="159.5"/>
         </tableViewCell>
     </objects>
 </document>

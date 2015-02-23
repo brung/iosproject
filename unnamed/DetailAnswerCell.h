@@ -10,9 +10,7 @@
 #import "Answer.h"
 
 @interface DetailAnswerCell : UITableViewCell
-@property (nonatomic, strong) Answer *answer;
-@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) BOOL isCurrentVote;
 @property (weak, nonatomic) IBOutlet UIImageView *selectionImage;
-
+- (void) initWithAnswer:(Answer *)answer totalVotes:(NSInteger)count;
 @end
