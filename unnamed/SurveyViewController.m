@@ -129,4 +129,10 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     }
 }
 
+- (UIImageView *)getMainProfileImageView {
+    DetailQuestionCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    return cell.profileImageView;
+}
+
+
 @end

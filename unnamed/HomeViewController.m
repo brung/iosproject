@@ -12,6 +12,7 @@
 #import "SurveyViewCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppColor.h"
+#import "HomeProfileAnimation.h"
 
 NSString * const kSurveyViewCell = @"SurveyViewCell";
 
@@ -23,6 +24,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @property (nonatomic, assign) BOOL isUpdating;
 @property (nonatomic, assign) BOOL isInsertingNewPost;
 @property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
+@property (nonatomic, strong) HomeProfileAnimation *transitionAnimation;
 
 @end
 
@@ -65,6 +67,9 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor appBgColor];
+    self.transitionAnimation = [[HomeProfileAnimation alloc] init];
+    self.navigationController.delegate = self.transitionAnimation;
+    self.navigationController.modalPresentationStyle = UIModalPresentationCustom;
     
     //Setup Notification listener
     self.isInsertingNewPost = NO;
@@ -190,6 +195,8 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     } else {
         ProfileViewController *vc = [[ProfileViewController alloc] init];
         vc.user = user;
+        vc.view.frame = self.view.frame;
+        self.transitionAnimation.selectedCell = cell;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -11,4 +11,5 @@
 
 @interface SurveyViewController : UIViewController
 @property (nonatomic, strong) Survey *survey;
+- (UIImageView *)getMainProfileImageView;
 @end

@@ -182,6 +182,11 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - Animation 
+- (ProfileImageView *)getMainProfileImageView {
+    ProfileCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    return cell.profileImageView;
+}
 
 #pragma mark - Private methods
 - (void) onRefresh{

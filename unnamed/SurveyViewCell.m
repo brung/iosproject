@@ -7,7 +7,6 @@
 //
 
 #import "SurveyViewCell.h"
-#import "ProfileImageView.h"
 #import "AnswerCollectionView.h"
 #import "CommentCollectionView.h"
 #import "UIColor+AppColor.h"
@@ -15,7 +14,6 @@
 
 @interface SurveyViewCell () <ProfileImageViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *createdByLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
@@ -59,5 +57,11 @@
 
 - (void)profileImageView:(ProfileImageView *)view tappedUser:(User *)user {
     [self.delegate surveyViewCell:self didClickOnUser:user];
+}
+
+- (CGRect)profileImageviewFrame {
+    float originX = self.contentView.frame.origin.x + self.containerView.frame.origin.x + self.profileImageView.frame.origin.x;
+    float originY = self.contentView.frame.origin.y + self.containerView.frame.origin.y + self.profileImageView.frame.origin.y;
+    return CGRectMake(originX, originY, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height);
 }
 @end

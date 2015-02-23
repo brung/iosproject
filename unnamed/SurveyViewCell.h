@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Survey.h"
 #import "User.h"
+#import "ProfileImageView.h"
 
 @class SurveyViewCell;
 @protocol SurveyViewCellDelegate <NSObject>
@@ -16,6 +17,9 @@
 @end
 
 @interface SurveyViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (nonatomic, strong) Survey *survey;
 @property (nonatomic, strong) id<SurveyViewCellDelegate> delegate;
+- (CGRect)profileImageviewFrame;
+
 @end
