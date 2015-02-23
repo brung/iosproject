@@ -69,6 +69,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     //Setup Notification listener
     self.isInsertingNewPost = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewPost:) name:UserDidPostNewSurveyNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatePost) name:UserDidPostUpdateSurveyNotification object:nil];
     
     // Setup Objects
     self.pageIndex = 0;
@@ -202,7 +203,10 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
         self.surveys = newSurveys;
         self.isInsertingNewPost = YES;
     }
-    
+}
+
+- (void)onUpdatePost {
+    [self.tableView reloadData];
 }
 
 - (void)configureCell:(UITableViewCell *)pCell forRowAtIndexPath:(NSIndexPath *)indexPath {
