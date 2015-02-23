@@ -138,7 +138,7 @@ NSInteger const ResultCount = 8;
     }
 }
 
-+ (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(Vote *vote, NSError *error))completion {
++ (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(Survey *survey, NSError *error))completion {
     Vote *vote =[[Vote alloc] init];
     NSInteger oldAnswerIndex = -1;
     if (survey.vote) {
@@ -157,7 +157,7 @@ NSInteger const ResultCount = 8;
     }];
 }
 
-+ (void)updateVoteCountOnSurvey:(Survey *)survey oldAnswerIndex:(NSInteger)oldIndex newVote:(Vote *)vote withCompletion:(void(^)(Vote *vote, NSError *error))completion{
++ (void)updateVoteCountOnSurvey:(Survey *)survey oldAnswerIndex:(NSInteger)oldIndex newVote:(Vote *)vote withCompletion:(void(^)(Survey *survey, NSError *error))completion{
     NSMutableArray *newCounts = [NSMutableArray arrayWithArray:survey.question.answerVoteCounts];
     
     NSInteger count = [newCounts[vote.answerIndex] integerValue];
@@ -165,6 +165,7 @@ NSInteger const ResultCount = 8;
     newCounts[vote.answerIndex] = @(count);
     Answer* newAnswer = survey.answers[vote.answerIndex];
     newAnswer.count = count;
+    survey.totalVotes++;
 
     if (oldIndex >= 0) {
         count = [newCounts[oldIndex] integerValue] - 1;
@@ -172,6 +173,7 @@ NSInteger const ResultCount = 8;
         newCounts[oldIndex] = @(count);
         Answer* oldAnswer = survey.answers[oldIndex];
         oldAnswer.count = count;
+        survey.totalVotes--;
     }
     
     survey.question.answerVoteCounts = newCounts;
@@ -180,7 +182,7 @@ NSInteger const ResultCount = 8;
         if (!error) {
             survey.voted = YES;
             survey.vote = vote;
-            completion(vote, nil);
+            completion(survey, nil);
         } else {
             // NEed to delete saved vote;
         }

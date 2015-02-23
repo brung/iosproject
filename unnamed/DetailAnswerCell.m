@@ -26,12 +26,12 @@
 
 - (void)setAnswer:(Answer *)answer {
     _answer = answer;
-    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.index, self.answer.text];
+    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.answer.index+1, self.answer.text];
 }
 
 - (void)setIndex:(NSInteger)index {
     _index = index;
-    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.index, self.answer.text];
+    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.answer.index+1, self.answer.text];
 }
 
 - (void)setIsCurrentVote:(BOOL)isCurrentVote {
