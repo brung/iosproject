@@ -11,8 +11,7 @@
 #import "ParseClient.h"
 #import "ProfileCell.h"
 #import "SurveyViewCell.h"
-#import "UIColor+AppBgColor.h"
-#import "UIColor+AppTintColor.h"
+#import "UIColor+AppColor.h"
 #import "GrayBarButtonItem.h"
 
 NSString * const kProfileCellName = @"ProfileCell";

@@ -12,7 +12,7 @@
 #import "Survey.h"
 #import "ParseClient.h"
 #import "GrayBarButtonItem.h"
-#import "UIColor+AppBgColor.h"
+#import "UIColor+AppColor.h"
 
 NSString * const AnswerCell = @"ComposeAnswerCell";
 NSString * const AskAQuestion = @"Ask a question . . .";

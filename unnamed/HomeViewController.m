@@ -11,7 +11,7 @@
 #import "ProfileViewController.h"
 #import "SurveyViewCell.h"
 #import "ParseClient.h"
-#import "UIColor+AppBgColor.h"
+#import "UIColor+AppColor.h"
 
 NSString * const kSurveyViewCell = @"SurveyViewCell";
 

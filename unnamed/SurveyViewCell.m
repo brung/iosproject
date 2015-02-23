@@ -9,7 +9,7 @@
 #import "SurveyViewCell.h"
 #import "ProfileImageView.h"
 #import "AnswerCollectionView.h"
-#import "UIColor+AppBgColor.h"
+#import "UIColor+AppColor.h"
 #import "NSDate+MinimalTimeAgo.h"
 
 @interface SurveyViewCell () <ProfileImageViewDelegate>

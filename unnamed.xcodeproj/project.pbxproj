@@ -18,10 +18,9 @@
 		3E7C1D501A958BC10046FDE1 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D4E1A958BC10046FDE1 /* HomeViewController.xib */; };
 		3E7C1D591A95AA520046FDE1 /* SurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */; };
 		3E7C1D5A1A95AA520046FDE1 /* SurveyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */; };
+		3EC3AEE11A9AB22100E0DCCB /* UIColor+AppColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC3AEE01A9AB22100E0DCCB /* UIColor+AppColor.m */; };
 		B827A9E81A9815E100AB43CE /* ProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9E71A9815E100AB43CE /* ProfileImageView.m */; };
-		B827A9EB1A9823DF00AB43CE /* UIColor+AppTintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9EA1A9823DF00AB43CE /* UIColor+AppTintColor.m */; };
 		B827A9EE1A98287B00AB43CE /* GrayBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */; };
-		B827A9F41A982B2600AB43CE /* UIColor+AppBgColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9F31A982B2600AB43CE /* UIColor+AppBgColor.m */; };
 		B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B862A88A1A970E25008B2310 /* DetailAnswerCell.m */; };
 		B862A88D1A970E25008B2310 /* DetailAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */; };
 		B87C15BC1A93113400191823 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C15B71A93113400191823 /* LoginViewController.m */; };
@@ -81,16 +80,14 @@
 		3E7C1D561A95AA520046FDE1 /* SurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyViewController.h; sourceTree = "<group>"; };
 		3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyViewController.m; sourceTree = "<group>"; };
 		3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyViewController.xib; sourceTree = "<group>"; };
+		3EC3AEDF1A9AB22100E0DCCB /* UIColor+AppColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColor.h"; sourceTree = "<group>"; };
+		3EC3AEE01A9AB22100E0DCCB /* UIColor+AppColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColor.m"; sourceTree = "<group>"; };
 		4AEAEEA448EAC175BD0FED56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA90E0F57CF5978BEB02DE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B827A9E61A9815E100AB43CE /* ProfileImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileImageView.h; sourceTree = "<group>"; };
 		B827A9E71A9815E100AB43CE /* ProfileImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileImageView.m; sourceTree = "<group>"; };
-		B827A9E91A9823DF00AB43CE /* UIColor+AppTintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppTintColor.h"; sourceTree = "<group>"; };
-		B827A9EA1A9823DF00AB43CE /* UIColor+AppTintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppTintColor.m"; sourceTree = "<group>"; };
 		B827A9EC1A98287B00AB43CE /* GrayBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrayBarButtonItem.h; sourceTree = "<group>"; };
 		B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrayBarButtonItem.m; sourceTree = "<group>"; };
-		B827A9F21A982B2600AB43CE /* UIColor+AppBgColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppBgColor.h"; sourceTree = "<group>"; };
-		B827A9F31A982B2600AB43CE /* UIColor+AppBgColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppBgColor.m"; sourceTree = "<group>"; };
 		B862A8891A970E25008B2310 /* DetailAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailAnswerCell.h; sourceTree = "<group>"; };
 		B862A88A1A970E25008B2310 /* DetailAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailAnswerCell.m; sourceTree = "<group>"; };
 		B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailAnswerCell.xib; sourceTree = "<group>"; };
@@ -223,14 +220,12 @@
 		B8C291B21A930BDD000F2143 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B827A9E91A9823DF00AB43CE /* UIColor+AppTintColor.h */,
-				B827A9EA1A9823DF00AB43CE /* UIColor+AppTintColor.m */,
 				B8C291B31A930BDD000F2143 /* Info.plist */,
 				B8C291B41A930BDD000F2143 /* main.m */,
 				B827A9EC1A98287B00AB43CE /* GrayBarButtonItem.h */,
 				B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */,
-				B827A9F21A982B2600AB43CE /* UIColor+AppBgColor.h */,
-				B827A9F31A982B2600AB43CE /* UIColor+AppBgColor.m */,
+				3EC3AEDF1A9AB22100E0DCCB /* UIColor+AppColor.h */,
+				3EC3AEE01A9AB22100E0DCCB /* UIColor+AppColor.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -483,14 +478,12 @@
 			files = (
 				B8C0DBF41A95C2D60023BC39 /* ParseClient.m in Sources */,
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
-				B827A9F41A982B2600AB43CE /* UIColor+AppBgColor.m in Sources */,
 				B8C0DBF11A95C1DA0023BC39 /* Survey.m in Sources */,
 				3E58B4D41A9832BF00AA14D4 /* AnswerView.m in Sources */,
 				3E58B4CB1A98229200AA14D4 /* SurveyViewCell.m in Sources */,
 				B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */,
 				3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */,
 				B8BA93F41A947718003BD476 /* Answer.m in Sources */,
-				B827A9EB1A9823DF00AB43CE /* UIColor+AppTintColor.m in Sources */,
 				B8C0DBCD1A94F71A0023BC39 /* ComposeViewController.m in Sources */,
 				B8C291B81A930BDD000F2143 /* AppDelegate.m in Sources */,
 				B8C291B51A930BDD000F2143 /* main.m in Sources */,
@@ -500,6 +493,7 @@
 				3E7C1D591A95AA520046FDE1 /* SurveyViewController.m in Sources */,
 				B8BA93EB1A9464C7003BD476 /* Question.m in Sources */,
 				3E58B4CF1A98300C00AA14D4 /* AnswerCollectionView.m in Sources */,
+				3EC3AEE11A9AB22100E0DCCB /* UIColor+AppColor.m in Sources */,
 				E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */,
 				B827A9EE1A98287B00AB43CE /* GrayBarButtonItem.m in Sources */,
 				B8C0DBDC1A95138C0023BC39 /* ComposeAnswerCell.m in Sources */,

@@ -13,8 +13,7 @@
 #import "DetailQuestionCell.h"
 #import "DetailAnswerCell.h"
 #import "ParseClient.h"
-#import "UIColor+AppBgColor.h"
-#import "UIColor+AppTintColor.h"
+#import "UIColor+AppColor.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";

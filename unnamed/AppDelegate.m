@@ -17,7 +17,7 @@
 #import "ComposeViewController.h"
 #import "ProfileViewController.h"
 #import "AppNavigationController.h"
-#import "UIColor+AppTintColor.h"
+#import "UIColor+AppColor.h"
 
 NSString * const kParseApplicationId = @"j4MqR9ASYk601tn3xX3vR8nLUyqcoRqjE0UzCqr7";
 NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
