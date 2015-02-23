@@ -7,7 +7,7 @@
 //
 
 #import "TabBarMenuViewController.h"
-#import "UIColor+AppTintColor.h"
+#import "UIColor+AppColor.h"
 
 @interface TabBarMenuViewController ()
 

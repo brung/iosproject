@@ -14,6 +14,7 @@
 #import "User.h"
 
 extern NSString * const UserDidPostNewSurveyNotification;
+extern NSString * const UserDidPostUpdateSurveyNotification;
 extern NSInteger const ResultCount;
 
 @interface ParseClient : Parse

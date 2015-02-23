@@ -8,7 +8,7 @@
 
 #import "AnswerView.h"
 #import "GRKBarGraphView.h"
-#import "UIColor+AppTintColor.h"
+#import "UIColor+AppColor.h"
 
 @interface AnswerView ()
 @property (weak, nonatomic) IBOutlet GRKBarGraphView *barView;

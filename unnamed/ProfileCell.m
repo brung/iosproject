@@ -8,8 +8,7 @@
 
 #import "ProfileCell.h"
 #import "ProfileImageView.h"
-#import "UIColor+AppBgColor.h"
-#import "UIColor+AppTintColor.h"
+#import "UIColor+AppColor.h"
 
 @interface ProfileCell()
 

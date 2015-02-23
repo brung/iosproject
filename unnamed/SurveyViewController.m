@@ -13,8 +13,7 @@
 #import "DetailQuestionCell.h"
 #import "DetailAnswerCell.h"
 #import "ParseClient.h"
-#import "UIColor+AppBgColor.h"
-#import "UIColor+AppTintColor.h"
+#import "UIColor+AppColor.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
@@ -133,6 +132,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
                                     nil];
             self.currentSelectedIndexPath = indexPath;
             [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostUpdateSurveyNotification object:nil];
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to vote. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
