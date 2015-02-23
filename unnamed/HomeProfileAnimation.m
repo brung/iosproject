@@ -8,6 +8,9 @@
 
 #import "HomeProfileAnimation.h"
 #import "ProfileViewController.h"
+@interface HomeProfileAnimation()
+@property UINavigationController *navController;
+@end
 
 @implementation HomeProfileAnimation 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
@@ -21,8 +24,9 @@
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     CGPoint originalCenter = fromViewController.view.center;
-    CGPoint downCenter = CGPointMake(fromViewController.view.center.x, fromViewController.view.center.y + fromViewController.view.frame.size.height);
     CGPoint rightCenter =CGPointMake(originalCenter.x + toViewController.view.frame.size.width, originalCenter.y);
+    UINavigationBar *navBar = self.navController.navigationBar;
+    float navBarHeight = navBar.frame.size.height + navBar.frame.origin.y;
     
     if (self.isPresenting) {
         NSLog(@"I'm presenting");
@@ -35,26 +39,26 @@
         
         UIImageView *selectedProfileImage = self.selectedCell.profileImageView;
 
-        CGRect profileImageFrame = [self.selectedCell profileImageviewFrame];
+        
+        CGRect profileFrameInCell = [self.selectedCell profileImageviewFrame];
+        NSLog(@"y:%f %f nav:%f x:%f %f", self.selectedCell.frame.origin.y, profileFrameInCell.origin.y, navBarHeight, self.selectedCell.frame.origin.x , profileFrameInCell.origin.x);
+        CGRect profileImageFrame = CGRectMake(self.selectedCell.frame.origin.x + profileFrameInCell.origin.x+2, self.selectedCell.frame.origin.y + profileFrameInCell.origin.y+navBarHeight, profileFrameInCell.size.width, profileFrameInCell.size.height);
         UIImageView *transImageView = [[ProfileImageView alloc] initWithFrame:profileImageFrame];
         transImageView.layer.cornerRadius = transImageView.frame.size.width / 2;
         transImageView.image = selectedProfileImage.image;
         transImageView.contentMode = UIViewContentModeScaleAspectFill;
         transImageView.clipsToBounds = YES;
-        transImageView.center = selectedProfileImage.center;
-        transImageView.transform = CGAffineTransformMakeScale(1.15,1.15);
-        [containerView insertSubview:transImageView aboveSubview:toViewController.view];
+        transImageView.transform = CGAffineTransformMakeScale(1.1,1.1);
+        [containerView addSubview:transImageView];
         
         selectedProfileImage.hidden = YES;
         [UIView animateWithDuration:1 animations:^{
             CGFloat widthScale = (remoteProfileImageView.frame.size.width/selectedProfileImage.frame.size.width);
             CGFloat heightScale = (remoteProfileImageView.frame.size.height/selectedProfileImage.frame.size.height);
             transImageView.transform = CGAffineTransformScale(selectedProfileImage.transform, widthScale, heightScale);
-            transImageView.center = remoteProfileImageView.center;
+            transImageView.center = CGPointMake(remoteProfileImageView.center.x+28, remoteProfileImageView.center.y + navBarHeight);
             toViewController.view.center = originalCenter;
             fromViewController.view.alpha = 0.5;
-//            fromViewController.view.center = downCenter;
-//            fromViewController.view.transform = CGAffineTransformMakeScale(0.90, 0.90);
         } completion:^(BOOL finished) {
             [transImageView removeFromSuperview];
             [transitionContext completeTransition:YES];
@@ -64,13 +68,10 @@
     } else {
         NSLog(@"I'm dismissing");
         [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
-//        toViewController.view.center = downCenter;
         [fromViewController dismissViewControllerAnimated:YES completion:nil];
         [UIView animateWithDuration:1 animations:^{
             fromViewController.view.center = rightCenter;
             toViewController.view.alpha =1;
-//            toViewController.view.center = originalCenter;
-//            toViewController.view.transform = CGAffineTransformMakeScale(1.0,1.0);
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:YES];
             [fromViewController.view removeFromSuperview];
@@ -92,6 +93,7 @@
 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    self.navController = navigationController;
     if (operation == UINavigationControllerOperationPush) {
         self.isPresenting = YES;
     } else if (operation == UINavigationControllerOperationPop) {
