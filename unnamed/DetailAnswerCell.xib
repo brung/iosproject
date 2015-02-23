@@ -15,17 +15,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xh-Ul-rC5">
-                        <rect key="frame" x="8" y="22" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="8" y="26" width="31" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xwf-pX-8Wb">
-                        <rect key="frame" x="268" y="11" width="44" height="44"/>
+                        <rect key="frame" x="280" y="17" width="32" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="44" id="9tQ-Nz-nIl"/>
-                            <constraint firstAttribute="height" constant="44" id="doC-qN-PGf"/>
+                            <constraint firstAttribute="width" constant="32" id="9tQ-Nz-nIl"/>
+                            <constraint firstAttribute="height" constant="32" id="doC-qN-PGf"/>
                         </constraints>
                     </imageView>
                 </subviews>
