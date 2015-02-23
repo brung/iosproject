@@ -19,6 +19,9 @@
 		3E7C1D591A95AA520046FDE1 /* SurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */; };
 		3E7C1D5A1A95AA520046FDE1 /* SurveyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */; };
 		3EC3AEE11A9AB22100E0DCCB /* UIColor+AppColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC3AEE01A9AB22100E0DCCB /* UIColor+AppColor.m */; };
+		B81A2F121A9AC237001F2C6D /* DetailGraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B81A2F101A9AC237001F2C6D /* DetailGraphCell.m */; };
+		B81A2F131A9AC237001F2C6D /* DetailGraphCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B81A2F111A9AC237001F2C6D /* DetailGraphCell.xib */; };
+		B81A2F161A9AC409001F2C6D /* GraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = B81A2F151A9AC409001F2C6D /* GraphData.m */; };
 		B827A9E81A9815E100AB43CE /* ProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9E71A9815E100AB43CE /* ProfileImageView.m */; };
 		B827A9EE1A98287B00AB43CE /* GrayBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */; };
 		B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B862A88A1A970E25008B2310 /* DetailAnswerCell.m */; };
@@ -84,6 +87,11 @@
 		3EC3AEE01A9AB22100E0DCCB /* UIColor+AppColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColor.m"; sourceTree = "<group>"; };
 		4AEAEEA448EAC175BD0FED56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA90E0F57CF5978BEB02DE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B81A2F0F1A9AC237001F2C6D /* DetailGraphCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailGraphCell.h; sourceTree = "<group>"; };
+		B81A2F101A9AC237001F2C6D /* DetailGraphCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailGraphCell.m; sourceTree = "<group>"; };
+		B81A2F111A9AC237001F2C6D /* DetailGraphCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailGraphCell.xib; sourceTree = "<group>"; };
+		B81A2F141A9AC409001F2C6D /* GraphData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphData.h; sourceTree = "<group>"; };
+		B81A2F151A9AC409001F2C6D /* GraphData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphData.m; sourceTree = "<group>"; };
 		B827A9E61A9815E100AB43CE /* ProfileImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileImageView.h; sourceTree = "<group>"; };
 		B827A9E71A9815E100AB43CE /* ProfileImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileImageView.m; sourceTree = "<group>"; };
 		B827A9EC1A98287B00AB43CE /* GrayBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrayBarButtonItem.h; sourceTree = "<group>"; };
@@ -254,6 +262,8 @@
 				B8BA93E71A9459B5003BD476 /* User.m */,
 				B8C0DBEF1A95C1DA0023BC39 /* Survey.h */,
 				B8C0DBF01A95C1DA0023BC39 /* Survey.m */,
+				B81A2F141A9AC409001F2C6D /* GraphData.h */,
+				B81A2F151A9AC409001F2C6D /* GraphData.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -283,6 +293,9 @@
 				3E58B4D21A9832BF00AA14D4 /* AnswerView.h */,
 				3E58B4D31A9832BF00AA14D4 /* AnswerView.m */,
 				3E58B4D51A984C3900AA14D4 /* AnswerView.xib */,
+				B81A2F0F1A9AC237001F2C6D /* DetailGraphCell.h */,
+				B81A2F101A9AC237001F2C6D /* DetailGraphCell.m */,
+				B81A2F111A9AC237001F2C6D /* DetailGraphCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -420,6 +433,7 @@
 				3E58B4D61A984C3900AA14D4 /* AnswerView.xib in Resources */,
 				3E7C1D5A1A95AA520046FDE1 /* SurveyViewController.xib in Resources */,
 				B862A88D1A970E25008B2310 /* DetailAnswerCell.xib in Resources */,
+				B81A2F131A9AC237001F2C6D /* DetailGraphCell.xib in Resources */,
 				B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */,
 				B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */,
 				B8C0DBDD1A95138C0023BC39 /* ComposeAnswerCell.xib in Resources */,
@@ -479,10 +493,12 @@
 				B8C0DBF41A95C2D60023BC39 /* ParseClient.m in Sources */,
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
 				B8C0DBF11A95C1DA0023BC39 /* Survey.m in Sources */,
+				B81A2F161A9AC409001F2C6D /* GraphData.m in Sources */,
 				3E58B4D41A9832BF00AA14D4 /* AnswerView.m in Sources */,
 				3E58B4CB1A98229200AA14D4 /* SurveyViewCell.m in Sources */,
 				B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */,
 				3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */,
+				B81A2F121A9AC237001F2C6D /* DetailGraphCell.m in Sources */,
 				B8BA93F41A947718003BD476 /* Answer.m in Sources */,
 				B8C0DBCD1A94F71A0023BC39 /* ComposeViewController.m in Sources */,
 				B8C291B81A930BDD000F2143 /* AppDelegate.m in Sources */,
