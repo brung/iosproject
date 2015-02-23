@@ -15,5 +15,4 @@
 @property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 
 - (void) initWithQuestion:(Question *)question user:(User *)user totalCount:(NSInteger)count;
-
 @end

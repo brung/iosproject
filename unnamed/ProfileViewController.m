@@ -46,6 +46,9 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.modalPresentationStyle = UIModalPresentationNone;
+
+    
     self.isInsertingNewPost = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewPost:) name:UserDidPostNewSurveyNotification object:nil];
 
@@ -179,12 +182,13 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
     vc.survey = self.surveys[indexPath.row];
+    vc.view.frame = self.view.frame;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Animation 
 - (ProfileImageView *)getMainProfileImageView {
-    ProfileCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    ProfileCell *cell = (ProfileCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     return cell.profileImageView;
 }
 

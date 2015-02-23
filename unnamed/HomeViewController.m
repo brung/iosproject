@@ -177,6 +177,8 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     SurveyViewController *vc = [[SurveyViewController alloc] init];
     vc.survey = self.surveys[indexPath.row];
+    vc.view.frame = self.view.frame;
+    self.transitionAnimation.selectedCell = (SurveyViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

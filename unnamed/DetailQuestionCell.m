@@ -49,8 +49,4 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 }
 
-- (CGRect)profileImageviewFrame {
-    return self.profileImageView.frame;
-}
-
 @end
