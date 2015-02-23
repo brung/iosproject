@@ -133,6 +133,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
                                     nil];
             self.currentSelectedIndexPath = indexPath;
             [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostUpdateSurveyNotification object:nil];
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to vote. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }

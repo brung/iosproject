@@ -9,6 +9,7 @@
 #import "ParseClient.h"
 
 NSString * const UserDidPostNewSurveyNotification = @"kUserDidPostNewSurveyNotification";
+NSString * const UserDidPostUpdateSurveyNotification = @"kUserDidPostUpdateSurveyNotification";
 NSInteger const ResultCount = 8;
 
 @implementation ParseClient
@@ -162,14 +163,19 @@ NSInteger const ResultCount = 8;
     NSInteger count = [newCounts[vote.answerIndex] integerValue];
     count++;
     newCounts[vote.answerIndex] = @(count);
+    Answer* newAnswer = survey.answers[vote.answerIndex];
+    newAnswer.count = count;
 
     if (oldIndex >= 0) {
         count = [newCounts[oldIndex] integerValue] - 1;
         if (count < 0) count = 0;
         newCounts[oldIndex] = @(count);
+        Answer* oldAnswer = survey.answers[oldIndex];
+        oldAnswer.count = count;
     }
     
     survey.question.answerVoteCounts = newCounts;
+    survey.totalVotes = [survey.question getTotalVotes];//Update Total Vote Count
     [survey.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             survey.voted = YES;
