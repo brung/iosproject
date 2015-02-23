@@ -7,9 +7,17 @@
 //
 
 #import "DetailAnswerCell.h"
+#import "GRKBarGraphView.h"
+#import "UIColor+AppColor.h"
 
 @interface DetailAnswerCell()
+@property (nonatomic, strong) Answer *answer;
+@property (nonatomic, assign) NSInteger totalVotes;
+
+@property (weak, nonatomic) IBOutlet UILabel *answerIndexLabel;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel;
+@property (weak, nonatomic) IBOutlet GRKBarGraphView *barGraph;
+@property (weak, nonatomic) IBOutlet UILabel *percentLabel;
 
 @end
 
@@ -17,21 +25,26 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.barGraph.barStyle = GRKBarStyleFromRight;
+    self.barGraph.barColor = [UIColor appTintColor];
+    self.barGraph.tintColor = [UIColor appTintColor];
+    self.barGraph.contentMode = UIViewContentModeCenter;
+    self.barGraph.animationDuration = 1;
+
     [self.selectionImage setImage:[UIImage imageNamed:@"answer_unselected"]];
 }
 
 - (void)layoutSubviews {
-    
+    self.answerIndexLabel.text = [NSString stringWithFormat:@"%ld.", (long)self.answer.index +1];
+    self.answerLabel.text = self.answer.text;
+    float percent = (float)self.answer.count / (float)self.totalVotes;
+    self.percentLabel.text = [NSString stringWithFormat:@"%.1f%%", percent * 100];
+    self.barGraph.percent = percent;
 }
 
-- (void)setAnswer:(Answer *)answer {
+- (void) initWithAnswer:(Answer *)answer totalVotes:(NSInteger)count {
     _answer = answer;
-    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.answer.index+1, self.answer.text];
-}
-
-- (void)setIndex:(NSInteger)index {
-    _index = index;
-    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.answer.index+1, self.answer.text];
+    _totalVotes = count;
 }
 
 - (void)setIsCurrentVote:(BOOL)isCurrentVote {

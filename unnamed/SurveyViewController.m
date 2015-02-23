@@ -12,12 +12,10 @@
 #import "Answer.h"
 #import "DetailQuestionCell.h"
 #import "DetailAnswerCell.h"
-#import "DetailGraphCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppColor.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
-NSString * const GraphCellNib = @"DetailGraphCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
 
 @interface SurveyViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -25,7 +23,6 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 @property (nonatomic, strong) NSArray *surveyContents;
 @property (nonatomic, assign) NSInteger voteTotal;
 @property (nonatomic, strong) DetailQuestionCell *prototypeQuestionCell;
-@property (nonatomic, strong) DetailGraphCell *prototypeGraphCell;
 @property (nonatomic, strong) DetailAnswerCell *prototypeAnswerCell;
 
 @end
@@ -39,9 +36,8 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCellNib bundle:nil] forCellReuseIdentifier:AnswerCellNib];
-    [self.tableView registerNib:[UINib nibWithNibName:GraphCellNib bundle:nil] forCellReuseIdentifier:GraphCellNib];
     [self.tableView registerNib:[UINib nibWithNibName:QuestionCellNib bundle:nil] forCellReuseIdentifier:QuestionCellNib];
-    
+\
     [self.tableView reloadData];
 }
 
@@ -49,12 +45,6 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     _survey = survey;
     NSMutableArray *contents = [NSMutableArray array];
     [contents addObject:survey.question];
-    for (Answer *answer in survey.answers) {
-        GraphData *data = [[GraphData alloc] init];
-        data.answer = answer;
-        data.totalVotes = survey.totalVotes;
-        [contents addObject:data];
-    }
     [contents addObjectsFromArray:survey.answers];
     self.surveyContents = [contents copy];
 }
@@ -70,12 +60,6 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         _prototypeQuestionCell = [self.tableView dequeueReusableCellWithIdentifier:QuestionCellNib];
     }
     return _prototypeQuestionCell;
-}
-- (DetailGraphCell *)prototypeGraphCell {
-    if (!_prototypeGraphCell) {
-        _prototypeGraphCell = [self.tableView dequeueReusableCellWithIdentifier:GraphCellNib];
-    }
-    return _prototypeGraphCell;
 }
 
 - (DetailAnswerCell *)prototypeAnswerCell {
@@ -95,11 +79,6 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         [self.prototypeQuestionCell layoutIfNeeded];
         CGSize size = [self.prototypeQuestionCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         return size.height+1;
-    } else if ([self.surveyContents[indexPath.row] isKindOfClass:[GraphData class]]) {
-        [self configureCell:self.prototypeGraphCell forRowAtIndexPath:indexPath];
-        [self.prototypeGraphCell layoutIfNeeded];
-        CGSize size = [self.prototypeGraphCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-        return size.height+1;
     } else {
         [self configureCell:self.prototypeAnswerCell forRowAtIndexPath:indexPath];
         [self.prototypeAnswerCell layoutIfNeeded];
@@ -113,10 +92,6 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         DetailQuestionCell *cell = [self.tableView dequeueReusableCellWithIdentifier:QuestionCellNib];
         [self configureCell:cell forRowAtIndexPath:indexPath];
         return cell;
-    } else if ([self.surveyContents[indexPath.row] isKindOfClass:[GraphData class]]) {
-        DetailGraphCell *cell = [self.tableView dequeueReusableCellWithIdentifier:GraphCellNib];
-        [self configureCell:cell forRowAtIndexPath:indexPath];
-        return cell;
     } else {
         DetailAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:AnswerCellNib];
         [self configureCell:cell forRowAtIndexPath:indexPath];
@@ -127,17 +102,12 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 - (void)configureCell:(UITableViewCell *)pCell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([pCell isKindOfClass:[DetailQuestionCell class]]) {
         DetailQuestionCell *cell = (DetailQuestionCell *)pCell;
-        cell.question = self.survey.question;
-        cell.user = self.survey.user;
+        [cell initWithQuestion:self.survey.question user:self.survey.user totalCount:self.survey.totalVotes];
     } else if ([pCell isKindOfClass:[DetailAnswerCell class]]) {
         DetailAnswerCell *cell = (DetailAnswerCell *)pCell;
         Answer *answer = (Answer *)self.surveyContents[indexPath.row];
-        cell.answer = answer;
-        cell.index = indexPath.row;
+        [cell initWithAnswer:answer totalVotes:self.survey.totalVotes];
         cell.isCurrentVote = [self.survey isCurrentVoteAnswer:answer];
-    } else if ([pCell isKindOfClass:[DetailGraphCell class]]) {
-        DetailGraphCell *cell = (DetailGraphCell *)pCell;
-        cell.graphData = self.surveyContents[indexPath.row];
     }
     pCell.backgroundColor = [UIColor appBgColor];
 }

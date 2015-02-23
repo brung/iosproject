@@ -11,7 +11,6 @@
 #import "User.h"
 
 @interface DetailQuestionCell : UITableViewCell
-@property (nonatomic, strong) Question *question;
-@property (nonatomic, strong) User *user;
+- (void) initWithQuestion:(Question *)question user:(User *)user totalCount:(NSInteger)count;
 
 @end
