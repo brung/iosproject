@@ -12,10 +12,12 @@
 #import "Answer.h"
 #import "DetailQuestionCell.h"
 #import "DetailAnswerCell.h"
+#import "DetailGraphCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppColor.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
+NSString * const GraphCellNib = @"DetailGraphCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
 
 @interface SurveyViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -23,8 +25,8 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 @property (nonatomic, strong) NSArray *surveyContents;
 @property (nonatomic, assign) NSInteger voteTotal;
 @property (nonatomic, strong) DetailQuestionCell *prototypeQuestionCell;
+@property (nonatomic, strong) DetailGraphCell *prototypeGraphCell;
 @property (nonatomic, strong) DetailAnswerCell *prototypeAnswerCell;
-@property (nonatomic, strong) NSIndexPath *currentSelectedIndexPath;
 
 @end
 
@@ -37,6 +39,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCellNib bundle:nil] forCellReuseIdentifier:AnswerCellNib];
+    [self.tableView registerNib:[UINib nibWithNibName:GraphCellNib bundle:nil] forCellReuseIdentifier:GraphCellNib];
     [self.tableView registerNib:[UINib nibWithNibName:QuestionCellNib bundle:nil] forCellReuseIdentifier:QuestionCellNib];
     
     [self.tableView reloadData];
@@ -47,9 +50,12 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     NSMutableArray *contents = [NSMutableArray array];
     [contents addObject:survey.question];
     for (Answer *answer in survey.answers) {
-        [contents addObject:answer];
-        self.voteTotal += answer.count;
+        GraphData *data = [[GraphData alloc] init];
+        data.answer = answer;
+        data.totalVotes = survey.totalVotes;
+        [contents addObject:data];
     }
+    [contents addObjectsFromArray:survey.answers];
     self.surveyContents = [contents copy];
 }
 
@@ -64,6 +70,12 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         _prototypeQuestionCell = [self.tableView dequeueReusableCellWithIdentifier:QuestionCellNib];
     }
     return _prototypeQuestionCell;
+}
+- (DetailGraphCell *)prototypeGraphCell {
+    if (!_prototypeGraphCell) {
+        _prototypeGraphCell = [self.tableView dequeueReusableCellWithIdentifier:GraphCellNib];
+    }
+    return _prototypeGraphCell;
 }
 
 - (DetailAnswerCell *)prototypeAnswerCell {
@@ -83,6 +95,11 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         [self.prototypeQuestionCell layoutIfNeeded];
         CGSize size = [self.prototypeQuestionCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         return size.height+1;
+    } else if ([self.surveyContents[indexPath.row] isKindOfClass:[GraphData class]]) {
+        [self configureCell:self.prototypeGraphCell forRowAtIndexPath:indexPath];
+        [self.prototypeGraphCell layoutIfNeeded];
+        CGSize size = [self.prototypeGraphCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        return size.height+1;
     } else {
         [self configureCell:self.prototypeAnswerCell forRowAtIndexPath:indexPath];
         [self.prototypeAnswerCell layoutIfNeeded];
@@ -94,6 +111,10 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.surveyContents[indexPath.row] isKindOfClass:[Question class]]) {
         DetailQuestionCell *cell = [self.tableView dequeueReusableCellWithIdentifier:QuestionCellNib];
+        [self configureCell:cell forRowAtIndexPath:indexPath];
+        return cell;
+    } else if ([self.surveyContents[indexPath.row] isKindOfClass:[GraphData class]]) {
+        DetailGraphCell *cell = [self.tableView dequeueReusableCellWithIdentifier:GraphCellNib];
         [self configureCell:cell forRowAtIndexPath:indexPath];
         return cell;
     } else {
@@ -113,30 +134,29 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         Answer *answer = (Answer *)self.surveyContents[indexPath.row];
         cell.answer = answer;
         cell.index = indexPath.row;
-        if ([self.survey isCurrentVoteAnswer:answer]) {
-            cell.isCurrentVote = YES;
-            self.currentSelectedIndexPath = indexPath;
-        } else {
-            cell.isCurrentVote = NO;
-        }
+        cell.isCurrentVote = [self.survey isCurrentVoteAnswer:answer];
+    } else if ([pCell isKindOfClass:[DetailGraphCell class]]) {
+        DetailGraphCell *cell = (DetailGraphCell *)pCell;
+        cell.graphData = self.surveyContents[indexPath.row];
     }
     pCell.backgroundColor = [UIColor appBgColor];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [ParseClient saveVoteOnSurvey:self.survey withAnswer:self.surveyContents[indexPath.row] withCompletion:^(Vote *vote, NSError *error) {
+    
+    Answer *newAnswer = self.surveyContents[indexPath.row];
+    if (!self.survey.voted || self.survey.vote.answerIndex != newAnswer.index) {
+    [ParseClient saveVoteOnSurvey:self.survey withAnswer:self.surveyContents[indexPath.row] withCompletion:^(Survey *survey, NSError *error) {
         if (!error) {
-            NSArray *array = [NSArray arrayWithObjects:indexPath,
-                                    self.currentSelectedIndexPath,
-                                    nil];
-            self.currentSelectedIndexPath = indexPath;
-            [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+            self.survey = survey;
+            [self.tableView reloadData];
             [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostUpdateSurveyNotification object:nil];
         } else {
             [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to vote. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
     }];
+    }
 }
 
 @end
