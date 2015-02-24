@@ -43,7 +43,6 @@ NSInteger const ResultCount = 8;
     [userQuery whereKey:@"objectId" equalTo:user.objectId];
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
-    [query whereKey:@"isTextSurvey" equalTo:@(true)];
     [query whereKey:@"user" matchesQuery:userQuery];
     [query includeKey:@"user"];
     [query whereKey:@"complete" equalTo:@(complete)];
@@ -62,7 +61,6 @@ NSInteger const ResultCount = 8;
 + (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
-//    [query whereKey:@"isTextSurvey" equalTo:@(true)];
     [query includeKey:@"user"];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
