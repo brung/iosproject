@@ -26,10 +26,15 @@
 		B827A9E81A9815E100AB43CE /* ProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9E71A9815E100AB43CE /* ProfileImageView.m */; };
 		B827A9EE1A98287B00AB43CE /* GrayBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */; };
 		B82956B81A9B10C000D0ECFD /* HomeProfileAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B82956B71A9B10C000D0ECFD /* HomeProfileAnimation.m */; };
+		B82956BC1A9C553200D0ECFD /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B82956BA1A9C553200D0ECFD /* CameraViewController.m */; };
+		B82956BD1A9C553200D0ECFD /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82956BB1A9C553200D0ECFD /* CameraViewController.xib */; };
+		B82956C61A9C5AA200D0ECFD /* ComposePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B82956C41A9C5AA200D0ECFD /* ComposePhotoCell.m */; };
+		B82956C71A9C5AA200D0ECFD /* ComposePhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82956C51A9C5AA200D0ECFD /* ComposePhotoCell.xib */; };
 		B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B862A88A1A970E25008B2310 /* DetailAnswerCell.m */; };
 		B862A88D1A970E25008B2310 /* DetailAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */; };
 		B87C15BC1A93113400191823 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C15B71A93113400191823 /* LoginViewController.m */; };
 		B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87C15B81A93113400191823 /* LoginViewController.xib */; };
+		B895C4A01A9C7709001DF829 /* QuestionPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = B895C49F1A9C7709001DF829 /* QuestionPhotos.m */; };
 		B8BA93E81A9459B5003BD476 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93E71A9459B5003BD476 /* User.m */; };
 		B8BA93EB1A9464C7003BD476 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93EA1A9464C7003BD476 /* Question.m */; };
 		B8BA93F41A947718003BD476 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BA93F31A947718003BD476 /* Answer.m */; };
@@ -102,12 +107,20 @@
 		B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrayBarButtonItem.m; sourceTree = "<group>"; };
 		B82956B61A9B10C000D0ECFD /* HomeProfileAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeProfileAnimation.h; sourceTree = "<group>"; };
 		B82956B71A9B10C000D0ECFD /* HomeProfileAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeProfileAnimation.m; sourceTree = "<group>"; };
+		B82956B91A9C553200D0ECFD /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		B82956BA1A9C553200D0ECFD /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		B82956BB1A9C553200D0ECFD /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		B82956C31A9C5AA200D0ECFD /* ComposePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposePhotoCell.h; sourceTree = "<group>"; };
+		B82956C41A9C5AA200D0ECFD /* ComposePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposePhotoCell.m; sourceTree = "<group>"; };
+		B82956C51A9C5AA200D0ECFD /* ComposePhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposePhotoCell.xib; sourceTree = "<group>"; };
 		B862A8891A970E25008B2310 /* DetailAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailAnswerCell.h; sourceTree = "<group>"; };
 		B862A88A1A970E25008B2310 /* DetailAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailAnswerCell.m; sourceTree = "<group>"; };
 		B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailAnswerCell.xib; sourceTree = "<group>"; };
 		B87C15B61A93113400191823 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B87C15B71A93113400191823 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B87C15B81A93113400191823 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		B895C49E1A9C7709001DF829 /* QuestionPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionPhotos.h; sourceTree = "<group>"; };
+		B895C49F1A9C7709001DF829 /* QuestionPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionPhotos.m; sourceTree = "<group>"; };
 		B8BA93E61A9459B5003BD476 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		B8BA93E71A9459B5003BD476 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		B8BA93E91A9464C7003BD476 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
@@ -192,6 +205,8 @@
 				B8BA93F61A947817003BD476 /* Vote.m */,
 				B8C0DBF21A95C2D60023BC39 /* ParseClient.h */,
 				B8C0DBF31A95C2D60023BC39 /* ParseClient.m */,
+				B895C49E1A9C7709001DF829 /* QuestionPhotos.h */,
+				B895C49F1A9C7709001DF829 /* QuestionPhotos.m */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -306,6 +321,9 @@
 				3E4B809E1A9C42FB004F5D78 /* CommentView.h */,
 				3E4B809F1A9C42FB004F5D78 /* CommentView.m */,
 				3E4B80A11A9C4345004F5D78 /* CommentView.xib */,
+				B82956C31A9C5AA200D0ECFD /* ComposePhotoCell.h */,
+				B82956C41A9C5AA200D0ECFD /* ComposePhotoCell.m */,
+				B82956C51A9C5AA200D0ECFD /* ComposePhotoCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -331,6 +349,9 @@
 				3E7C1D561A95AA520046FDE1 /* SurveyViewController.h */,
 				3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */,
 				3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */,
+				B82956B91A9C553200D0ECFD /* CameraViewController.h */,
+				B82956BA1A9C553200D0ECFD /* CameraViewController.m */,
+				B82956BB1A9C553200D0ECFD /* CameraViewController.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -435,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E25DBF0C1A948D870074D48B /* ProfileViewController.xib in Resources */,
+				B82956BD1A9C553200D0ECFD /* CameraViewController.xib in Resources */,
 				B8C704AB1A97065600243C3B /* DetailQuestionCell.xib in Resources */,
 				3E2BB7E11A94FF0000E78B3A /* AppNavigationController.xib in Resources */,
 				E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */,
@@ -450,6 +472,7 @@
 				B8C0DBCE1A94F71A0023BC39 /* ComposeViewController.xib in Resources */,
 				3E4B80A21A9C4345004F5D78 /* CommentView.xib in Resources */,
 				3E7C1D501A958BC10046FDE1 /* HomeViewController.xib in Resources */,
+				B82956C71A9C5AA200D0ECFD /* ComposePhotoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +524,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8C0DBF41A95C2D60023BC39 /* ParseClient.m in Sources */,
+				B82956C61A9C5AA200D0ECFD /* ComposePhotoCell.m in Sources */,
+				B895C4A01A9C7709001DF829 /* QuestionPhotos.m in Sources */,
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
 				B8C0DBF11A95C1DA0023BC39 /* Survey.m in Sources */,
 				B81A2F161A9AC409001F2C6D /* GraphData.m in Sources */,
@@ -527,6 +552,7 @@
 				B8C0DBDC1A95138C0023BC39 /* ComposeAnswerCell.m in Sources */,
 				B827A9E81A9815E100AB43CE /* ProfileImageView.m in Sources */,
 				B87C15BC1A93113400191823 /* LoginViewController.m in Sources */,
+				B82956BC1A9C553200D0ECFD /* CameraViewController.m in Sources */,
 				B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */,
 				B8BA93F71A947817003BD476 /* Vote.m in Sources */,
 			);

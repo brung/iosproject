@@ -43,6 +43,7 @@ NSInteger const ResultCount = 8;
     [userQuery whereKey:@"objectId" equalTo:user.objectId];
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
+    [query whereKey:@"isTextSurvey" equalTo:@(true)];
     [query whereKey:@"user" matchesQuery:userQuery];
     [query includeKey:@"user"];
     [query whereKey:@"complete" equalTo:@(complete)];
@@ -61,6 +62,7 @@ NSInteger const ResultCount = 8;
 + (void)getHomeSurveysOnPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
+//    [query whereKey:@"isTextSurvey" equalTo:@(true)];
     [query includeKey:@"user"];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
@@ -112,8 +114,9 @@ NSInteger const ResultCount = 8;
 + (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
     NSMutableArray *validAnswers = [NSMutableArray array];
     for (Answer *answer in survey.answers) {
-        if ([answer.text length] >= 1) {
-            [validAnswers addObject:answer.text];
+        if ((survey.question.isTextSurvey && [answer.text length] >= 1) ||
+            (!survey.question.isTextSurvey && answer.photo)) {
+            [validAnswers addObject:answer];
         }
     }
     if ([survey.question.text length] >= 8 && validAnswers.count >= 2) {
@@ -121,12 +124,69 @@ NSInteger const ResultCount = 8;
         survey.question.anonymous = NO;
         survey.question.complete = NO;
         survey.question.numAnswers = validAnswers.count;
-        survey.question.answerTexts = validAnswers;
+        survey.answers = validAnswers;
         NSMutableArray *counts = [NSMutableArray array];
         for (int i = 0; i < validAnswers.count; i++) {
             [counts addObject:@(0)];
         }
         survey.question.answerVoteCounts = counts;
+
+        if (survey.question.isTextSurvey) {
+            survey.question.answerTexts = validAnswers;
+            [survey.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    completion(YES, nil);
+                } else {
+                    NSLog(@"unable to save question");
+                    completion(NO, error);
+                }
+            }];
+        } else {
+            [ParseClient saveQuestionPhotosSurvey:survey withCompletion:completion];
+        }
+    }
+}
+
++ (void)saveQuestionPhotosSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
+    QuestionPhotos *questionPhotos = [[QuestionPhotos alloc] init];
+    for (int i = 0; i < survey.answers.count && i < 4; i++) {
+        Answer *answer = survey.answers[i];
+        switch (i) {
+            case 0:
+            {
+                NSData *imageData = UIImagePNGRepresentation(answer.photo);
+                PFFile *imageFile = [PFFile fileWithName:@"answer1.png" data:imageData];
+                questionPhotos.answerPhoto1 = imageFile;
+                break;
+            }
+            case 1:
+            {
+                NSData *imageData = UIImagePNGRepresentation(answer.photo);
+                PFFile *imageFile = [PFFile fileWithName:@"answer2.png" data:imageData];
+                questionPhotos.answerPhoto2 = imageFile;
+                break;
+            }
+            case 2:
+            {
+                NSData *imageData = UIImagePNGRepresentation(answer.photo);
+                PFFile *imageFile = [PFFile fileWithName:@"answer3.png" data:imageData];
+                questionPhotos.answerPhoto3 = imageFile;
+                break;
+            }
+            case 3:
+            {
+                NSData *imageData = UIImagePNGRepresentation(answer.photo);
+                PFFile *imageFile = [PFFile fileWithName:@"answer4.png" data:imageData];
+                questionPhotos.answerPhoto4 = imageFile;
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    [questionPhotos saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+        survey.question.questionPhotos = questionPhotos;
         [survey.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 completion(YES, nil);
@@ -135,7 +195,10 @@ NSInteger const ResultCount = 8;
                 completion(NO, error);
             }
         }];
-    }
+        } else {
+            completion(NO, error);
+        }
+    }];
 }
 
 + (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(Survey *survey, NSError *error))completion {

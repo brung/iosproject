@@ -7,7 +7,9 @@
 //
 
 #import "ComposeViewController.h"
+#import "CameraViewController.h"
 #import "ComposeAnswerCell.h"
+#import "ComposePhotoCell.h"
 #import "Answer.h"
 #import "Survey.h"
 #import "ParseClient.h"
@@ -15,17 +17,20 @@
 #import "UIColor+AppColor.h"
 
 NSString * const AnswerCell = @"ComposeAnswerCell";
+NSString * const PhotoCell = @"ComposePhotoCell";
 NSString * const AskAQuestion = @"Ask a question . . .";
 NSInteger const maxCount = 160;
 
-@interface ComposeViewController () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ComposeAnswerCellDelegate>
+@interface ComposeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, ComposeAnswerCellDelegate, CameraViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
 @property (weak, nonatomic) IBOutlet UITextView *questionText;
 @property (weak, nonatomic) IBOutlet UILabel *questionTextCountLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
 @property (nonatomic, strong) NSMutableArray *answers;
 @property (nonatomic, strong) ComposeAnswerCell *prototypeCell;
 @property (nonatomic, assign) BOOL isUpdating;
+@property (nonatomic, assign) BOOL isShowingTextAnswers;
 @end
 
 @implementation ComposeViewController
@@ -59,14 +64,24 @@ NSInteger const maxCount = 160;
     self.navigationItem.leftBarButtonItem = cancelButton;
     GrayBarButtonItem *submitButton = [[GrayBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];
     self.navigationItem.rightBarButtonItem = submitButton;
-    // Do any additional setup after loading the view from its nib.
+    
+    //TableView
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCell bundle:nil] forCellReuseIdentifier:AnswerCell];
-    
     self.tableView.alpha = 0;
+    self.isShowingTextAnswers = YES;
+    
+    //CollectionVIew
+    self.photoCollectionView.dataSource = self;
+    self.photoCollectionView.delegate = self;
+    [self.photoCollectionView registerNib:[UINib nibWithNibName:PhotoCell bundle:nil] forCellWithReuseIdentifier:PhotoCell];
+    self.photoCollectionView.backgroundColor = [UIColor appBgColor];
+    self.photoCollectionView.alpha = 0;
+    
     self.answers = [NSMutableArray arrayWithObject:[[Answer alloc] init]];
     [self.answers addObject:[[Answer alloc] init]];
+    
     
     self.questionText.delegate = self;
     
@@ -170,15 +185,15 @@ NSInteger const maxCount = 160;
 
 }
 
-
 - (void)onSubmitButton {
     if (!self.isUpdating) {
         self.isUpdating = YES;
         
         NSMutableArray *validAnswers = [NSMutableArray array];
         for (Answer *answer in self.answers) {
-            if ([answer.text length] >= 1) {
-                [validAnswers addObject:answer];
+            if ((self.isShowingTextAnswers && [answer.text length] >= 1) ||
+                (!self.isShowingTextAnswers && answer.photo)) {
+                    [validAnswers addObject:answer];
             }
         }
         if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
@@ -188,6 +203,7 @@ NSInteger const maxCount = 160;
             survey.question = question;
             survey.answers = [validAnswers copy];
             survey.user = [User currentUser];
+            survey.question.isTextSurvey = self.isShowingTextAnswers;
             [ParseClient saveSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
                     NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
@@ -198,6 +214,8 @@ NSInteger const maxCount = 160;
                 }
                 self.isUpdating = NO;
             }];
+        } else {
+            self.isUpdating = NO;
         }
     }
 }
@@ -219,6 +237,54 @@ NSInteger const maxCount = 160;
         self.questionText.alpha = 1;
     }];
 
+}
+
+- (IBAction)onCameraButton:(id)sender {
+    UIView *current;
+    UIView *new;
+    if (self.isShowingTextAnswers) {
+        self.isShowingTextAnswers = NO;
+        current = self.tableView;
+        new = self.photoCollectionView;
+    } else {
+        self.isShowingTextAnswers = YES;
+        current = self.photoCollectionView;
+        new = self.tableView;
+    }
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        current.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        current.alpha = 0;
+        new.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        new.alpha = 1;
+    }];
+}
+
+#pragma mark - CollectionView
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.answers.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ComposePhotoCell *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:PhotoCell forIndexPath:indexPath];
+    cell.answer = self.answers[indexPath.row];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    CameraViewController *vc = [[CameraViewController alloc] init];
+    vc.indexPath = indexPath;
+    vc.delegate = self;
+    vc.view.frame = self.view.frame;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark -CameraViewControllerDelegate methods
+- (void)cameraViewController:(CameraViewController *)vc didSelectPhoto:(UIImage *)photo {
+    Answer *answer = self.answers[vc.indexPath.row];
+    answer.photo = photo;
+    [self.photoCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:vc.indexPath]];
 }
 
 /*

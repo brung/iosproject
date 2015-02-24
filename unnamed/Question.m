@@ -22,6 +22,8 @@ NSInteger const resultCount = 20;
 @dynamic anonymous;
 @dynamic complete;
 @dynamic createdAt;
+@dynamic isTextSurvey;
+@dynamic questionPhotos;
 
 - (id)initWithText:(NSString *)text {
     self = [super init];
