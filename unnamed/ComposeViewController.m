@@ -50,6 +50,10 @@ NSInteger const maxCount = 160;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isUpdating = NO;
+    // Setup Question Text Field
+    self.questionText.layer.cornerRadius = 10;
+    self.questionText.layer.masksToBounds = YES;
+    
     // Button
     GrayBarButtonItem *cancelButton = [[GrayBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -109,6 +113,8 @@ NSInteger const maxCount = 160;
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UILabel *footer = [[UILabel alloc] init];
+    footer.layer.cornerRadius = 10;
+    footer.layer.masksToBounds = YES;
     footer.contentMode = UIViewContentModeCenter;
     footer.textAlignment = NSTextAlignmentCenter;
     footer.textColor = [UIColor lightGrayColor];

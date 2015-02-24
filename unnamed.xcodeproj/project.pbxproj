@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BB7DE1A94FF0000E78B3A /* AppNavigationController.m */; };
 		3E2BB7E11A94FF0000E78B3A /* AppNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2BB7DF1A94FF0000E78B3A /* AppNavigationController.xib */; };
+		3E4B809D1A9C41CF004F5D78 /* CommentCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4B809C1A9C41CF004F5D78 /* CommentCollectionView.m */; };
+		3E4B80A01A9C42FB004F5D78 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4B809F1A9C42FB004F5D78 /* CommentView.m */; };
+		3E4B80A21A9C4345004F5D78 /* CommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4B80A11A9C4345004F5D78 /* CommentView.xib */; };
 		3E58B4CB1A98229200AA14D4 /* SurveyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E58B4C91A98229200AA14D4 /* SurveyViewCell.m */; };
 		3E58B4CC1A98229200AA14D4 /* SurveyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E58B4CA1A98229200AA14D4 /* SurveyViewCell.xib */; };
 		3E58B4CF1A98300C00AA14D4 /* AnswerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E58B4CE1A98300C00AA14D4 /* AnswerCollectionView.m */; };
@@ -67,6 +70,11 @@
 		3E2BB7DD1A94FF0000E78B3A /* AppNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppNavigationController.h; sourceTree = "<group>"; };
 		3E2BB7DE1A94FF0000E78B3A /* AppNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppNavigationController.m; sourceTree = "<group>"; };
 		3E2BB7DF1A94FF0000E78B3A /* AppNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppNavigationController.xib; sourceTree = "<group>"; };
+		3E4B809B1A9C41CF004F5D78 /* CommentCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCollectionView.h; sourceTree = "<group>"; };
+		3E4B809C1A9C41CF004F5D78 /* CommentCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCollectionView.m; sourceTree = "<group>"; };
+		3E4B809E1A9C42FB004F5D78 /* CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
+		3E4B809F1A9C42FB004F5D78 /* CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
+		3E4B80A11A9C4345004F5D78 /* CommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentView.xib; sourceTree = "<group>"; };
 		3E58B4C81A98229200AA14D4 /* SurveyViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyViewCell.h; sourceTree = "<group>"; };
 		3E58B4C91A98229200AA14D4 /* SurveyViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyViewCell.m; sourceTree = "<group>"; };
 		3E58B4CA1A98229200AA14D4 /* SurveyViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyViewCell.xib; sourceTree = "<group>"; };
@@ -288,6 +296,11 @@
 				3E58B4D21A9832BF00AA14D4 /* AnswerView.h */,
 				3E58B4D31A9832BF00AA14D4 /* AnswerView.m */,
 				3E58B4D51A984C3900AA14D4 /* AnswerView.xib */,
+				3E4B809B1A9C41CF004F5D78 /* CommentCollectionView.h */,
+				3E4B809C1A9C41CF004F5D78 /* CommentCollectionView.m */,
+				3E4B809E1A9C42FB004F5D78 /* CommentView.h */,
+				3E4B809F1A9C42FB004F5D78 /* CommentView.m */,
+				3E4B80A11A9C4345004F5D78 /* CommentView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -430,6 +443,7 @@
 				B8C0DBDD1A95138C0023BC39 /* ComposeAnswerCell.xib in Resources */,
 				3E58B4CC1A98229200AA14D4 /* SurveyViewCell.xib in Resources */,
 				B8C0DBCE1A94F71A0023BC39 /* ComposeViewController.xib in Resources */,
+				3E4B80A21A9C4345004F5D78 /* CommentView.xib in Resources */,
 				3E7C1D501A958BC10046FDE1 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +501,7 @@
 				B81A2F161A9AC409001F2C6D /* GraphData.m in Sources */,
 				3E58B4D41A9832BF00AA14D4 /* AnswerView.m in Sources */,
 				3E58B4CB1A98229200AA14D4 /* SurveyViewCell.m in Sources */,
+				3E4B809D1A9C41CF004F5D78 /* CommentCollectionView.m in Sources */,
 				B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */,
 				3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */,
 				B8BA93F41A947718003BD476 /* Answer.m in Sources */,
@@ -502,6 +517,7 @@
 				3EC3AEE11A9AB22100E0DCCB /* UIColor+AppColor.m in Sources */,
 				E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */,
 				B827A9EE1A98287B00AB43CE /* GrayBarButtonItem.m in Sources */,
+				3E4B80A01A9C42FB004F5D78 /* CommentView.m in Sources */,
 				B8C0DBDC1A95138C0023BC39 /* ComposeAnswerCell.m in Sources */,
 				B827A9E81A9815E100AB43CE /* ProfileImageView.m in Sources */,
 				B87C15BC1A93113400191823 /* LoginViewController.m in Sources */,

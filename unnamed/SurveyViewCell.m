@@ -9,6 +9,7 @@
 #import "SurveyViewCell.h"
 #import "ProfileImageView.h"
 #import "AnswerCollectionView.h"
+#import "CommentCollectionView.h"
 #import "UIColor+AppColor.h"
 #import "NSDate+MinimalTimeAgo.h"
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 @property (weak, nonatomic) IBOutlet AnswerCollectionView *answerCollectionView;
+@property (weak, nonatomic) IBOutlet CommentCollectionView *commentCollectionView;
 
 @end
 
@@ -52,6 +54,7 @@
     self.createdByLabel.text = [survey.question.createdAt timeAgo];
     self.questionLabel.text = survey.question.text;
     [self.answerCollectionView setAnswers:survey.answers andTotal:survey.totalVotes];
+    [self.commentCollectionView setComments:[NSArray arrayWithObjects:nil]];
 }
 
 - (void)profileImageView:(ProfileImageView *)view tappedUser:(User *)user {
