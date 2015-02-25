@@ -17,8 +17,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="100.0%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6c-5O-Ip8">
-                    <rect key="frame" x="51" y="5" width="44" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.0%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6c-5O-Ip8">
+                    <rect key="frame" x="51" y="4" width="44" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="28" id="3rh-hP-pRR"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="44" id="NeE-Gv-5Wt"/>
@@ -32,14 +32,14 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="1. The Answer Is" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zp-Vs-ovw">
-                    <rect key="frame" x="97" y="5" width="215" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1. The Answer Is" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zp-Vs-ovw">
+                    <rect key="frame" x="97" y="4" width="215" height="15"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-Bf-ACJ" customClass="GRKBarGraphView">
-                    <rect key="frame" x="8" y="8" width="40" height="8"/>
+                    <rect key="frame" x="8" y="7" width="40" height="8"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="0l3-oJ-CVJ"/>
                         <constraint firstAttribute="height" constant="8" id="eTG-9f-CWP"/>
@@ -47,12 +47,11 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="R6c-5O-Ip8" firstAttribute="centerY" secondItem="6zp-Vs-ovw" secondAttribute="centerY" id="AzX-HI-mZd"/>
+                <constraint firstAttribute="centerY" secondItem="6zp-Vs-ovw" secondAttribute="centerY" id="6pL-yH-yRa"/>
+                <constraint firstAttribute="centerY" secondItem="O7j-Bf-ACJ" secondAttribute="centerY" id="LpG-ze-sL5"/>
                 <constraint firstItem="6zp-Vs-ovw" firstAttribute="leading" relation="lessThanOrEqual" secondItem="R6c-5O-Ip8" secondAttribute="trailing" constant="3" id="NXq-7s-fxT"/>
+                <constraint firstAttribute="centerY" secondItem="R6c-5O-Ip8" secondAttribute="centerY" id="PPs-bc-FhN"/>
                 <constraint firstAttribute="trailing" secondItem="6zp-Vs-ovw" secondAttribute="trailing" constant="8" id="aqr-RD-inv"/>
-                <constraint firstItem="O7j-Bf-ACJ" firstAttribute="centerY" secondItem="6zp-Vs-ovw" secondAttribute="centerY" id="b9l-Fr-vO8"/>
-                <constraint firstItem="O7j-Bf-ACJ" firstAttribute="top" secondItem="m8k-6m-S8c" secondAttribute="top" constant="8" id="dpT-8x-DnB"/>
-                <constraint firstItem="O7j-Bf-ACJ" firstAttribute="centerY" secondItem="R6c-5O-Ip8" secondAttribute="centerY" id="f0l-31-lgq"/>
                 <constraint firstItem="O7j-Bf-ACJ" firstAttribute="leading" secondItem="m8k-6m-S8c" secondAttribute="leading" constant="8" id="ikq-q4-iQg"/>
                 <constraint firstItem="R6c-5O-Ip8" firstAttribute="leading" secondItem="O7j-Bf-ACJ" secondAttribute="trailing" constant="3" id="onP-rZ-joU"/>
             </constraints>

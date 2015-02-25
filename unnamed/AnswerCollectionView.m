@@ -76,7 +76,7 @@
     [super layoutSubviews];
     
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width,
-                            self.answerHeight * (self.answerViews.count + 1));// +1 to account additional height
+                            self.answerHeight * self.answerViews.count);// +1 to account additional height
     
     for (int i=0;i<self.answerViews.count;i++) {
         AnswerView *view = self.answerViews[i];

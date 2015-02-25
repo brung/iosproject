@@ -31,28 +31,30 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @implementation HomeViewController
 
 - (void) setupTestData {
-//    for (int i=0; i<20; i++) {
-//        Survey *survey = [[Survey alloc] init];
-//        survey.question = [[Question alloc] init];
-//        survey.question.text = [NSString stringWithFormat:@"Question %d?", i];
-//        survey.question.anonymous = (i%2==0)?YES:NO;
-//        survey.question.complete = (i%2==0)?NO:YES;
-//        
-//        survey.user = [[User alloc] init];
-//        survey.user.name = [NSString stringWithFormat:@"Name %d", i];
-//        
-//        NSMutableArray *answers = [[NSMutableArray alloc] init];
-//        for (int j=0; j < ((i % 4) + 2); j++) {
-//            Answer *answer = [[Answer alloc] init];
-//            answer.count = i * j;
-//            answer.text = [NSString stringWithFormat:@"Answer %d - %d", i, j];
-//            [answers addObject:answer];
-//        }
-//        survey.answers = [NSArray arrayWithArray:answers];
-//        survey.voted = (i%2 == 0)?YES:NO;
-//        
-//        [self.surveys addObject:survey];
-//    }
+    for (int i=0; i<20; i++) {
+        Survey *survey = [[Survey alloc] init];
+        survey.question = [[Question alloc] init];
+        survey.question.text = [NSString stringWithFormat:@"Question %d?", i];
+        survey.question.anonymous = (i%2==0)?YES:NO;
+        survey.question.complete = (i%2==0)?NO:YES;
+        
+        survey.user = [[User alloc] init];
+        survey.user.name = [NSString stringWithFormat:@"Name %d", i];
+        
+        NSInteger total = 0;
+        NSMutableArray *answers = [[NSMutableArray alloc] init];
+        for (int j=0; j < ((i % 4) + 2); j++) {
+            Answer *answer = [[Answer alloc] init];
+            answer.count = i * j;
+            total += answer.count;
+            answer.text = [NSString stringWithFormat:@"Answer %d - %d", i, j];
+            [answers addObject:answer];
+        }
+        survey.answers = [NSArray arrayWithArray:answers];
+        survey.voted = (i%2 == 0)?YES:NO;
+        survey.totalVotes = total;
+        [self.surveys addObject:survey];
+    }
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -187,7 +189,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     [self.prototypeSurveyCell layoutIfNeeded];
     CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
-    return size.height;
+    return size.height + 1;
 }
 
 #pragma mark - SurveyViewCellDelegate methods
