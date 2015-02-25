@@ -14,6 +14,8 @@
 #import "DetailAnswerCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppColor.h"
+#import "GrayBarButtonItem.h"
+#import "CmtViewController.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
@@ -31,7 +33,11 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor appBgColor];
-        
+    
+    //comment button
+    GrayBarButtonItem *commentButton = [[GrayBarButtonItem alloc] initWithTitle:@"Comment" style:UIBarButtonItemStylePlain target:self action:@selector(onCommentButton)];
+    self.navigationItem.rightBarButtonItem = commentButton;
+    
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -132,6 +138,13 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 - (UIImageView *)getMainProfileImageView {
     DetailQuestionCell *cell = (DetailQuestionCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     return cell.profileImageView;
+}
+
+- (void) onCommentButton{
+    CmtViewController *vc = [[CmtViewController alloc] init];
+    vc.view.frame = self.view.frame;
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 
