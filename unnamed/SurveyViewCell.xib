@@ -84,11 +84,23 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="6Jp-aC-bqY" secondAttribute="bottom" constant="10" id="0My-aR-uWG"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6Jp-aC-bqY" secondAttribute="trailing" constant="2" id="Gal-dI-gUu"/>
                     <constraint firstItem="6Jp-aC-bqY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="Zny-cx-s0i"/>
                     <constraint firstItem="6Jp-aC-bqY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="gAd-x1-YHB"/>
+                    <constraint firstItem="6Jp-aC-bqY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="lak-gJ-jgm"/>
+                    <constraint firstItem="6Jp-aC-bqY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ldy-de-02f"/>
                     <constraint firstAttribute="bottomMargin" secondItem="6Jp-aC-bqY" secondAttribute="bottom" constant="2" id="qVL-sV-Y7q"/>
+                    <constraint firstAttribute="trailing" secondItem="6Jp-aC-bqY" secondAttribute="trailing" constant="10" id="vUP-S4-Zfz"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Gal-dI-gUu"/>
+                        <exclude reference="Zny-cx-s0i"/>
+                        <exclude reference="gAd-x1-YHB"/>
+                        <exclude reference="qVL-sV-Y7q"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>

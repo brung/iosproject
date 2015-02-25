@@ -11,6 +11,7 @@
 #import "UIColor+AppColor.h"
 
 @interface PhotoAnswerView()
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (weak, nonatomic) IBOutlet GRKBarGraphView *barView;
@@ -23,7 +24,7 @@
 @implementation PhotoAnswerView
 
 - (void)setup {
-    UINib *nib = [UINib nibWithNibName:@"AnswerView" bundle:nil];
+    UINib *nib = [UINib nibWithNibName:@"PhotoAnswerView" bundle:nil];
     NSArray *objects = [nib instantiateWithOwner:self options:nil];
     //    NSLog(@"Nib Objects Count: %ld", objects.count);
     //    NSLog(@"Height: %f, Width: %f", self.containerView.frame.size.height, self.containerView.frame.size.width);
@@ -32,7 +33,8 @@
     self.barView.barStyle = GRKBarStyleFromRight;
     self.barView.barColor = [UIColor appTintColor];
     self.barView.tintColor = [UIColor appTintColor];
-    
+    self.contentView.frame = self.bounds;
+    [self addSubview:self.contentView];
 }
 
 - (id)init {

@@ -177,13 +177,12 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
     }
     Survey *survey = self.surveys[indexPath.row];
     if (survey.question.isTextSurvey) {
-    SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
-    cell.survey = survey;
-    cell.delegate = self;
-    return cell;
+        SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
+        [self configureCell:cell forRowAtIndexPath:indexPath];
+        return cell;
     } else {
         PhotoAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoViewCell];
-        cell.survey = survey;
+        [self configureCell:cell forRowAtIndexPath:indexPath];
         return cell;
     }
 }
@@ -202,11 +201,31 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Survey *survey = self.surveys[indexPath.row];
+    if (survey.question.isTextSurvey) {
     [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
     [self.prototypeSurveyCell layoutIfNeeded];
     CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
     return size.height + 1;
+    } else {
+        [self configureCell:self.prototypePhotoCell forRowAtIndexPath:indexPath];
+        [self.prototypePhotoCell layoutIfNeeded];
+        CGSize size = [self.prototypePhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+        return size.height;
+    }
+}
+
+- (void)configureCell:(UITableViewCell *)pCell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([pCell isKindOfClass:[SurveyViewCell class]]) {
+        SurveyViewCell *cell = (SurveyViewCell *)pCell;
+        cell.survey = self.surveys[indexPath.row];
+        cell.delegate = self;
+    } else if ([pCell isKindOfClass:[PhotoAnswerCell class]]) {
+        PhotoAnswerCell *cell = (PhotoAnswerCell *)pCell;
+        cell.survey = self.surveys[indexPath.row];
+    }
 }
 
 #pragma mark - SurveyViewCellDelegate methods
@@ -235,13 +254,6 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
 
 - (void)onUpdatePost {
     [self.tableView reloadData];
-}
-
-- (void)configureCell:(UITableViewCell *)pCell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([pCell isKindOfClass:[SurveyViewCell class]]) {
-        SurveyViewCell *cell = (SurveyViewCell *)pCell;
-        cell.survey = self.surveys[indexPath.row];
-    }
 }
 
 @end
