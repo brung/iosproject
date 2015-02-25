@@ -57,8 +57,6 @@
 		B8C291CF1A930BDD000F2143 /* unnamedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C291CE1A930BDD000F2143 /* unnamedTests.m */; };
 		B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C704A81A97065600243C3B /* DetailQuestionCell.m */; };
 		B8C704AB1A97065600243C3B /* DetailQuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8C704A91A97065600243C3B /* DetailQuestionCell.xib */; };
-		E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF041A9489530074D48B /* TabBarMenuViewController.m */; };
-		E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */; };
 		E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF091A948D870074D48B /* ProfileViewController.m */; };
 		E25DBF0C1A948D870074D48B /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF0A1A948D870074D48B /* ProfileViewController.xib */; };
 		E2C6FF1E1A96C178005AEDA9 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C6FF1C1A96C178005AEDA9 /* ProfileCell.m */; };
@@ -165,9 +163,6 @@
 		B8C704A71A97065600243C3B /* DetailQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailQuestionCell.h; sourceTree = "<group>"; };
 		B8C704A81A97065600243C3B /* DetailQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailQuestionCell.m; sourceTree = "<group>"; };
 		B8C704A91A97065600243C3B /* DetailQuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailQuestionCell.xib; sourceTree = "<group>"; };
-		E25DBF031A9489530074D48B /* TabBarMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarMenuViewController.h; sourceTree = "<group>"; };
-		E25DBF041A9489530074D48B /* TabBarMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarMenuViewController.m; sourceTree = "<group>"; };
-		E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarMenuViewController.xib; sourceTree = "<group>"; };
 		E25DBF081A948D870074D48B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		E25DBF091A948D870074D48B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		E25DBF0A1A948D870074D48B /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -355,9 +350,6 @@
 				B87C15B61A93113400191823 /* LoginViewController.h */,
 				B87C15B71A93113400191823 /* LoginViewController.m */,
 				B87C15B81A93113400191823 /* LoginViewController.xib */,
-				E25DBF031A9489530074D48B /* TabBarMenuViewController.h */,
-				E25DBF041A9489530074D48B /* TabBarMenuViewController.m */,
-				E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */,
 				E25DBF081A948D870074D48B /* ProfileViewController.h */,
 				E25DBF091A948D870074D48B /* ProfileViewController.m */,
 				E25DBF0A1A948D870074D48B /* ProfileViewController.xib */,
@@ -480,7 +472,6 @@
 				B82956BD1A9C553200D0ECFD /* CameraViewController.xib in Resources */,
 				B8C704AB1A97065600243C3B /* DetailQuestionCell.xib in Resources */,
 				3E2BB7E11A94FF0000E78B3A /* AppNavigationController.xib in Resources */,
-				E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */,
 				E2C6FF1F1A96C178005AEDA9 /* ProfileCell.xib in Resources */,
 				B8C291C31A930BDD000F2143 /* LaunchScreen.xib in Resources */,
 				3E58B4D61A984C3900AA14D4 /* AnswerView.xib in Resources */,
@@ -571,7 +562,6 @@
 				B8BA93EB1A9464C7003BD476 /* Question.m in Sources */,
 				3E58B4CF1A98300C00AA14D4 /* AnswerCollectionView.m in Sources */,
 				3EC3AEE11A9AB22100E0DCCB /* UIColor+AppColor.m in Sources */,
-				E25DBF061A9489530074D48B /* TabBarMenuViewController.m in Sources */,
 				B827A9EE1A98287B00AB43CE /* GrayBarButtonItem.m in Sources */,
 				3E4B80A01A9C42FB004F5D78 /* CommentView.m in Sources */,
 				B8C0DBDC1A95138C0023BC39 /* ComposeAnswerCell.m in Sources */,

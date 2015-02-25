@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "SurveyViewController.h"
 #import "ProfileViewController.h"
+#import "ComposeViewController.h"
 #import "SurveyViewCell.h"
 #import "PhotoAnswerCell.h"
 #import "ParseClient.h"
@@ -65,6 +66,10 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
     if (self) {
         self.title = @"Home";
         self.tabBarItem.image = [UIImage imageNamed:@"Home"];
+        UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"User Male"] style:UIBarButtonItemStylePlain target:self action:@selector(onProfileTap)];
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+        UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Poll Topic"] style:UIBarButtonItemStylePlain target:self action:@selector(onCreateTap)];
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem;
     }
     return self;
 }
@@ -111,6 +116,10 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
                 [self.tableView endUpdates];
             }];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    self.transitionAnimation.selectedCell = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -231,21 +240,17 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
 
 #pragma mark - SurveyViewCellDelegate methods
 - (void)surveyViewCell:(SurveyViewCell *)cell didClickOnUser:(User *)user {
-    if ([user.objectId isEqualToString:[User currentUser].objectId]) {
-        [self.tabBarController setSelectedIndex:2];
-    } else {
-        ProfileViewController *vc = [[ProfileViewController alloc] init];
-        vc.user = user;
-        vc.view.frame = self.view.frame;
-        self.transitionAnimation.selectedCell = cell;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    [self clickedOnCell:cell userPhoto:user];
 }
 
 #pragma mark - PhotoAnswerCellDelegate methods
 - (void)photoAnswerCell:(PhotoAnswerCell *)cell didClickOnUser:(User *)user{
-    if ([user.objectId isEqualToString:[User currentUser].objectId]) {
-        [self.tabBarController setSelectedIndex:2];
+    [self clickedOnCell:cell userPhoto:user];
+}
+
+- (void)clickedOnCell:(UITableViewCell *)cell userPhoto:(User *)user {
+    if ([user isEqualUser:[User currentUser]]) {
+        [self onProfileTap];
     } else {
         ProfileViewController *vc = [[ProfileViewController alloc] init];
         vc.user = user;
@@ -265,6 +270,19 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
         self.surveys = newSurveys;
         self.isInsertingNewPost = YES;
     }
+}
+
+- (void)onProfileTap {
+    ProfileViewController *vc = [[ProfileViewController alloc] init];
+    vc.user = [User currentUser];
+    vc.view.frame = self.view.frame;
+    self.transitionAnimation.selectedCell = nil;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onCreateTap{
+    ComposeViewController *vc = [[ComposeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)onUpdatePost {

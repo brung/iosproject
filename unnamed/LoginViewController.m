@@ -11,6 +11,8 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "AppDelegate.h"
+#import "AppNavigationController.h"
+#import "HomeViewController.h"
 
 @interface LoginViewController () <FBLoginViewDelegate>
 
@@ -72,7 +74,7 @@
 #pragma mark - Private methods
 
 - (void)presentLoggedInViewController {
-    [self presentViewController:[AppDelegate tabBarMenuViewController] animated:YES completion:nil];
+    [self presentViewController:[[AppNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]] animated:YES completion:nil];
 }
 
 - (IBAction)onLoginButton:(id)sender {

@@ -41,40 +41,37 @@ NSString * const kPhotoViewCellName = @"PhotoAnswerCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Profile";
-        self.tabBarItem.image = [UIImage imageNamed:@"User Male"];
+        self.isInsertingNewPost = NO;
         self.surveys = [NSMutableArray array];
+        self.pageIndex = 0;
+        self.view.backgroundColor = [UIColor appBgColor];
+        
+        // Setup
+        self.logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
+                
+        // - tableview related:        
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        self.tableView.backgroundColor = [UIColor appBgColor];
+        [self.tableView registerNib:[UINib nibWithNibName:kProfileCellName bundle:nil] forCellReuseIdentifier:kProfileCellName];
+        [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCellName bundle:nil] forCellReuseIdentifier:kSurveyViewCellName];
+        [self.tableView registerNib:[UINib nibWithNibName:kPhotoViewCellName bundle:nil] forCellReuseIdentifier:kPhotoViewCellName];
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.modalPresentationStyle = UIModalPresentationNone;
-
-    
-    self.isInsertingNewPost = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewPost:) name:UserDidPostNewSurveyNotification object:nil];
 
     // Do any additional setup after loading the view from its nib.
-    self.pageIndex = 0;
-    self.view.backgroundColor = [UIColor appBgColor];
     if (!self.user) {
         self.user = [User currentUser];
     }
     
-    // Setup
-    self.logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
-    
-    // - tableview related:
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor appBgColor];
-    [self.tableView registerNib:[UINib nibWithNibName:kProfileCellName bundle:nil] forCellReuseIdentifier:kProfileCellName];
-    [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCellName bundle:nil] forCellReuseIdentifier:kSurveyViewCellName];
-    [self.tableView registerNib:[UINib nibWithNibName:kPhotoViewCellName bundle:nil] forCellReuseIdentifier:kPhotoViewCellName];
-
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-
     [self fetchSurveys];
     
     // - refresh table content

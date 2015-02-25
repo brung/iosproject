@@ -42,29 +42,19 @@ static User * _currentUser = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
 }
 
-//+ (User *)getUserById:(NSString *)userId {
-//    PFQuery *query = [PFQuery queryWithClassName:PFObjectName];
-//    [query getObjectInBackgroundWithId:userId block:^(PFObject *object, NSError *error) {
-//        if (!error) {
-//            NSDictionary *dict = object[@"profile"];
-//            User *user = [[User alloc] initWithDictionary:dict];
-//            return user;
-//        } else {
-//            NSLog(@"Unable to retrieve user %@", userId)
-//        }
-//    }];
-//    return nil;
-//}
-
 - (id)initWithPFUser:(PFUser *)user {
     self = [super init];
     if (self) {
-        self.objectId = user.objectId;
+        self.parseUser = user;
         NSDictionary *profile = user[@"profile"];
         self.name = profile[@"name"];
         self.profileImageUrl = profile[@"pictureURL"];
     }
     return self;
+}
+
+- (BOOL)isEqualUser:(User *)user {
+    return [self.parseUser.objectId isEqualToString:user.parseUser.objectId];
 }
 
 @end

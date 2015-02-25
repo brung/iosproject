@@ -13,9 +13,6 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "User.h"
-#import "TabBarMenuViewController.h"
-#import "ComposeViewController.h"
-#import "ProfileViewController.h"
 #import "AppNavigationController.h"
 #import "UIColor+AppColor.h"
 
@@ -27,26 +24,6 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
 @end
 
 @implementation AppDelegate
-
-+ (TabBarMenuViewController *)tabBarMenuViewController {
-    static TabBarMenuViewController *instance = nil;
-    
-    instance = [[TabBarMenuViewController alloc] init];
-    
-    AppNavigationController * vc1 = [[AppNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
-    AppNavigationController * vc2 = [[AppNavigationController alloc] initWithRootViewController:[[ComposeViewController alloc] init]];
-    ProfileViewController *pvc = [[ProfileViewController alloc] init];
-    pvc.user = [User currentUser];
-    AppNavigationController * vc3 = [[AppNavigationController alloc] initWithRootViewController:pvc];
-    
-    
-    //adding sub view controllers
-    NSArray* controllers = [NSArray arrayWithObjects:vc1, vc2, vc3, nil];
-    instance.viewControllers = controllers;
-    //instance.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    return instance;
-}
 
 - (void) showFBSessionState{
     //Debugging purpose to see whether
@@ -91,11 +68,6 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
     
     User *user = [User currentUser];
     if (user) {
-        
-        NSLog(@"User name %@", user.name);
-        NSLog(@"User image %@", user.profileImageUrl);
-        NSLog(@"User id %@", user.objectId);
-        
         [self showFBSessionState];
         
         if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
@@ -119,7 +91,7 @@ NSString * const kParseClientId = @"msAxad6wCjR01uuvzVWYtoMOpbakjgRlwQDTKeD8";
         self.window.rootViewController = [[LoginViewController alloc] init];
         self.window.backgroundColor = [UIColor whiteColor];
     }else{
-        self.window.rootViewController = [AppDelegate tabBarMenuViewController];
+        self.window.rootViewController = [[AppNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
     }
     
     [self.window makeKeyAndVisible];

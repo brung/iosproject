@@ -103,12 +103,12 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     self.navController = navigationController;
     if (operation == UINavigationControllerOperationPush) {
-        if ([toVC isKindOfClass:[ProfileViewController class]] && [fromVC isKindOfClass:[HomeViewController class]]) {
+        if ([toVC isKindOfClass:[ProfileViewController class]] && [fromVC isKindOfClass:[HomeViewController class]] && self.selectedCell) {
         self.isPresenting = YES;
             return self;
         }
     } else if (operation == UINavigationControllerOperationPop) {
-        if ([fromVC isKindOfClass:[ProfileViewController class]] && [toVC isKindOfClass:[HomeViewController class]]) {
+        if ([fromVC isKindOfClass:[ProfileViewController class]] && [toVC isKindOfClass:[HomeViewController class]] && self.selectedCell) {
             self.isPresenting = NO;
             return self;
         }

@@ -40,7 +40,8 @@ NSInteger const maxCount = 160;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Create";
-        self.tabBarItem.image = [UIImage imageNamed:@"Poll Topic"];
+        GrayBarButtonItem *submitButton = [[GrayBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];
+        self.navigationItem.rightBarButtonItem = submitButton;
     }
     self.view.backgroundColor = [UIColor appBgColor];
     return self;
@@ -61,10 +62,8 @@ NSInteger const maxCount = 160;
     self.questionText.layer.masksToBounds = YES;
     
     // Button
-    GrayBarButtonItem *cancelButton = [[GrayBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    GrayBarButtonItem *submitButton = [[GrayBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];
-    self.navigationItem.rightBarButtonItem = submitButton;
+//    GrayBarButtonItem *cancelButton = [[GrayBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
+//    self.navigationItem.leftBarButtonItem = cancelButton;
     
     self.answerSegControl.alpha = 0;
     
@@ -217,27 +216,11 @@ NSInteger const maxCount = 160;
             
             if (self.isShowingTextAnswers) {
                 [ParseClient saveTextSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostNewSurveyNotification object:nil userInfo:dict];
-                        [self resetForm];
-                        [self.tabBarController setSelectedIndex:0];
-                    } else {
-                        [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                    }
-                    self.isUpdating = NO;
+                    [self onPostSurvey:survey completionStatus:succeeded error:error];
                 }];
             } else {
                 [ParseClient savePhotoSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostNewSurveyNotification object:nil userInfo:dict];
-                        [self resetForm];
-                        [self.tabBarController setSelectedIndex:0];
-                    } else {
-                        [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                    }
-                    self.isUpdating = NO;
+                    [self onPostSurvey:survey completionStatus:succeeded error:error];
                 }];
                 
             }
@@ -247,8 +230,28 @@ NSInteger const maxCount = 160;
     }
 }
 
+- (void)onPostSurvey:(Survey *)survey completionStatus:(BOOL) succeeded error:(NSError *)error {
+    if (succeeded) {
+        [self onSuccessfulPostSurvey:survey];
+    } else {
+        [self onErrorPost];
+    }
+    self.isUpdating = NO;
+}
+
+- (void)onSuccessfulPostSurvey:(Survey *)survey {
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostNewSurveyNotification object:nil userInfo:dict];
+    [self onCancelButton];
+}
+
+- (void)onErrorPost {
+    [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
 - (void)onCancelButton {
     [self resetForm];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)resetForm {

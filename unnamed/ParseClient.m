@@ -36,14 +36,13 @@ NSInteger const ResultCount = 8;
 //}
 
 + (void)getUser:(User *)user surveysComplete:(BOOL)complete onPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
-    if (!user) {
+    if (!user || !user.parseUser) {
         completion([NSArray array], [[NSError alloc] initWithDomain:@"No user found" code:909 userInfo:nil]);
+        return;
     }
-    PFQuery *userQuery = [PFUser query];
-    [userQuery whereKey:@"objectId" equalTo:user.objectId];
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
-    [query whereKey:@"user" matchesQuery:userQuery];
+    [query whereKey:@"user" equalTo:user.parseUser];
     [query includeKey:@"user"];
     [query includeKey:@"questionPhotos"];
     [query whereKey:@"complete" equalTo:@(complete)];
@@ -207,6 +206,9 @@ NSInteger const ResultCount = 8;
                 completion(NO, error);
             }
         }];
+    } else {
+        completion([NSArray array], [[NSError alloc] initWithDomain:@"Not enough valid answers for question" code:500 userInfo:nil]);
+        return;
     }
 }
 
