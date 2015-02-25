@@ -37,7 +37,7 @@
 - (void)layoutSubviews {
     self.answerIndexLabel.text = [NSString stringWithFormat:@"%ld.", (long)self.answer.index +1];
     self.answerLabel.text = self.answer.text;
-    float percent = (float)self.answer.count / (float)self.totalVotes;
+    float percent = self.totalVotes > 0 ? (float)self.answer.count / (float)self.totalVotes : 0;
     self.percentLabel.text = [NSString stringWithFormat:@"%.1f%%", percent * 100];
     self.barGraph.percent = percent;
 }
