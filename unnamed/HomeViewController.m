@@ -203,11 +203,11 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Survey *survey = self.surveys[indexPath.row];
     if (survey.question.isTextSurvey) {
-    [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
-    [self.prototypeSurveyCell layoutIfNeeded];
-    CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
-    return size.height + 1;
+        [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
+        [self.prototypeSurveyCell layoutIfNeeded];
+        CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+        return size.height + 1;
     } else {
         [self configureCell:self.prototypePhotoCell forRowAtIndexPath:indexPath];
         [self.prototypePhotoCell layoutIfNeeded];
