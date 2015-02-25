@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeViewController">
             <connections>
+                <outlet property="answerSegControl" destination="d0k-Rn-SO8" id="zS7-xJ-jw1"/>
                 <outlet property="instructionLabel" destination="2eW-Cr-3wD" id="r7k-ym-Daj"/>
                 <outlet property="photoCollectionView" destination="Cok-a4-urZ" id="GK5-th-WBd"/>
                 <outlet property="questionText" destination="rbk-if-DMU" id="UoU-02-xje"/>
@@ -29,7 +30,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ty4-5D-Pxu">
-                    <rect key="frame" x="268" y="120" width="36" height="17"/>
+                    <rect key="frame" x="269" y="120" width="36" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -41,47 +42,52 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="86v-la-mTY">
-                    <rect key="frame" x="8" y="153" width="304" height="407"/>
+                    <rect key="frame" x="8" y="189" width="304" height="372"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Cok-a4-urZ">
-                    <rect key="frame" x="8" y="153" width="304" height="407"/>
+                    <rect key="frame" x="8" y="189" width="304" height="372"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="8" id="OOE-ut-S83">
                         <size key="itemSize" width="140" height="140"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="sectionInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLt-bq-ckZ">
-                    <rect key="frame" x="137" y="530" width="46" height="30"/>
-                    <state key="normal" title="Button">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="d0k-Rn-SO8">
+                    <rect key="frame" x="70" y="153" width="180" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="r0z-sO-zce"/>
+                    </constraints>
+                    <segments>
+                        <segment title="Text"/>
+                        <segment title="Photo"/>
+                    </segments>
+                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <action selector="onCameraButton:" destination="-1" eventType="touchUpInside" id="RTP-wc-MKW"/>
+                        <action selector="onToggleAnswerType:" destination="-1" eventType="valueChanged" id="zyS-Vg-ZFq"/>
                     </connections>
-                </button>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="0.87228954079999999" green="0.87228954079999999" blue="0.87228954079999999" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="Cok-a4-urZ" firstAttribute="top" secondItem="rbk-if-DMU" secondAttribute="bottom" constant="8" id="2TX-b0-A3o"/>
+                <constraint firstItem="86v-la-mTY" firstAttribute="top" secondItem="d0k-Rn-SO8" secondAttribute="bottom" constant="8" id="1ym-Hf-eF9"/>
                 <constraint firstItem="rbk-if-DMU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="3Pl-KS-xiJ"/>
-                <constraint firstAttribute="bottom" secondItem="Cok-a4-urZ" secondAttribute="bottom" constant="8" id="8VM-jz-MwN"/>
-                <constraint firstAttribute="bottom" secondItem="tLt-bq-ckZ" secondAttribute="bottom" constant="8" id="AK1-i5-JXV"/>
                 <constraint firstAttribute="trailing" secondItem="ty4-5D-Pxu" secondAttribute="trailing" constant="16" id="EPn-vd-mmH"/>
+                <constraint firstItem="Cok-a4-urZ" firstAttribute="top" secondItem="d0k-Rn-SO8" secondAttribute="bottom" constant="8" id="GVr-R4-hJn"/>
                 <constraint firstAttribute="trailing" secondItem="rbk-if-DMU" secondAttribute="trailing" constant="8" id="J3K-QT-phS"/>
-                <constraint firstAttribute="centerX" secondItem="tLt-bq-ckZ" secondAttribute="centerX" id="KXl-Th-wdN"/>
                 <constraint firstItem="Cok-a4-urZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Lz8-ke-sRs"/>
+                <constraint firstAttribute="bottom" secondItem="Cok-a4-urZ" secondAttribute="bottom" constant="8" id="OZZ-ly-ys5"/>
                 <constraint firstItem="2eW-Cr-3wD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="P36-AT-jde"/>
-                <constraint firstAttribute="bottom" secondItem="86v-la-mTY" secondAttribute="bottom" constant="8" id="UOF-lu-c2Q"/>
                 <constraint firstItem="86v-la-mTY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="V8Y-Wy-Ydw"/>
-                <constraint firstItem="86v-la-mTY" firstAttribute="top" secondItem="ty4-5D-Pxu" secondAttribute="bottom" constant="16" id="Zf0-Mj-Wtm"/>
+                <constraint firstItem="d0k-Rn-SO8" firstAttribute="top" secondItem="rbk-if-DMU" secondAttribute="bottom" constant="8" id="YbS-u6-pef"/>
                 <constraint firstAttribute="trailing" secondItem="86v-la-mTY" secondAttribute="trailing" constant="8" id="aJb-fO-5iA"/>
                 <constraint firstItem="rbk-if-DMU" firstAttribute="bottom" secondItem="ty4-5D-Pxu" secondAttribute="bottom" constant="8" id="fgd-rw-fug"/>
                 <constraint firstAttribute="trailing" secondItem="Cok-a4-urZ" secondAttribute="trailing" constant="8" id="g8s-mE-nV5"/>
+                <constraint firstAttribute="bottom" secondItem="86v-la-mTY" secondAttribute="bottom" constant="8" id="nE0-xi-qjr"/>
                 <constraint firstAttribute="trailing" secondItem="2eW-Cr-3wD" secondAttribute="trailing" constant="8" id="oAC-pl-KzV"/>
+                <constraint firstAttribute="centerX" secondItem="d0k-Rn-SO8" secondAttribute="centerX" id="opk-5d-JJn"/>
                 <constraint firstItem="2eW-Cr-3wD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="sjn-Tc-zEa"/>
                 <constraint firstItem="rbk-if-DMU" firstAttribute="top" secondItem="2eW-Cr-3wD" secondAttribute="bottom" constant="8" id="voE-ja-KC5"/>
             </constraints>

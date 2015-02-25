@@ -27,6 +27,7 @@ NSInteger const maxCount = 160;
 @property (weak, nonatomic) IBOutlet UILabel *questionTextCountLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *answerSegControl;
 @property (nonatomic, strong) NSMutableArray *answers;
 @property (nonatomic, strong) ComposeAnswerCell *prototypeCell;
 @property (nonatomic, assign) BOOL isUpdating;
@@ -64,6 +65,8 @@ NSInteger const maxCount = 160;
     self.navigationItem.leftBarButtonItem = cancelButton;
     GrayBarButtonItem *submitButton = [[GrayBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitButton)];
     self.navigationItem.rightBarButtonItem = submitButton;
+    
+    self.answerSegControl.alpha = 0;
     
     //TableView
     self.tableView.dataSource = self;
@@ -167,11 +170,18 @@ NSInteger const maxCount = 160;
 - (void) showAddAnswerButton:(BOOL)show {
     if (show) {
         [UIView animateWithDuration:0.5 animations:^{
-            self.tableView.alpha = 1;
+            if (self.isShowingTextAnswers)
+                self.tableView.alpha = 1;
+            else
+                self.photoCollectionView.alpha = 1;
+            
+            self.answerSegControl.alpha = 1;
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
             self.tableView.alpha = 0;
+            self.photoCollectionView.alpha = 0;
+            self.answerSegControl.alpha = 0;
         }];
     }
 }
@@ -204,16 +214,33 @@ NSInteger const maxCount = 160;
             survey.answers = [validAnswers copy];
             survey.user = [User currentUser];
             survey.question.isTextSurvey = self.isShowingTextAnswers;
-            [ParseClient saveSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostNewSurveyNotification object:nil userInfo:dict];
-                    [self resetForm];
-                } else {
-                    [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                }
-                self.isUpdating = NO;
-            }];
+            
+            if (self.isShowingTextAnswers) {
+                [ParseClient saveTextSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostNewSurveyNotification object:nil userInfo:dict];
+                        [self resetForm];
+                        [self.tabBarController setSelectedIndex:0];
+                    } else {
+                        [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    }
+                    self.isUpdating = NO;
+                }];
+            } else {
+                [ParseClient savePhotoSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostNewSurveyNotification object:nil userInfo:dict];
+                        [self resetForm];
+                        [self.tabBarController setSelectedIndex:0];
+                    } else {
+                        [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    }
+                    self.isUpdating = NO;
+                }];
+                
+            }
         } else {
             self.isUpdating = NO;
         }
@@ -229,8 +256,11 @@ NSInteger const maxCount = 160;
     [self.answers addObject:[[Answer alloc] init]];
     [UIView animateWithDuration:0.25 animations:^{
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        [self.photoCollectionView reloadData];
         self.questionText.alpha = 0;
         self.tableView.alpha = 0;
+        self.photoCollectionView.alpha = 0;
+        self.answerSegControl.alpha = 0;
     } completion:^(BOOL finished) {
         self.questionText.text = @"";
         self.questionTextCountLabel.text = [NSString stringWithFormat:@"%ld", maxCount];
@@ -239,7 +269,7 @@ NSInteger const maxCount = 160;
 
 }
 
-- (IBAction)onCameraButton:(id)sender {
+- (IBAction)onToggleAnswerType:(UISegmentedControl *)sender {
     UIView *current;
     UIView *new;
     if (self.isShowingTextAnswers) {
@@ -258,6 +288,7 @@ NSInteger const maxCount = 160;
         new.transform = CGAffineTransformMakeScale(1.0, 1.0);
         new.alpha = 1;
     }];
+    
 }
 
 #pragma mark - CollectionView
