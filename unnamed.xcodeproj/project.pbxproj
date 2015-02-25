@@ -51,6 +51,9 @@
 		E25DBF071A9489530074D48B /* TabBarMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF051A9489530074D48B /* TabBarMenuViewController.xib */; };
 		E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF091A948D870074D48B /* ProfileViewController.m */; };
 		E25DBF0C1A948D870074D48B /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF0A1A948D870074D48B /* ProfileViewController.xib */; };
+		E29DB8571A9E8D02001FF9D9 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = E29DB8561A9E8D02001FF9D9 /* Comment.m */; };
+		E29DB85B1A9E8DB3001FF9D9 /* CmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E29DB8591A9E8DB3001FF9D9 /* CmtViewController.m */; };
+		E29DB85C1A9E8DB3001FF9D9 /* CmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E29DB85A1A9E8DB3001FF9D9 /* CmtViewController.xib */; };
 		E2C6FF1E1A96C178005AEDA9 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C6FF1C1A96C178005AEDA9 /* ProfileCell.m */; };
 		E2C6FF1F1A96C178005AEDA9 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2C6FF1D1A96C178005AEDA9 /* ProfileCell.xib */; };
 		EAB0BC95865217516AEE88BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEAEEA448EAC175BD0FED56 /* libPods.a */; };
@@ -145,6 +148,11 @@
 		E25DBF081A948D870074D48B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		E25DBF091A948D870074D48B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		E25DBF0A1A948D870074D48B /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		E29DB8551A9E8D02001FF9D9 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		E29DB8561A9E8D02001FF9D9 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		E29DB8581A9E8DB3001FF9D9 /* CmtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmtViewController.h; sourceTree = "<group>"; };
+		E29DB8591A9E8DB3001FF9D9 /* CmtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CmtViewController.m; sourceTree = "<group>"; };
+		E29DB85A1A9E8DB3001FF9D9 /* CmtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CmtViewController.xib; sourceTree = "<group>"; };
 		E2C6FF1B1A96C178005AEDA9 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
 		E2C6FF1C1A96C178005AEDA9 /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
 		E2C6FF1D1A96C178005AEDA9 /* ProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
@@ -192,6 +200,8 @@
 				B8BA93F61A947817003BD476 /* Vote.m */,
 				B8C0DBF21A95C2D60023BC39 /* ParseClient.h */,
 				B8C0DBF31A95C2D60023BC39 /* ParseClient.m */,
+				E29DB8551A9E8D02001FF9D9 /* Comment.h */,
+				E29DB8561A9E8D02001FF9D9 /* Comment.m */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -331,6 +341,9 @@
 				3E7C1D561A95AA520046FDE1 /* SurveyViewController.h */,
 				3E7C1D571A95AA520046FDE1 /* SurveyViewController.m */,
 				3E7C1D581A95AA520046FDE1 /* SurveyViewController.xib */,
+				E29DB8581A9E8DB3001FF9D9 /* CmtViewController.h */,
+				E29DB8591A9E8DB3001FF9D9 /* CmtViewController.m */,
+				E29DB85A1A9E8DB3001FF9D9 /* CmtViewController.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -446,6 +459,7 @@
 				B8C291C01A930BDD000F2143 /* Images.xcassets in Resources */,
 				B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */,
 				B8C0DBDD1A95138C0023BC39 /* ComposeAnswerCell.xib in Resources */,
+				E29DB85C1A9E8DB3001FF9D9 /* CmtViewController.xib in Resources */,
 				3E58B4CC1A98229200AA14D4 /* SurveyViewCell.xib in Resources */,
 				B8C0DBCE1A94F71A0023BC39 /* ComposeViewController.xib in Resources */,
 				3E4B80A21A9C4345004F5D78 /* CommentView.xib in Resources */,
@@ -500,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29DB85B1A9E8DB3001FF9D9 /* CmtViewController.m in Sources */,
 				B8C0DBF41A95C2D60023BC39 /* ParseClient.m in Sources */,
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
 				B8C0DBF11A95C1DA0023BC39 /* Survey.m in Sources */,
@@ -513,6 +528,7 @@
 				B8C0DBCD1A94F71A0023BC39 /* ComposeViewController.m in Sources */,
 				B8C291B81A930BDD000F2143 /* AppDelegate.m in Sources */,
 				B8C291B51A930BDD000F2143 /* main.m in Sources */,
+				E29DB8571A9E8D02001FF9D9 /* Comment.m in Sources */,
 				E2C6FF1E1A96C178005AEDA9 /* ProfileCell.m in Sources */,
 				E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */,
 				3E7C1D4F1A958BC10046FDE1 /* HomeViewController.m in Sources */,
