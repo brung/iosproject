@@ -45,6 +45,7 @@ NSInteger const ResultCount = 8;
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"user" matchesQuery:userQuery];
     [query includeKey:@"user"];
+    [query includeKey:@"questionPhotos"];
     [query whereKey:@"complete" equalTo:@(complete)];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
@@ -62,6 +63,7 @@ NSInteger const ResultCount = 8;
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"user"];
+    [query includeKey:@"questionPhotos"];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
 

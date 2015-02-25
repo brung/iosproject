@@ -10,11 +10,13 @@
 #import "SurveyViewController.h"
 #import "ProfileViewController.h"
 #import "SurveyViewCell.h"
+#import "PhotoAnswerCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppColor.h"
 #import "HomeProfileAnimation.h"
 
 NSString * const kSurveyViewCell = @"SurveyViewCell";
+NSString * const kPhotoViewCell = @"PhotoAnswerCell";
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, SurveyViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -24,6 +26,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @property (nonatomic, assign) BOOL isUpdating;
 @property (nonatomic, assign) BOOL isInsertingNewPost;
 @property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
+@property (nonatomic, strong) PhotoAnswerCell *prototypePhotoCell;
 @property (nonatomic, strong) HomeProfileAnimation *transitionAnimation;
 
 @end
@@ -91,6 +94,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCell bundle:nil] forCellReuseIdentifier:kSurveyViewCell];
+    [self.tableView registerNib:[UINib nibWithNibName:kPhotoViewCell bundle:nil] forCellReuseIdentifier:kPhotoViewCell];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.backgroundColor = [UIColor appBgColor];
 
@@ -153,6 +157,13 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     return _prototypeSurveyCell;
 }
 
+- (PhotoAnswerCell *)prototypePhotoCell {
+    if (!_prototypePhotoCell) {
+        _prototypePhotoCell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoViewCell];
+    }
+    return _prototypePhotoCell;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.surveys.count;
 }
@@ -164,11 +175,17 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
             [self fetchSurveys];
         }
     }
-    
+    Survey *survey = self.surveys[indexPath.row];
+    if (survey.question.isTextSurvey) {
     SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
-    cell.survey = self.surveys[indexPath.row];
+    cell.survey = survey;
     cell.delegate = self;
     return cell;
+    } else {
+        PhotoAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoViewCell];
+        cell.survey = survey;
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
