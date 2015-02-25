@@ -69,7 +69,7 @@
         NSLog(@"I'm dismissing");
         [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
         [fromViewController dismissViewControllerAnimated:YES completion:nil];
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             fromViewController.view.center = rightCenter;
             toViewController.view.alpha =1;
         } completion:^(BOOL finished) {
@@ -95,11 +95,17 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     self.navController = navigationController;
     if (operation == UINavigationControllerOperationPush) {
+        if ([toVC isKindOfClass:[ProfileViewController class]]) {
         self.isPresenting = YES;
+            return self;
+        }
     } else if (operation == UINavigationControllerOperationPop) {
-        self.isPresenting = NO;
+        if ([fromVC isKindOfClass:[ProfileViewController class]]) {
+            self.isPresenting = NO;
+            return self;
+        }
     }
-    return self;
+    return nil;
 }
 
 @end
