@@ -40,15 +40,13 @@
         UIImageView *selectedProfileImage = self.selectedCell.profileImageView;
 
         
-        CGRect profileFrameInCell = [self.selectedCell profileImageviewFrame];
-        NSLog(@"y:%f %f nav:%f x:%f %f", self.selectedCell.frame.origin.y, profileFrameInCell.origin.y, navBarHeight, self.selectedCell.frame.origin.x , profileFrameInCell.origin.x);
-        CGRect profileImageFrame = CGRectMake(self.selectedCell.frame.origin.x + profileFrameInCell.origin.x+2, self.selectedCell.frame.origin.y + profileFrameInCell.origin.y+navBarHeight, profileFrameInCell.size.width, profileFrameInCell.size.height);
-        UIImageView *transImageView = [[ProfileImageView alloc] initWithFrame:profileImageFrame];
+        CGRect frame = [selectedProfileImage convertRect:selectedProfileImage.frame toView:containerView];
+        UIImageView *transImageView = [[ProfileImageView alloc] initWithFrame:frame];
         transImageView.layer.cornerRadius = transImageView.frame.size.width / 2;
         transImageView.image = selectedProfileImage.image;
         transImageView.contentMode = UIViewContentModeScaleAspectFill;
         transImageView.clipsToBounds = YES;
-        transImageView.transform = CGAffineTransformMakeScale(1.1,1.1);
+        transImageView.transform = CGAffineTransformScale(selectedProfileImage.transform, 1.1,1.1);
         [containerView addSubview:transImageView];
         
         selectedProfileImage.hidden = YES;

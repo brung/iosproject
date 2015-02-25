@@ -59,9 +59,4 @@
     [self.delegate surveyViewCell:self didClickOnUser:user];
 }
 
-- (CGRect)profileImageviewFrame {
-    float originX = self.contentView.frame.origin.x + self.containerView.frame.origin.x + self.profileImageView.frame.origin.x;
-    float originY = self.contentView.frame.origin.y + self.containerView.frame.origin.y + self.profileImageView.frame.origin.y;
-    return CGRectMake(originX, originY, self.profileImageView.frame.size.width, self.profileImageView.frame.size.height);
-}
 @end
