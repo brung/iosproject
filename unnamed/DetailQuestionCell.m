@@ -16,7 +16,6 @@
 @property (nonatomic, strong) User *user;
 @property (nonatomic, assign) NSInteger totalVoteCount;
 
-@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;

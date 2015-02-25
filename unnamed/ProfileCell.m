@@ -13,7 +13,6 @@
 @interface ProfileCell()
 
 //############################################################
-@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *profileTitleLabel;
 
 //############################################################

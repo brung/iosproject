@@ -25,6 +25,7 @@
 		B81A2F161A9AC409001F2C6D /* GraphData.m in Sources */ = {isa = PBXBuildFile; fileRef = B81A2F151A9AC409001F2C6D /* GraphData.m */; };
 		B827A9E81A9815E100AB43CE /* ProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9E71A9815E100AB43CE /* ProfileImageView.m */; };
 		B827A9EE1A98287B00AB43CE /* GrayBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */; };
+		B82956B81A9B10C000D0ECFD /* HomeProfileAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B82956B71A9B10C000D0ECFD /* HomeProfileAnimation.m */; };
 		B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B862A88A1A970E25008B2310 /* DetailAnswerCell.m */; };
 		B862A88D1A970E25008B2310 /* DetailAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */; };
 		B87C15BC1A93113400191823 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87C15B71A93113400191823 /* LoginViewController.m */; };
@@ -99,6 +100,8 @@
 		B827A9E71A9815E100AB43CE /* ProfileImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileImageView.m; sourceTree = "<group>"; };
 		B827A9EC1A98287B00AB43CE /* GrayBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrayBarButtonItem.h; sourceTree = "<group>"; };
 		B827A9ED1A98287B00AB43CE /* GrayBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrayBarButtonItem.m; sourceTree = "<group>"; };
+		B82956B61A9B10C000D0ECFD /* HomeProfileAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeProfileAnimation.h; sourceTree = "<group>"; };
+		B82956B71A9B10C000D0ECFD /* HomeProfileAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeProfileAnimation.m; sourceTree = "<group>"; };
 		B862A8891A970E25008B2310 /* DetailAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailAnswerCell.h; sourceTree = "<group>"; };
 		B862A88A1A970E25008B2310 /* DetailAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailAnswerCell.m; sourceTree = "<group>"; };
 		B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailAnswerCell.xib; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				3E2BB7DD1A94FF0000E78B3A /* AppNavigationController.h */,
 				3E2BB7DE1A94FF0000E78B3A /* AppNavigationController.m */,
 				3E2BB7DF1A94FF0000E78B3A /* AppNavigationController.xib */,
+				B82956B61A9B10C000D0ECFD /* HomeProfileAnimation.h */,
+				B82956B71A9B10C000D0ECFD /* HomeProfileAnimation.m */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -511,6 +516,7 @@
 				E2C6FF1E1A96C178005AEDA9 /* ProfileCell.m in Sources */,
 				E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */,
 				3E7C1D4F1A958BC10046FDE1 /* HomeViewController.m in Sources */,
+				B82956B81A9B10C000D0ECFD /* HomeProfileAnimation.m in Sources */,
 				3E7C1D591A95AA520046FDE1 /* SurveyViewController.m in Sources */,
 				B8BA93EB1A9464C7003BD476 /* Question.m in Sources */,
 				3E58B4CF1A98300C00AA14D4 /* AnswerCollectionView.m in Sources */,

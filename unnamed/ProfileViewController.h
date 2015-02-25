@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "ProfileImageView.h"
 
 @interface ProfileViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) User *user;
 
+- (ProfileImageView *)getMainProfileImageView;
 @end

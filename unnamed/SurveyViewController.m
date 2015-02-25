@@ -37,7 +37,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCellNib bundle:nil] forCellReuseIdentifier:AnswerCellNib];
     [self.tableView registerNib:[UINib nibWithNibName:QuestionCellNib bundle:nil] forCellReuseIdentifier:QuestionCellNib];
-\
+
     [self.tableView reloadData];
 }
 
@@ -128,5 +128,11 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     }];
     }
 }
+
+- (UIImageView *)getMainProfileImageView {
+    DetailQuestionCell *cell = (DetailQuestionCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    return cell.profileImageView;
+}
+
 
 @end

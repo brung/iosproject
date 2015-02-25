@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Question.h"
 #import "User.h"
+#import "ProfileImageView.h"
 
 @interface DetailQuestionCell : UITableViewCell
-- (void) initWithQuestion:(Question *)question user:(User *)user totalCount:(NSInteger)count;
+@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 
+- (void) initWithQuestion:(Question *)question user:(User *)user totalCount:(NSInteger)count;
 @end
