@@ -37,7 +37,6 @@
 		B895C4A01A9C7709001DF829 /* QuestionPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = B895C49F1A9C7709001DF829 /* QuestionPhotos.m */; };
 		B895C4A31A9CD9B8001DF829 /* PhotoAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B895C4A21A9CD9B8001DF829 /* PhotoAnswerView.m */; };
 		B895C4A51A9CD9D4001DF829 /* PhotoAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B895C4A41A9CD9D4001DF829 /* PhotoAnswerView.xib */; };
-		B895C4A81A9CDE1B001DF829 /* PhotoAnswerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B895C4A71A9CDE1B001DF829 /* PhotoAnswerCollectionView.m */; };
 		B895C4AB1A9D5BC9001DF829 /* UIImageView+Parse.m in Sources */ = {isa = PBXBuildFile; fileRef = B895C4AA1A9D5BC9001DF829 /* UIImageView+Parse.m */; };
 		B895C4AF1A9D6516001DF829 /* PhotoAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B895C4AD1A9D6516001DF829 /* PhotoAnswerCell.m */; };
 		B895C4B01A9D6516001DF829 /* PhotoAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B895C4AE1A9D6516001DF829 /* PhotoAnswerCell.xib */; };
@@ -130,8 +129,6 @@
 		B895C4A11A9CD9B8001DF829 /* PhotoAnswerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAnswerView.h; sourceTree = "<group>"; };
 		B895C4A21A9CD9B8001DF829 /* PhotoAnswerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAnswerView.m; sourceTree = "<group>"; };
 		B895C4A41A9CD9D4001DF829 /* PhotoAnswerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAnswerView.xib; sourceTree = "<group>"; };
-		B895C4A61A9CDE1B001DF829 /* PhotoAnswerCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAnswerCollectionView.h; sourceTree = "<group>"; };
-		B895C4A71A9CDE1B001DF829 /* PhotoAnswerCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAnswerCollectionView.m; sourceTree = "<group>"; };
 		B895C4A91A9D5BC9001DF829 /* UIImageView+Parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Parse.h"; sourceTree = "<group>"; };
 		B895C4AA1A9D5BC9001DF829 /* UIImageView+Parse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Parse.m"; sourceTree = "<group>"; };
 		B895C4AC1A9D6516001DF829 /* PhotoAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAnswerCell.h; sourceTree = "<group>"; };
@@ -342,11 +339,6 @@
 				3E4B809E1A9C42FB004F5D78 /* CommentView.h */,
 				3E4B809F1A9C42FB004F5D78 /* CommentView.m */,
 				3E4B80A11A9C4345004F5D78 /* CommentView.xib */,
-				B82956C31A9C5AA200D0ECFD /* ComposePhotoCell.h */,
-				B82956C41A9C5AA200D0ECFD /* ComposePhotoCell.m */,
-				B82956C51A9C5AA200D0ECFD /* ComposePhotoCell.xib */,
-				B895C4A61A9CDE1B001DF829 /* PhotoAnswerCollectionView.h */,
-				B895C4A71A9CDE1B001DF829 /* PhotoAnswerCollectionView.m */,
 				B895C4A11A9CD9B8001DF829 /* PhotoAnswerView.h */,
 				B895C4A21A9CD9B8001DF829 /* PhotoAnswerView.m */,
 				B895C4A41A9CD9D4001DF829 /* PhotoAnswerView.xib */,
@@ -570,7 +562,6 @@
 				B8C0DBCD1A94F71A0023BC39 /* ComposeViewController.m in Sources */,
 				B8C291B81A930BDD000F2143 /* AppDelegate.m in Sources */,
 				B8C291B51A930BDD000F2143 /* main.m in Sources */,
-				B895C4A81A9CDE1B001DF829 /* PhotoAnswerCollectionView.m in Sources */,
 				E2C6FF1E1A96C178005AEDA9 /* ProfileCell.m in Sources */,
 				B895C4A31A9CD9B8001DF829 /* PhotoAnswerView.m in Sources */,
 				E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */,

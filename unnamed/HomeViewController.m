@@ -18,7 +18,7 @@
 NSString * const kSurveyViewCell = @"SurveyViewCell";
 NSString * const kPhotoViewCell = @"PhotoAnswerCell";
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, SurveyViewCellDelegate>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, SurveyViewCellDelegate, PhotoAnswerCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
 @property (nonatomic, strong) NSMutableArray *surveys;
@@ -225,6 +225,7 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
     } else if ([pCell isKindOfClass:[PhotoAnswerCell class]]) {
         PhotoAnswerCell *cell = (PhotoAnswerCell *)pCell;
         cell.survey = self.surveys[indexPath.row];
+        cell.delegate = self;
     }
 }
 
@@ -240,6 +241,20 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+#pragma mark - PhotoAnswerCellDelegate methods
+- (void)photoAnswerCell:(PhotoAnswerCell *)cell didClickOnUser:(User *)user{
+    if ([user.objectId isEqualToString:[User currentUser].objectId]) {
+        [self.tabBarController setSelectedIndex:2];
+    } else {
+        ProfileViewController *vc = [[ProfileViewController alloc] init];
+        vc.user = user;
+        vc.view.frame = self.view.frame;
+        self.transitionAnimation.selectedCell = cell;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 
 #pragma mark - Private Methods
 - (void)onNewPost:(NSNotification *)notification {

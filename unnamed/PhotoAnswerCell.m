@@ -8,13 +8,11 @@
 
 #import "PhotoAnswerCell.h"
 #import "PhotoAnswerView.h"
-#import "ProfileImageView.h"
 #import "UIColor+AppColor.h"
 #import "NSDate+MinimalTimeAgo.h"
 
-@interface PhotoAnswerCell()
+@interface PhotoAnswerCell() <ProfileImageViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *innerView;
-@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -30,6 +28,7 @@
     self.backgroundColor = [UIColor appBgColor];
     self.innerView.layer.cornerRadius = 10;
     self.innerView.layer.masksToBounds = YES;
+    self.profileImageView.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -49,5 +48,8 @@
     [self.photo2View setAnswer:self.survey.answers[1] andTotalVotes:self.survey.totalVotes];
 }
 
+- (void)profileImageView:(ProfileImageView *)view tappedUser:(User *)user {
+    [self.delegate photoAnswerCell:self didClickOnUser:user];
+}
 
 @end

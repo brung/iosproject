@@ -9,6 +9,9 @@
 #import "HomeProfileAnimation.h"
 #import "ProfileViewController.h"
 #import "HomeViewController.h"
+#import "SurveyViewCell.h"
+#import "PhotoAnswerCell.h"
+
 @interface HomeProfileAnimation()
 @property UINavigationController *navController;
 @end
@@ -38,7 +41,13 @@
         ProfileImageView *remoteProfileImageView = [vc getMainProfileImageView];
         remoteProfileImageView.hidden = YES;
         
-        UIImageView *selectedProfileImage = self.selectedCell.profileImageView;
+        
+        UIImageView *selectedProfileImage;
+        if ([self.selectedCell isKindOfClass:[SurveyViewCell class]]) {
+            selectedProfileImage = ((SurveyViewCell *)self.selectedCell).profileImageView;
+        } else if ([self.selectedCell isKindOfClass:[PhotoAnswerCell class]]) {
+            selectedProfileImage = ((PhotoAnswerCell *)self.selectedCell).profileImageView;
+        }
 
         
         CGRect frame = [selectedProfileImage convertRect:selectedProfileImage.frame toView:containerView];
