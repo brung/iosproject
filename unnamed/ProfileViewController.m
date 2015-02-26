@@ -157,13 +157,13 @@ NSString * const kPhotoViewCellName = @"PhotoAnswerCell";
         [self.prototypeSurveyCell layoutIfNeeded];
         CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
-        return size.height;
+        return size.height + 1;
     } else {
         [self configureCell:self.prototypePhotoCell forRowAtIndexPath:indexPath];
         [self.prototypePhotoCell layoutIfNeeded];
         CGSize size = [self.prototypePhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
-        return size.height;
+        return size.height + 1;
     }
 }
 
@@ -175,6 +175,7 @@ NSString * const kPhotoViewCellName = @"PhotoAnswerCell";
         return cell;
     } else {
         if (indexPath.row == self.surveys.count && !self.isUpdating) {
+            self.pageIndex++;
             if (self.surveys.count == (self.pageIndex * ResultCount)) {
                 [self fetchSurveys];
             }
