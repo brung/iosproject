@@ -283,6 +283,8 @@ NSInteger const maxCount = 160;
     UIView *new;
     if (self.isShowingTextAnswers) {
         self.isShowingTextAnswers = NO;
+        
+        [self.view endEditing:YES];
         current = self.tableView;
         new = self.photoCollectionView;
     } else {
