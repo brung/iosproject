@@ -222,7 +222,7 @@ NSString * const kPhotoViewCell = @"PhotoAnswerCell";
         [self.prototypePhotoCell layoutIfNeeded];
         CGSize size = [self.prototypePhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
-        return size.height;
+        return size.height + 1;
     }
 }
 
