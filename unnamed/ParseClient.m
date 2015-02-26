@@ -229,6 +229,38 @@ NSInteger const ResultCount = 8;
     }];
 }
 
++ (void)saveCommentOnSurvey:(Survey *)survey withComment:(Comment *)comment withCompletion:(void(^)(Survey *survey, NSError *error))completion{
+    //comment already set up
+    [comment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(!error){
+            NSLog(@"Comment saved successfully! Comment.questionId is %@", comment.questionId);
+            completion(survey, nil);
+        }else{
+            completion(nil, error);
+        }
+    }];
+}
+
++ (void)getCommentsOnSurvey:(Survey *)survey withCompletion:(void(^)(NSArray *comments, NSError *error))completion{
+    
+    PFQuery *query = [Comment query];
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"questionId" equalTo:survey.question.objectId];
+    //adding to code to select pages to load results from...
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"get comments succeed! totally %ld comments retrieved.", objects.count);
+            completion(objects, nil);
+        } else {
+            NSLog(@"comments retrieving failed! error is %@", [error localizedDescription]);
+            completion(nil, error);
+        }
+    }];
+
+    
+}
+
 + (void)updateVoteCountOnSurvey:(Survey *)survey oldAnswerIndex:(NSInteger)oldIndex newVote:(Vote *)vote withCompletion:(void(^)(Survey *survey, NSError *error))completion{
     NSMutableArray *newCounts = [NSMutableArray arrayWithArray:survey.question.answerVoteCounts];
     

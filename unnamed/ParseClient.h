@@ -12,6 +12,7 @@
 #import "Vote.h"
 #import "Answer.h"
 #import "User.h"
+#import "Comment.h"
 
 extern NSString * const UserDidPostNewSurveyNotification;
 extern NSString * const UserDidPostUpdateSurveyNotification;
@@ -25,4 +26,7 @@ extern NSInteger const ResultCount;
 + (void)savePhotoSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 + (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(Survey *survey, NSError *error))completion;
 + (void)setImageView:(UIImageView *)iView fromAnswer:(Answer *)answer;
+
++ (void)saveCommentOnSurvey:(Survey *)survey withComment:(Comment *)comment withCompletion:(void(^)(Survey *survey, NSError *error))completion;
++ (void)getCommentsOnSurvey:(Survey *)survey withCompletion:(void(^)(NSArray *comments, NSError *error))completion;
 @end
