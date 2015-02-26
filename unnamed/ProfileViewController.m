@@ -47,6 +47,9 @@ NSString * const kPhotoViewCellName = @"PhotoAnswerCell";
         self.view.backgroundColor = [UIColor appBgColor];
         
         // Setup
+        if (!self.user) {
+            self.user = [User currentUser];
+        }
         self.logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
                 
         // - tableview related:        
@@ -68,11 +71,6 @@ NSString * const kPhotoViewCellName = @"PhotoAnswerCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewPost:) name:UserDidPostNewSurveyNotification object:nil];
 
     // Do any additional setup after loading the view from its nib.
-    if (!self.user) {
-        self.user = [User currentUser];
-    }
-    
-    [self fetchSurveys];
     
     // - refresh table content
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -87,6 +85,7 @@ NSString * const kPhotoViewCellName = @"PhotoAnswerCell";
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
+    [self fetchSurveys];
     
     if (self.isInsertingNewPost) {
         self.isInsertingNewPost = NO;
