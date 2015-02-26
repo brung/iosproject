@@ -12,11 +12,13 @@
 #import "Answer.h"
 #import "DetailQuestionCell.h"
 #import "DetailAnswerCell.h"
+#import "DetailPhotoAnswerCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppColor.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
+NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
 
 @interface SurveyViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -24,6 +26,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 @property (nonatomic, assign) NSInteger voteTotal;
 @property (nonatomic, strong) DetailQuestionCell *prototypeQuestionCell;
 @property (nonatomic, strong) DetailAnswerCell *prototypeAnswerCell;
+@property (nonatomic, strong) DetailPhotoAnswerCell *prototypePhotoAnswerCell;
 
 @end
 
@@ -37,7 +40,8 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCellNib bundle:nil] forCellReuseIdentifier:AnswerCellNib];
     [self.tableView registerNib:[UINib nibWithNibName:QuestionCellNib bundle:nil] forCellReuseIdentifier:QuestionCellNib];
-
+    [self.tableView registerNib:[UINib nibWithNibName:PhotoAnswerCellNib bundle:nil] forCellReuseIdentifier:PhotoAnswerCellNib];
+    
     [self.tableView reloadData];
 }
 
@@ -69,6 +73,13 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     return _prototypeAnswerCell;
 }
 
+- (DetailPhotoAnswerCell *)prototypePhotoAnswerCell {
+    if (!_prototypePhotoAnswerCell) {
+        _prototypePhotoAnswerCell = [self.tableView dequeueReusableCellWithIdentifier:PhotoAnswerCellNib];
+    }
+    return _prototypePhotoAnswerCell;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.surveyContents.count;
 }
@@ -80,10 +91,17 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         CGSize size = [self.prototypeQuestionCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         return size.height+1;
     } else {
-        [self configureCell:self.prototypeAnswerCell forRowAtIndexPath:indexPath];
-        [self.prototypeAnswerCell layoutIfNeeded];
-        CGSize size = [self.prototypeAnswerCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-        return size.height+1;
+        if (self.survey.question.isTextSurvey) {
+            [self configureCell:self.prototypeAnswerCell forRowAtIndexPath:indexPath];
+            [self.prototypeAnswerCell layoutIfNeeded];
+            CGSize size = [self.prototypeAnswerCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+            return size.height+1;
+        } else {
+            [self configureCell:self.prototypePhotoAnswerCell forRowAtIndexPath:indexPath];
+            [self.prototypePhotoAnswerCell layoutIfNeeded];
+            CGSize size = [self.prototypePhotoAnswerCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+            return size.height+1;
+        }
     }
 }
 
@@ -93,9 +111,15 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         [self configureCell:cell forRowAtIndexPath:indexPath];
         return cell;
     } else {
-        DetailAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:AnswerCellNib];
-        [self configureCell:cell forRowAtIndexPath:indexPath];
-        return cell;
+        if (self.survey.question.isTextSurvey) {
+            DetailAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:AnswerCellNib];
+            [self configureCell:cell forRowAtIndexPath:indexPath];
+            return cell;
+        } else {
+            DetailPhotoAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:PhotoAnswerCellNib];
+            [self configureCell:cell forRowAtIndexPath:indexPath];
+            return cell;
+        }
     }
 }
 
@@ -105,6 +129,11 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
         [cell initWithQuestion:self.survey.question user:self.survey.user totalCount:self.survey.totalVotes];
     } else if ([pCell isKindOfClass:[DetailAnswerCell class]]) {
         DetailAnswerCell *cell = (DetailAnswerCell *)pCell;
+        Answer *answer = (Answer *)self.surveyContents[indexPath.row];
+        [cell initWithAnswer:answer totalVotes:self.survey.totalVotes];
+        cell.isCurrentVote = [self.survey isCurrentVoteAnswer:answer];
+    } else if ([pCell isKindOfClass:[DetailPhotoAnswerCell class]]) {
+        DetailPhotoAnswerCell *cell = (DetailPhotoAnswerCell *)pCell;
         Answer *answer = (Answer *)self.surveyContents[indexPath.row];
         [cell initWithAnswer:answer totalVotes:self.survey.totalVotes];
         cell.isCurrentVote = [self.survey isCurrentVoteAnswer:answer];
