@@ -36,12 +36,14 @@ NSString * const CommentCellNib = @"DetailCommentCell";
 @property (nonatomic, strong) NSMutableArray * comments;
 @property (nonatomic, strong) DetailPhotoAnswerCell *prototypePhotoAnswerCell;
 @property (nonatomic, strong) CmtViewController * cmtVC;
+@property (nonatomic, assign) BOOL isVoting;
 
 @end
 
 @implementation SurveyViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isVoting = NO;
     self.view.backgroundColor = [UIColor appBgColor];
     
     //comment button
@@ -210,17 +212,21 @@ NSString * const CommentCellNib = @"DetailCommentCell";
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.section == 1) return;
     
-    Answer *newAnswer = self.surveyContents[indexPath.row];
-    if (!self.survey.voted || self.survey.vote.answerIndex != newAnswer.index) {
-    [ParseClient saveVoteOnSurvey:self.survey withAnswer:self.surveyContents[indexPath.row] withCompletion:^(Survey *survey, NSError *error) {
-        if (!error) {
-            self.survey = survey;
-            [self.tableView reloadData];
-            [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostUpdateSurveyNotification object:nil];
-        } else {
-            [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to vote. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    if (!self.isVoting) {
+        self.isVoting = YES;
+        Answer *newAnswer = self.surveyContents[indexPath.row];
+        if (!self.survey.voted || self.survey.vote.answerIndex != newAnswer.index) {
+            [ParseClient saveVoteOnSurvey:self.survey withAnswer:self.surveyContents[indexPath.row] withCompletion:^(Survey *survey, NSError *error) {
+                if (!error) {
+                    self.survey = survey;
+                    [self.tableView reloadData];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostUpdateSurveyNotification object:nil];
+                    self.isVoting = NO;
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Unable to vote. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                }
+            }];
         }
-    }];
     }
 }
 
