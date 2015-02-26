@@ -59,6 +59,8 @@
     int count = 1;
     for (int i=0;i<comments.count;i++) {
         CommentView *view = [[CommentView alloc] init];
+        //fill in comment's content
+        
         count++;
         [self.commentViews addObject:view];
         [self addSubview:view];

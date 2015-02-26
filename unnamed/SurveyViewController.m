@@ -16,6 +16,8 @@
 #import "GrayBarButtonItem.h"
 #import "UIColor+AppColor.h"
 #import "CmtViewController.h"
+#import "CommentCollectionView.h"
+
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
@@ -26,6 +28,7 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
 @property (nonatomic, assign) NSInteger voteTotal;
 @property (nonatomic, strong) DetailQuestionCell *prototypeQuestionCell;
 @property (nonatomic, strong) DetailAnswerCell *prototypeAnswerCell;
+@property (nonatomic, strong) NSArray * comments;
 
 @end
 
@@ -48,7 +51,9 @@ NSString * const QuestionCellNib = @"DetailQuestionCell";
     
     [ParseClient getCommentsOnSurvey:_survey withCompletion:^(NSArray *comments, NSError *error) {
         NSLog(@"just tried to get comments for this survey!");
+        [self.comments initWithArray:comments];
     }];
+    
 }
 
 - (void)setSurvey:(Survey *)survey {

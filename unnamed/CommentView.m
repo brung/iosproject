@@ -7,6 +7,7 @@
 //
 
 #import "CommentView.h"
+#import "User.h"
 
 @interface CommentView ()
 @property (strong, nonatomic) IBOutlet UIView *containerView;
@@ -55,15 +56,11 @@
     return self;
 }
 
-//- (void)setAnswer:(Answer *)answer {
-//    _answer = answer;
-//    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", self.index, answer.text];
-//    CGFloat percentage = self.total <= 0 ? 0.0 : 1.0f * answer.count / self.total;
-//    self.percentLabel.text = [NSString stringWithFormat:@"%.1f%%", percentage * 100.0];
-//    self.barView.percent = percentage;
-//    
-//    [self setNeedsLayout];
-//}
+- (void)setComment:(Comment *)comment {
+    _comment = comment;
+    self.commentLabel.text = comment.text;
+    self.nameLabel.text = comment.user[@"profile"][@"name"];
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];

@@ -229,14 +229,13 @@ NSInteger const ResultCount = 8;
     }];
 }
 
-+ (void)saveCommentOnSurvey:(Survey *)survey withComment:(Comment *)comment withCompletion:(void(^)(Survey *survey, NSError *error))completion{
++ (void)saveComment:(Comment *)comment withCompletion:(void(^)(NSError *error))completion{
     //comment already set up
     [comment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(!error){
-            NSLog(@"Comment saved successfully! Comment.questionId is %@", comment.questionId);
-            completion(survey, nil);
+            completion(nil);
         }else{
-            completion(nil, error);
+            completion(error);
         }
     }];
 }
@@ -250,10 +249,8 @@ NSInteger const ResultCount = 8;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"get comments succeed! totally %ld comments retrieved.", objects.count);
             completion(objects, nil);
         } else {
-            NSLog(@"comments retrieving failed! error is %@", [error localizedDescription]);
             completion(nil, error);
         }
     }];

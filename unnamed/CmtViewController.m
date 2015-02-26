@@ -91,11 +91,11 @@ NSString * const WriteAComment = @"Leave a comment here . . .";
             comment.user = [PFUser currentUser];
             comment.questionId = _survey.question.objectId;
             NSLog(@"in CmtViewController: Comment.questionId is %@", comment.questionId);
-            [ParseClient saveCommentOnSurvey:_survey withComment:comment withCompletion:^(Survey *survey, NSError *error) {
+            [ParseClient saveComment: comment withCompletion:^(NSError *error) {
                 if(error==nil){
-                    NSLog(@"in CmtViewController: comment saved successfully!");
+                    NSLog(@"CmtViewController: comment saved successfully!");
                 }else{
-                    NSLog(@"Error happens while saving comment: %@", [error localizedDescription]);
+                    NSLog(@"CmtViewController: comment saving failed - %@", [error localizedDescription]);
                 }
             }];
         }

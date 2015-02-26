@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Comment.h"
+
 
 @interface CommentView : UIView
+
+@property(nonatomic, strong) Comment *comment;
 
 @end
