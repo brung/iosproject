@@ -270,7 +270,7 @@ NSInteger const maxCount = 160;
         self.answerSegControl.alpha = 0;
     } completion:^(BOOL finished) {
         self.questionText.text = @"";
-        self.questionTextCountLabel.text = [NSString stringWithFormat:@"%ld", maxCount];
+        self.questionTextCountLabel.text = [NSString stringWithFormat:@"%ld", (long)maxCount];
         self.questionText.alpha = 1;
         [self.navigationController popViewControllerAnimated:YES];
 //        [self dismissViewControllerAnimated:YES completion:nil];

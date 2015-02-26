@@ -336,12 +336,15 @@
 				B8C704A71A97065600243C3B /* DetailQuestionCell.h */,
 				B8C704A81A97065600243C3B /* DetailQuestionCell.m */,
 				B8C704A91A97065600243C3B /* DetailQuestionCell.xib */,
-				E253726F1A9F0CB20023C8C1 /* DetailCommentCell.h */,
-				E25372701A9F0CB20023C8C1 /* DetailCommentCell.m */,
-				E25372711A9F0CB20023C8C1 /* DetailCommentCell.xib */,
 				B862A8891A970E25008B2310 /* DetailAnswerCell.h */,
 				B862A88A1A970E25008B2310 /* DetailAnswerCell.m */,
 				B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */,
+				3E3C84BE1A9DB7FD00A053CA /* DetailPhotoAnswerCell.h */,
+				3E3C84BF1A9DB7FD00A053CA /* DetailPhotoAnswerCell.m */,
+				3E3C84C01A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib */,
+				E253726F1A9F0CB20023C8C1 /* DetailCommentCell.h */,
+				E25372701A9F0CB20023C8C1 /* DetailCommentCell.m */,
+				E25372711A9F0CB20023C8C1 /* DetailCommentCell.xib */,
 				B827A9E61A9815E100AB43CE /* ProfileImageView.h */,
 				B827A9E71A9815E100AB43CE /* ProfileImageView.m */,
 				3E58B4C81A98229200AA14D4 /* SurveyViewCell.h */,
@@ -363,9 +366,6 @@
 				B895C4AC1A9D6516001DF829 /* PhotoAnswerCell.h */,
 				B895C4AD1A9D6516001DF829 /* PhotoAnswerCell.m */,
 				B895C4AE1A9D6516001DF829 /* PhotoAnswerCell.xib */,
-				3E3C84BE1A9DB7FD00A053CA /* DetailPhotoAnswerCell.h */,
-				3E3C84BF1A9DB7FD00A053CA /* DetailPhotoAnswerCell.m */,
-				3E3C84C01A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";

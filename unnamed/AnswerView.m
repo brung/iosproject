@@ -66,7 +66,7 @@
     if (!answer.text) {
         return;
     }
-    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", self.index, answer.text];
+    self.answerLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.index, answer.text];
     CGFloat percentage = self.total <= 0 ? 0.0 : 1.0f * answer.count / self.total;
     self.percentLabel.text = [NSString stringWithFormat:@"%.1f%%", percentage * 100.0];
     self.barView.percent = percentage;
