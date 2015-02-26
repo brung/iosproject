@@ -18,11 +18,34 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use your camera or photo library to add a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clm-Gh-ffs">
+                    <rect key="frame" x="8" y="267" width="304" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lu4-6o-R6K">
                     <rect key="frame" x="0.0" y="468" width="320" height="100"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qn-rV-o56">
+                            <rect key="frame" x="32" y="32" width="48" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="48" id="cXc-vG-tw6"/>
+                                <constraint firstAttribute="height" constant="48" id="oim-bf-WyT"/>
+                            </constraints>
+                            <state key="normal" image="take photo">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onTakePhoto:" destination="-1" eventType="touchUpInside" id="KQg-oJ-n6v"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="3qn-rV-o56" firstAttribute="leading" secondItem="Lu4-6o-R6K" secondAttribute="leading" constant="32" id="Qae-Qh-rD1"/>
                         <constraint firstAttribute="height" constant="100" id="SSG-U0-4ll"/>
+                        <constraint firstAttribute="bottom" secondItem="3qn-rV-o56" secondAttribute="bottom" constant="20" id="pnA-hS-edh"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vXb-iN-7Vp">
@@ -31,24 +54,11 @@
                         <constraint firstAttribute="width" secondItem="vXb-iN-7Vp" secondAttribute="height" multiplier="1:1" id="erW-fD-vS7"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qn-rV-o56">
-                    <rect key="frame" x="136" y="488" width="48" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="48" id="cXc-vG-tw6"/>
-                        <constraint firstAttribute="height" constant="48" id="oim-bf-WyT"/>
-                    </constraints>
-                    <state key="normal" image="take photo">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onTakePhoto:" destination="-1" eventType="touchUpInside" id="KQg-oJ-n6v"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2U-4C-9gb">
-                    <rect key="frame" x="248" y="512" width="40" height="40"/>
+                    <rect key="frame" x="240" y="500" width="48" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="mTm-Gh-ZwB"/>
-                        <constraint firstAttribute="height" constant="40" id="vMh-Fs-igV"/>
+                        <constraint firstAttribute="width" constant="48" id="mTm-Gh-ZwB"/>
+                        <constraint firstAttribute="height" constant="48" id="vMh-Fs-igV"/>
                     </constraints>
                     <state key="normal" image="photo album">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,24 +70,26 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="J2U-4C-9gb" secondAttribute="bottom" constant="16" id="08R-fW-wtk"/>
+                <constraint firstAttribute="bottom" secondItem="J2U-4C-9gb" secondAttribute="bottom" constant="20" id="08R-fW-wtk"/>
                 <constraint firstItem="vXb-iN-7Vp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="48" id="2w7-FZ-TFL"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vXb-iN-7Vp" secondAttribute="bottom" id="Akd-IX-D2n"/>
                 <constraint firstAttribute="trailing" secondItem="Lu4-6o-R6K" secondAttribute="trailing" id="F5H-Ss-104"/>
                 <constraint firstAttribute="trailing" secondItem="J2U-4C-9gb" secondAttribute="trailing" constant="32" id="FaO-Go-8IS"/>
                 <constraint firstItem="vXb-iN-7Vp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Frz-lF-6ZH"/>
-                <constraint firstAttribute="centerX" secondItem="3qn-rV-o56" secondAttribute="centerX" id="Ktd-PS-Cux"/>
+                <constraint firstAttribute="centerX" secondItem="clm-Gh-ffs" secondAttribute="centerX" id="L7Z-8y-y3Z"/>
                 <constraint firstAttribute="trailing" secondItem="vXb-iN-7Vp" secondAttribute="trailing" id="PQI-PG-V0d"/>
-                <constraint firstAttribute="bottom" secondItem="3qn-rV-o56" secondAttribute="bottom" constant="32" id="a8N-RB-i56"/>
+                <constraint firstAttribute="trailing" secondItem="clm-Gh-ffs" secondAttribute="trailing" constant="8" id="QKs-1x-Tj5"/>
+                <constraint firstItem="clm-Gh-ffs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="apk-6A-6XR"/>
                 <constraint firstAttribute="bottom" secondItem="Lu4-6o-R6K" secondAttribute="bottom" id="iPL-oP-lhp"/>
+                <constraint firstAttribute="centerY" secondItem="clm-Gh-ffs" secondAttribute="centerY" id="jsO-N8-sAa"/>
                 <constraint firstItem="Lu4-6o-R6K" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uCA-XB-Mhx"/>
             </constraints>
             <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>
     <resources>
-        <image name="photo album" width="64" height="64"/>
-        <image name="take photo" width="128" height="128"/>
+        <image name="photo album" width="128" height="128"/>
+        <image name="take photo" width="85" height="85"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
