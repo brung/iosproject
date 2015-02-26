@@ -59,6 +59,9 @@
 		B8C291CF1A930BDD000F2143 /* unnamedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C291CE1A930BDD000F2143 /* unnamedTests.m */; };
 		B8C704AA1A97065600243C3B /* DetailQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C704A81A97065600243C3B /* DetailQuestionCell.m */; };
 		B8C704AB1A97065600243C3B /* DetailQuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8C704A91A97065600243C3B /* DetailQuestionCell.xib */; };
+		E22435FA1A9EE42E00DE9280 /* CmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22435F81A9EE42E00DE9280 /* CmtViewController.m */; };
+		E22435FB1A9EE42E00DE9280 /* CmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22435F91A9EE42E00DE9280 /* CmtViewController.xib */; };
+		E22435FE1A9EE69700DE9280 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = E22435FD1A9EE69700DE9280 /* Comment.m */; };
 		E25DBF0B1A948D870074D48B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25DBF091A948D870074D48B /* ProfileViewController.m */; };
 		E25DBF0C1A948D870074D48B /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E25DBF0A1A948D870074D48B /* ProfileViewController.xib */; };
 		E2C6FF1E1A96C178005AEDA9 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C6FF1C1A96C178005AEDA9 /* ProfileCell.m */; };
@@ -168,6 +171,11 @@
 		B8C704A71A97065600243C3B /* DetailQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailQuestionCell.h; sourceTree = "<group>"; };
 		B8C704A81A97065600243C3B /* DetailQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailQuestionCell.m; sourceTree = "<group>"; };
 		B8C704A91A97065600243C3B /* DetailQuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailQuestionCell.xib; sourceTree = "<group>"; };
+		E22435F71A9EE42E00DE9280 /* CmtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmtViewController.h; sourceTree = "<group>"; };
+		E22435F81A9EE42E00DE9280 /* CmtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CmtViewController.m; sourceTree = "<group>"; };
+		E22435F91A9EE42E00DE9280 /* CmtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CmtViewController.xib; sourceTree = "<group>"; };
+		E22435FC1A9EE69700DE9280 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		E22435FD1A9EE69700DE9280 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		E25DBF081A948D870074D48B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		E25DBF091A948D870074D48B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		E25DBF0A1A948D870074D48B /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -210,6 +218,8 @@
 		B8C0DBEE1A95C15B0023BC39 /* Parse */ = {
 			isa = PBXGroup;
 			children = (
+				E22435FC1A9EE69700DE9280 /* Comment.h */,
+				E22435FD1A9EE69700DE9280 /* Comment.m */,
 				B8C0DBF21A95C2D60023BC39 /* ParseClient.h */,
 				B8C0DBF31A95C2D60023BC39 /* ParseClient.m */,
 				B8BA93E91A9464C7003BD476 /* Question.h */,
@@ -373,6 +383,9 @@
 				B82956B91A9C553200D0ECFD /* CameraViewController.h */,
 				B82956BA1A9C553200D0ECFD /* CameraViewController.m */,
 				B82956BB1A9C553200D0ECFD /* CameraViewController.xib */,
+				E22435F71A9EE42E00DE9280 /* CmtViewController.h */,
+				E22435F81A9EE42E00DE9280 /* CmtViewController.m */,
+				E22435F91A9EE42E00DE9280 /* CmtViewController.xib */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -489,6 +502,7 @@
 				B895C4B01A9D6516001DF829 /* PhotoAnswerCell.xib in Resources */,
 				B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */,
 				B8C0DBDD1A95138C0023BC39 /* ComposeAnswerCell.xib in Resources */,
+				E22435FB1A9EE42E00DE9280 /* CmtViewController.xib in Resources */,
 				B895C4A51A9CD9D4001DF829 /* PhotoAnswerView.xib in Resources */,
 				3E3C84C21A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib in Resources */,
 				3E58B4CC1A98229200AA14D4 /* SurveyViewCell.xib in Resources */,
@@ -550,8 +564,10 @@
 				B82956C61A9C5AA200D0ECFD /* ComposePhotoCell.m in Sources */,
 				B895C4A01A9C7709001DF829 /* QuestionPhotos.m in Sources */,
 				B8BA93E81A9459B5003BD476 /* User.m in Sources */,
+				E22435FA1A9EE42E00DE9280 /* CmtViewController.m in Sources */,
 				B8C0DBF11A95C1DA0023BC39 /* Survey.m in Sources */,
 				B895C4AB1A9D5BC9001DF829 /* UIImageView+Parse.m in Sources */,
+				E22435FE1A9EE69700DE9280 /* Comment.m in Sources */,
 				B81A2F161A9AC409001F2C6D /* GraphData.m in Sources */,
 				3E58B4D41A9832BF00AA14D4 /* AnswerView.m in Sources */,
 				3E58B4CB1A98229200AA14D4 /* SurveyViewCell.m in Sources */,

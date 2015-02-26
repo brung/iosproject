@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CmtViewController">
+            <connections>
+                <outlet property="commentCountLabel" destination="TO5-NM-zW9" id="07g-qA-HAJ"/>
+                <outlet property="commentTextView" destination="rKw-oT-20c" id="nYl-RN-G5I"/>
+                <outlet property="instructionLabel" destination="A2P-xe-OQs" id="hJE-5o-gSc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2P-xe-OQs">
+                    <rect key="frame" x="8" y="8" width="584" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKw-oT-20c">
+                    <rect key="frame" x="8" y="36.5" width="584" height="100"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="LkZ-BU-gat"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO5-NM-zW9">
+                    <rect key="frame" x="542" y="108" width="42" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="A2P-xe-OQs" secondAttribute="trailing" constant="8" id="Bfh-zW-xp9"/>
+                <constraint firstAttribute="trailing" secondItem="rKw-oT-20c" secondAttribute="trailing" constant="8" id="Dez-d4-7Sj"/>
+                <constraint firstItem="rKw-oT-20c" firstAttribute="top" secondItem="A2P-xe-OQs" secondAttribute="bottom" constant="8" id="FHJ-Iw-iSB"/>
+                <constraint firstItem="rKw-oT-20c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="KIK-Hu-Nsg"/>
+                <constraint firstItem="A2P-xe-OQs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="aBi-DF-TOv"/>
+                <constraint firstItem="rKw-oT-20c" firstAttribute="top" secondItem="A2P-xe-OQs" secondAttribute="bottom" constant="8" id="czk-PU-fCo"/>
+                <constraint firstAttribute="trailing" secondItem="TO5-NM-zW9" secondAttribute="trailing" constant="16" id="k48-fa-h7U"/>
+                <constraint firstItem="rKw-oT-20c" firstAttribute="bottom" secondItem="TO5-NM-zW9" secondAttribute="bottom" constant="8" id="smR-Hp-p1T"/>
+                <constraint firstItem="A2P-xe-OQs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="zoF-Oy-ktH"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="czk-PU-fCo"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

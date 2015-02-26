@@ -14,7 +14,9 @@
 #import "DetailAnswerCell.h"
 #import "DetailPhotoAnswerCell.h"
 #import "ParseClient.h"
+#import "GrayBarButtonItem.h"
 #import "UIColor+AppColor.h"
+#import "CmtViewController.h"
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
@@ -34,6 +36,10 @@ NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor appBgColor];
+    
+    //comment button
+    GrayBarButtonItem *commentButton = [[GrayBarButtonItem alloc] initWithTitle:@"Comment" style:UIBarButtonItemStylePlain target:self action:@selector(onCommentButton)];
+    self.navigationItem.rightBarButtonItem = commentButton;
         
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
@@ -43,6 +49,10 @@ NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
     [self.tableView registerNib:[UINib nibWithNibName:PhotoAnswerCellNib bundle:nil] forCellReuseIdentifier:PhotoAnswerCellNib];
     
     [self.tableView reloadData];
+    
+    [ParseClient getCommentsOnSurvey:_survey withCompletion:^(NSArray *comments, NSError *error) {
+        NSLog(@"just tried to get comments for this survey!");
+    }];
 }
 
 - (void)setSurvey:(Survey *)survey {
@@ -163,5 +173,12 @@ NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
     return cell.profileImageView;
 }
 
+- (void) onCommentButton{
+    CmtViewController *vc = [[CmtViewController alloc] init];
+    vc.view.frame = self.view.frame;
+    vc.survey = _survey;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 @end
