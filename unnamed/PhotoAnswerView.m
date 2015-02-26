@@ -70,12 +70,6 @@
     self.barView.percent = percent;
 }
 
-- (void)layoutSubviews {
-    self.photoView.image = self.answer.photo;
-    float percent = self.totalVotes > 0 ? (float)self.answer.count / (float)self.totalVotes : 0;
-    self.barView.percent = percent;
-}
-
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
