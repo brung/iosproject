@@ -123,7 +123,6 @@ NSInteger const ResultCount = 8;
         survey.question.anonymous = NO;
         survey.question.complete = NO;
         survey.question.numAnswers = validAnswers.count;
-        survey.answers = validAnswers;
         NSMutableArray *counts = [NSMutableArray array];
         for (int i = 0; i < validAnswers.count; i++) {
             [counts addObject:@(0)];
@@ -153,7 +152,6 @@ NSInteger const ResultCount = 8;
         survey.question.anonymous = NO;
         survey.question.complete = NO;
         survey.question.numAnswers = validAnswers.count;
-        survey.answers = validAnswers;
         NSMutableArray *counts = [NSMutableArray array];
         for (int i = 0; i < validAnswers.count; i++) {
             [counts addObject:@(0)];

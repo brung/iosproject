@@ -202,7 +202,7 @@ NSInteger const maxCount = 160;
         for (Answer *answer in self.answers) {
             if ((self.isShowingTextAnswers && [answer.text length] >= 1) ||
                 (!self.isShowingTextAnswers && answer.photo)) {
-                    [validAnswers addObject:answer];
+                [validAnswers addObject:answer];
             }
         }
         if ([self.questionText.text length] >= 8 && validAnswers.count >= 2) {
@@ -215,10 +215,13 @@ NSInteger const maxCount = 160;
             survey.question.isTextSurvey = self.isShowingTextAnswers;
             
             if (self.isShowingTextAnswers) {
+                survey.question.isTextSurvey = YES;
+                survey.question.createdAt = [NSDate date] ;
                 [ParseClient saveTextSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
                     [self onPostSurvey:survey completionStatus:succeeded error:error];
                 }];
             } else {
+                survey.question.isTextSurvey = NO;
                 [ParseClient savePhotoSurvey:survey withCompletion:^(BOOL succeeded, NSError *error) {
                     [self onPostSurvey:survey completionStatus:succeeded error:error];
                 }];
@@ -242,17 +245,18 @@ NSInteger const maxCount = 160;
 - (void)onSuccessfulPostSurvey:(Survey *)survey {
     NSDictionary *dict = [NSDictionary dictionaryWithObject:survey forKey:@"survey"];
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDidPostNewSurveyNotification object:nil userInfo:dict];
-    [self onCancelButton];
+    [self resetForm];
 }
 
 - (void)onErrorPost {
     [[[UIAlertView alloc] initWithTitle:@"Save Failed" message:@"Unable to save at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
-- (void)onCancelButton {
-    [self resetForm];
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)onCancelButton {
+//    [self resetForm];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+////    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//}
 
 - (void)resetForm {
     self.answers = [NSMutableArray arrayWithObject:[[Answer alloc] init]];
@@ -268,6 +272,8 @@ NSInteger const maxCount = 160;
         self.questionText.text = @"";
         self.questionTextCountLabel.text = [NSString stringWithFormat:@"%ld", maxCount];
         self.questionText.alpha = 1;
+        [self.navigationController popViewControllerAnimated:YES];
+//        [self dismissViewControllerAnimated:YES completion:nil];
     }];
 
 }
