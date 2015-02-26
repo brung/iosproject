@@ -36,7 +36,7 @@
     self.nameLabel.text = self.user.name;
     self.questionLabel.text = self.question.text;
     self.timeLabel.text = [self.question.createdAt timeAgo];
-    self.voteCountLabel.text = [NSString stringWithFormat:@"%ld", self.totalVoteCount];
+    self.voteCountLabel.text = [NSString stringWithFormat:@"%ld", (long)self.totalVoteCount];
 }
 
 - (void) initWithQuestion:(Question *)question user:(User *)user totalCount:(NSInteger)count {

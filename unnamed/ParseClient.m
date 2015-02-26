@@ -205,7 +205,7 @@ NSInteger const ResultCount = 8;
             }
         }];
     } else {
-        completion([NSArray array], [[NSError alloc] initWithDomain:@"Not enough valid answers for question" code:500 userInfo:nil]);
+        completion(NO, [[NSError alloc] initWithDomain:@"Not enough valid answers for question" code:500 userInfo:nil]);
         return;
     }
 }
