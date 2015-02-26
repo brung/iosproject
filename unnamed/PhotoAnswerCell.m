@@ -37,7 +37,8 @@
     // Configure the view for the selected state
 }
 
-- (void) layoutSubviews {
+- (void)setSurvey:(Survey *)survey {
+    _survey = survey;
     self.profileImageView.user = self.survey.user;
     self.nameLabel.text = self.survey.user.name;
     self.questionLabel.text = self.survey.question.text;
@@ -45,7 +46,6 @@
     
     [self.photo1View setAnswer:self.survey.answers[0] andTotalVotes:self.survey.totalVotes];
     [self.photo2View setAnswer:self.survey.answers[1] andTotalVotes:self.survey.totalVotes];
-    
 }
 
 - (void)profileImageView:(ProfileImageView *)view tappedUser:(User *)user {
