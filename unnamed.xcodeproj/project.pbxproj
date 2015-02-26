@@ -721,7 +721,6 @@
 			baseConfigurationReference = 07914F7A13E0F07E2C695706 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yahoo iOS Developer (HGE5WHA59X)";
 				INFOPLIST_FILE = unnamed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -733,7 +732,6 @@
 			baseConfigurationReference = 5BA90E0F57CF5978BEB02DE4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yahoo iOS Developer (HGE5WHA59X)";
 				INFOPLIST_FILE = unnamed/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
