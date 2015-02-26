@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Comment.h"
 
 @interface DetailCommentCell : UITableViewCell
+
+- (void) initWithComment:(Comment *)comment;
 
 @end

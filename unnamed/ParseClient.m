@@ -244,6 +244,7 @@ NSInteger const ResultCount = 8;
     
     PFQuery *query = [Comment query];
     [query orderByDescending:@"createdAt"];
+    [query includeKey:@"user"];
     [query whereKey:@"questionId" equalTo:survey.question.objectId];
     //adding to code to select pages to load results from...
     

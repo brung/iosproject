@@ -7,6 +7,15 @@
 //
 
 #import "DetailCommentCell.h"
+#import "ParseClient.h"
+#import "User.h"
+
+@interface DetailCommentCell()
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+
+@end
 
 @implementation DetailCommentCell
 
@@ -18,6 +27,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)initWithComment:(Comment *)comment{
+    User *user = [[User alloc] initWithPFUser:comment.user];
+    self.nameLabel.text = user.name;
+    self.commentLabel.text = comment.text;
 }
 
 @end
