@@ -7,15 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="53" id="KGk-i7-Jjw" customClass="DetailCommentCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="85" id="KGk-i7-Jjw" customClass="DetailCommentCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="751" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JO-SV-o2s">
-                        <rect key="frame" x="8" y="2" width="63" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="751" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JO-SV-o2s">
+                        <rect key="frame" x="56" y="8" width="192" height="14.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14.5" id="2hB-cA-AVf"/>
                         </constraints>
@@ -28,45 +28,56 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="This is a comment and it could extend to multiple lines" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eze-v5-J5w">
-                        <rect key="frame" x="79" y="2" width="231" height="29"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xhG-xE-JF7">
+                        <rect key="frame" x="8" y="8" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="RUq-oV-wPv"/>
+                            <constraint firstAttribute="height" constant="40" id="gC8-3F-9H1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="751" text="5 min ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omt-WD-FMT">
+                        <rect key="frame" x="256" y="8" width="55.5" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14.5" id="5sR-2M-EpE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5sR-2M-EpE"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="This is a comment and it could extend to multiple lines.  This is a comment and it could extend to multiple lines." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eze-v5-J5w">
+                        <rect key="frame" x="56" y="33" width="248" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="Eze-v5-J5w" secondAttribute="bottom" constant="8" id="1ky-N2-TBs"/>
-                    <constraint firstItem="1JO-SV-o2s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="22e-fn-1Y7"/>
-                    <constraint firstItem="1JO-SV-o2s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="6jm-pr-OeC"/>
-                    <constraint firstItem="Eze-v5-J5w" firstAttribute="top" secondItem="1JO-SV-o2s" secondAttribute="bottom" constant="8" id="97c-DH-yvG"/>
-                    <constraint firstItem="1JO-SV-o2s" firstAttribute="centerY" secondItem="Eze-v5-J5w" secondAttribute="centerY" id="I5c-gt-5EZ"/>
-                    <constraint firstItem="Eze-v5-J5w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="IGB-wW-Kqj"/>
-                    <constraint firstAttribute="trailing" secondItem="Eze-v5-J5w" secondAttribute="trailing" constant="8" id="MoB-aK-gW6"/>
-                    <constraint firstAttribute="trailing" secondItem="1JO-SV-o2s" secondAttribute="trailing" constant="8" id="Wxy-b3-F6n"/>
-                    <constraint firstItem="Eze-v5-J5w" firstAttribute="leading" secondItem="1JO-SV-o2s" secondAttribute="trailing" constant="8" id="a5V-P8-3ED"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Eze-v5-J5w" secondAttribute="trailing" constant="8" id="aLJ-vu-2Ki"/>
-                    <constraint firstItem="Eze-v5-J5w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="u39-Po-FpV"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Eze-v5-J5w" secondAttribute="bottom" constant="2" id="yaK-J1-lhE"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1JO-SV-o2s" secondAttribute="bottom" constant="8" id="zQs-qu-Y7W"/>
+                    <constraint firstItem="1JO-SV-o2s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="1kl-js-pgb"/>
+                    <constraint firstItem="xhG-xE-JF7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="BV3-sQ-TUv"/>
+                    <constraint firstAttribute="bottom" secondItem="Eze-v5-J5w" secondAttribute="bottom" constant="8" id="LXS-F3-6G6"/>
+                    <constraint firstItem="Eze-v5-J5w" firstAttribute="leading" secondItem="xhG-xE-JF7" secondAttribute="trailing" constant="8" id="Pat-uB-dm9"/>
+                    <constraint firstItem="1JO-SV-o2s" firstAttribute="leading" secondItem="xhG-xE-JF7" secondAttribute="trailing" constant="8" id="RGO-V1-bCX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Eze-v5-J5w" secondAttribute="trailing" constant="8" id="XHi-o5-wmO"/>
+                    <constraint firstAttribute="trailing" secondItem="Omt-WD-FMT" secondAttribute="trailing" constant="8" id="YpN-Ga-4Bk"/>
+                    <constraint firstItem="Omt-WD-FMT" firstAttribute="leading" secondItem="1JO-SV-o2s" secondAttribute="trailing" constant="8" id="egS-m9-yl1"/>
+                    <constraint firstItem="Eze-v5-J5w" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Omt-WD-FMT" secondAttribute="bottom" constant="8" id="kgS-9E-C47"/>
+                    <constraint firstItem="xhG-xE-JF7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="tcN-pv-E7h"/>
+                    <constraint firstItem="Omt-WD-FMT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ueP-rd-RUH"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="I5c-gt-5EZ"/>
-                        <exclude reference="Wxy-b3-F6n"/>
-                        <exclude reference="zQs-qu-Y7W"/>
-                        <exclude reference="1ky-N2-TBs"/>
-                        <exclude reference="97c-DH-yvG"/>
-                        <exclude reference="MoB-aK-gW6"/>
-                        <exclude reference="u39-Po-FpV"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentLabel" destination="Eze-v5-J5w" id="pE3-p0-ypE"/>
+                <outlet property="commentTimeLabel" destination="Omt-WD-FMT" id="OCi-jf-1Dc"/>
+                <outlet property="commenterImageView" destination="xhG-xE-JF7" id="UWi-Ep-7r4"/>
                 <outlet property="nameLabel" destination="1JO-SV-o2s" id="oyS-Mt-Vbi"/>
             </connections>
-            <point key="canvasLocation" x="59" y="116.5"/>
+            <point key="canvasLocation" x="59" y="132.5"/>
         </tableViewCell>
     </objects>
 </document>

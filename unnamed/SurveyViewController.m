@@ -145,6 +145,7 @@ NSString * const CommentCellNib = @"DetailCommentCell";
         [self configureCell:self.prototypeCommentCell forRowAtIndexPath:indexPath];
         [self.prototypeCommentCell layoutIfNeeded];
         CGSize size = [self.prototypeCommentCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        //NSLog(@"returned height for comment cell is %f", size.height+1);
         return size.height+1;
     }
     if ([self.surveyContents[indexPath.row] isKindOfClass:[Question class]]) {
