@@ -10,7 +10,5 @@
 #import "Comment.h"
 
 @interface DetailCommentCell : UITableViewCell
-
-- (void) initWithComment:(Comment *)comment;
-
+@property (nonatomic, strong) Comment *comment;
 @end
