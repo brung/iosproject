@@ -261,4 +261,17 @@ NSInteger const ResultCount = 8;
     }];
 }
 
++ (void)setImageView:(UIImageView *)iView fromAnswer:(Answer *)answer {
+    if (answer.photo) {
+        iView.image = answer.photo;
+    } else {
+    [answer.photoFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            UIImage *newImage = [UIImage imageWithData:imageData];
+            answer.photo = newImage;
+            [iView setImage:newImage];
+        }
+    }];
+    }
+}
 @end

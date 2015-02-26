@@ -24,4 +24,5 @@ extern NSInteger const ResultCount;
 + (void)saveTextSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 + (void)savePhotoSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion;
 + (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(Survey *survey, NSError *error))completion;
++ (void)setImageView:(UIImageView *)iView fromAnswer:(Answer *)answer;
 @end
