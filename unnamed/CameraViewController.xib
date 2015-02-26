@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -15,27 +15,42 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lu4-6o-R6K">
+                    <rect key="frame" x="0.0" y="468" width="320" height="100"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="SSG-U0-4ll"/>
+                    </constraints>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vXb-iN-7Vp">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="48" width="320" height="320"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="vXb-iN-7Vp" secondAttribute="height" multiplier="1:1" id="erW-fD-vS7"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qn-rV-o56">
-                    <rect key="frame" x="262" y="530" width="77" height="30"/>
-                    <state key="normal" title="Take Photo">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qn-rV-o56">
+                    <rect key="frame" x="136" y="488" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="cXc-vG-tw6"/>
+                        <constraint firstAttribute="height" constant="48" id="oim-bf-WyT"/>
+                    </constraints>
+                    <state key="normal" image="take photo">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onTakePhoto:" destination="-1" eventType="touchUpInside" id="KQg-oJ-n6v"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2U-4C-9gb">
-                    <rect key="frame" x="504" y="531" width="88" height="30"/>
-                    <state key="normal" title="Select Photo">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2U-4C-9gb">
+                    <rect key="frame" x="248" y="512" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="mTm-Gh-ZwB"/>
+                        <constraint firstAttribute="height" constant="40" id="vMh-Fs-igV"/>
+                    </constraints>
+                    <state key="normal" image="photo album">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -43,17 +58,30 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="J2U-4C-9gb" secondAttribute="bottom" constant="39" id="08R-fW-wtk"/>
-                <constraint firstItem="vXb-iN-7Vp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2w7-FZ-TFL"/>
+                <constraint firstAttribute="bottom" secondItem="J2U-4C-9gb" secondAttribute="bottom" constant="16" id="08R-fW-wtk"/>
+                <constraint firstItem="vXb-iN-7Vp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="48" id="2w7-FZ-TFL"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vXb-iN-7Vp" secondAttribute="bottom" id="Akd-IX-D2n"/>
-                <constraint firstAttribute="trailing" secondItem="J2U-4C-9gb" secondAttribute="trailing" constant="8" id="FaO-Go-8IS"/>
+                <constraint firstAttribute="trailing" secondItem="Lu4-6o-R6K" secondAttribute="trailing" id="F5H-Ss-104"/>
+                <constraint firstAttribute="trailing" secondItem="J2U-4C-9gb" secondAttribute="trailing" constant="32" id="FaO-Go-8IS"/>
                 <constraint firstItem="vXb-iN-7Vp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Frz-lF-6ZH"/>
                 <constraint firstAttribute="centerX" secondItem="3qn-rV-o56" secondAttribute="centerX" id="Ktd-PS-Cux"/>
                 <constraint firstAttribute="trailing" secondItem="vXb-iN-7Vp" secondAttribute="trailing" id="PQI-PG-V0d"/>
-                <constraint firstAttribute="bottom" secondItem="3qn-rV-o56" secondAttribute="bottom" constant="40" id="a8N-RB-i56"/>
+                <constraint firstAttribute="bottom" secondItem="3qn-rV-o56" secondAttribute="bottom" constant="32" id="a8N-RB-i56"/>
+                <constraint firstAttribute="bottom" secondItem="Lu4-6o-R6K" secondAttribute="bottom" id="iPL-oP-lhp"/>
+                <constraint firstItem="Lu4-6o-R6K" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uCA-XB-Mhx"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>
+    <resources>
+        <image name="photo album" width="64" height="64"/>
+        <image name="take photo" width="128" height="128"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

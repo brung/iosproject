@@ -7,6 +7,7 @@
 //
 
 #import "CameraViewController.h"
+#import "UIColor+AppColor.h"
 
 @interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
@@ -19,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor appBgColor];
     // Do any additional setup after loading the view from its nib.
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
