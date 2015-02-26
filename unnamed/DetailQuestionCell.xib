@@ -47,13 +47,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Votes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GZ-NY-eP2">
-                        <rect key="frame" x="44" y="135" width="61" height="15"/>
+                        <rect key="frame" x="251" y="135" width="61" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arz-1U-tc2">
-                        <rect key="frame" x="8" y="135" width="28" height="15"/>
+                        <rect key="frame" x="215" y="135" width="28" height="15"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -61,13 +61,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="arz-1U-tc2" secondAttribute="bottom" constant="16" id="017-oG-gu7"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7GZ-NY-eP2" secondAttribute="trailing" constant="8" id="2be-vr-LTR"/>
+                    <constraint firstAttribute="trailing" secondItem="7GZ-NY-eP2" secondAttribute="trailing" constant="8" id="2be-vr-LTR"/>
                     <constraint firstItem="iwF-f0-RFn" firstAttribute="leading" secondItem="3hA-ye-iPO" secondAttribute="trailing" constant="8" id="4oP-eX-X3X"/>
                     <constraint firstItem="Afq-6b-65e" firstAttribute="top" secondItem="3hA-ye-iPO" secondAttribute="bottom" constant="8" id="9Eu-jc-aoL"/>
                     <constraint firstItem="iwF-f0-RFn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Bca-O0-95s"/>
                     <constraint firstItem="b5o-Xb-ISE" firstAttribute="leading" secondItem="iwF-f0-RFn" secondAttribute="trailing" constant="8" id="Brk-Q3-Ade"/>
                     <constraint firstItem="7GZ-NY-eP2" firstAttribute="leading" secondItem="arz-1U-tc2" secondAttribute="trailing" constant="8" id="DmT-QY-N76"/>
-                    <constraint firstItem="arz-1U-tc2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="HAO-DN-c6z"/>
+                    <constraint firstItem="arz-1U-tc2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="HAO-DN-c6z"/>
                     <constraint firstItem="3hA-ye-iPO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="K4b-h9-VEL"/>
                     <constraint firstAttribute="bottom" secondItem="7GZ-NY-eP2" secondAttribute="bottom" constant="16" id="Km8-Qw-wLi"/>
                     <constraint firstAttribute="trailing" secondItem="Afq-6b-65e" secondAttribute="trailing" constant="8" id="LMb-om-kPB"/>

@@ -9,30 +9,32 @@
 #import "DetailCommentCell.h"
 #import "ParseClient.h"
 #import "User.h"
+#import "ProfileImageView.h"
+#import "NSDate+MinimalTimeAgo.h"
 
 @interface DetailCommentCell()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet ProfileImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
-
 @end
 
 @implementation DetailCommentCell
 
 - (void)awakeFromNib {
     // Initialization code
+    self.commentLabel.preferredMaxLayoutWidth = self.commentLabel.frame.size.width;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
-- (void)initWithComment:(Comment *)comment{
-    User *user = [[User alloc] initWithPFUser:comment.user];
+- (void)layoutSubviews {
+    User *user = [[User alloc] initWithPFUser:self.comment.user];
     self.nameLabel.text = user.name;
-    self.commentLabel.text = comment.text;
+    self.commentLabel.text = self.comment.text;
+    self.dateLabel.text = [self.comment.createdAt timeAgo];
+    self.profileImageView.user = user;
 }
-
 @end

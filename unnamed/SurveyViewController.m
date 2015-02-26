@@ -35,7 +35,6 @@ NSString * const CommentCellNib = @"DetailCommentCell";
 @property (nonatomic, strong) DetailCommentCell *prototypeCommentCell;
 @property (nonatomic, strong) NSMutableArray * comments;
 @property (nonatomic, strong) DetailPhotoAnswerCell *prototypePhotoAnswerCell;
-@property (nonatomic, strong) CmtViewController * cmtVC;
 @property (nonatomic, assign) BOOL isVoting;
 
 @end
@@ -134,12 +133,11 @@ NSString * const CommentCellNib = @"DetailCommentCell";
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if(self.comments.count!=0){
-        //NSLog(@"table has 2 sections now");
-        return 2;
-    }
-    //NSLog(@"table has 1 section now");
-    return 1;
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -208,8 +206,7 @@ NSString * const CommentCellNib = @"DetailCommentCell";
         cell.isCurrentVote = [self.survey isCurrentVoteAnswer:answer];
     } else if ([pCell isKindOfClass:[DetailCommentCell class]]) {
         DetailCommentCell *cell = (DetailCommentCell *)pCell;
-        Comment * comment = self.comments[indexPath.row];
-        [cell initWithComment:comment];
+        cell.comment = self.comments[indexPath.row];
     }
     pCell.backgroundColor = [UIColor appBgColor];
 }
@@ -242,10 +239,10 @@ NSString * const CommentCellNib = @"DetailCommentCell";
 }
 
 - (void) onCommentButton{
-    self.cmtVC = [[CmtViewController alloc] init];
-    self.cmtVC.delegate =self;
-    self.cmtVC.view.frame = self.view.frame;
-    self.cmtVC.survey = _survey;
-    [self.navigationController pushViewController:self.cmtVC animated:YES];
+    CmtViewController *cmtVC = [[CmtViewController alloc] init];
+   cmtVC.delegate =self;
+    cmtVC.view.frame = self.view.frame;
+    cmtVC.survey = _survey;
+    [self.navigationController pushViewController:cmtVC animated:YES];
 }
 @end
