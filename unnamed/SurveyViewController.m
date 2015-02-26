@@ -108,6 +108,13 @@ NSString * const CommentCellNib = @"DetailCommentCell";
     return _prototypeAnswerCell;
 }
 
+- (DetailCommentCell *)prototypeCommentCell {
+    if (!_prototypeCommentCell) {
+        _prototypeCommentCell = [self.tableView dequeueReusableCellWithIdentifier:CommentCellNib];
+    }
+    return _prototypeCommentCell;
+}
+
 - (DetailPhotoAnswerCell *)prototypePhotoAnswerCell {
     if (!_prototypePhotoAnswerCell) {
         _prototypePhotoAnswerCell = [self.tableView dequeueReusableCellWithIdentifier:PhotoAnswerCellNib];
@@ -116,8 +123,9 @@ NSString * const CommentCellNib = @"DetailCommentCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 0) return self.surveyContents.count;
-    else{
+    if(section == 0) {
+        return self.surveyContents.count;
+    } else {
         //NSLog(@"section = 1 now!");
         return self.comments.count;
     }
@@ -137,9 +145,7 @@ NSString * const CommentCellNib = @"DetailCommentCell";
         [self configureCell:self.prototypeCommentCell forRowAtIndexPath:indexPath];
         [self.prototypeCommentCell layoutIfNeeded];
         CGSize size = [self.prototypeCommentCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-        //NSLog(@"for comment, cell height is %f", size.height);
-        return 60;
-        //return size.height+1;
+        return size.height+1;
     }
     if ([self.surveyContents[indexPath.row] isKindOfClass:[Question class]]) {
         [self configureCell:self.prototypeQuestionCell forRowAtIndexPath:indexPath];
@@ -200,7 +206,7 @@ NSString * const CommentCellNib = @"DetailCommentCell";
         cell.isCurrentVote = [self.survey isCurrentVoteAnswer:answer];
     } else if ([pCell isKindOfClass:[DetailCommentCell class]]) {
         DetailCommentCell *cell = (DetailCommentCell *)pCell;
-        Comment * comment =self.comments[indexPath.row];
+        Comment * comment = self.comments[indexPath.row];
         [cell initWithComment:comment];
     }
     pCell.backgroundColor = [UIColor appBgColor];
