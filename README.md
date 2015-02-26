@@ -62,7 +62,7 @@ Here is an itemized listof the Profile view features:
    * [ ] Make groups using facebook connections and allow users to only post to certain groups (restricted access surveys)
 
 ### Walkthrough
-![Video Walkthrough](survey_app.gif)
+![Video Walkthrough](https://github.com/brung/iosproject/blob/master/surv_walkthrough.gif)
  
 ### Created by
 Bruce Ng
