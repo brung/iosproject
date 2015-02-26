@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TabBarMenuViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
 @property (strong, nonatomic) UIWindow *window;
-
-+ (TabBarMenuViewController *)tabBarMenuViewController;
-
 @end
 

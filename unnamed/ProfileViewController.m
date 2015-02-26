@@ -11,11 +11,13 @@
 #import "ParseClient.h"
 #import "ProfileCell.h"
 #import "SurveyViewCell.h"
+#import "PhotoAnswerCell.h"
 #import "UIColor+AppColor.h"
 #import "GrayBarButtonItem.h"
 
 NSString * const kProfileCellName = @"ProfileCell";
 NSString * const kSurveyViewCellName = @"SurveyViewCell";
+NSString * const kPhotoViewCellName = @"PhotoAnswerCell";
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -23,6 +25,7 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
 @property (nonatomic, strong) NSMutableArray *surveys;
 @property (nonatomic, strong) ProfileCell * prototypeProfileCell;
 @property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
+@property (nonatomic, strong) PhotoAnswerCell *prototypePhotoCell;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, strong) GrayBarButtonItem *logOutButton;
@@ -38,39 +41,36 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Profile";
-        self.tabBarItem.image = [UIImage imageNamed:@"User Male"];
+        self.isInsertingNewPost = NO;
         self.surveys = [NSMutableArray array];
+        self.pageIndex = 0;
+        self.view.backgroundColor = [UIColor appBgColor];
+        
+        // Setup
+        if (!self.user) {
+            self.user = [User currentUser];
+        }
+        self.logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
+                
+        // - tableview related:        
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        self.tableView.backgroundColor = [UIColor appBgColor];
+        [self.tableView registerNib:[UINib nibWithNibName:kProfileCellName bundle:nil] forCellReuseIdentifier:kProfileCellName];
+        [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCellName bundle:nil] forCellReuseIdentifier:kSurveyViewCellName];
+        [self.tableView registerNib:[UINib nibWithNibName:kPhotoViewCellName bundle:nil] forCellReuseIdentifier:kPhotoViewCellName];
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.modalPresentationStyle = UIModalPresentationNone;
-
-    
-    self.isInsertingNewPost = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewPost:) name:UserDidPostNewSurveyNotification object:nil];
 
     // Do any additional setup after loading the view from its nib.
-    self.pageIndex = 0;
-    self.view.backgroundColor = [UIColor appBgColor];
-    if (!self.user) {
-        self.user = [User currentUser];
-    }
-    
-    // Setup
-    self.logOutButton = [[GrayBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutButton)];
-    
-    // - tableview related:
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor appBgColor];
-    [self.tableView registerNib:[UINib nibWithNibName:kProfileCellName bundle:nil] forCellReuseIdentifier:kProfileCellName];
-    [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCellName bundle:nil] forCellReuseIdentifier:kSurveyViewCellName];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-
-    [self fetchSurveys];
     
     // - refresh table content
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -85,6 +85,7 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
+    [self fetchSurveys];
     
     if (self.isInsertingNewPost) {
         self.isInsertingNewPost = NO;
@@ -108,6 +109,13 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
         _prototypeSurveyCell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCellName];
     }
     return _prototypeSurveyCell;
+}
+
+- (PhotoAnswerCell *)prototypePhotoCell {
+    if (!_prototypePhotoCell) {
+        _prototypePhotoCell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoViewCellName];
+    }
+    return _prototypePhotoCell;
 }
 
 - (ProfileCell *)prototypeProfileCell {
@@ -142,29 +150,46 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
         CGSize size = [self.prototypeProfileCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         return size.height;
     }
-
-    [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
-    [self.prototypeSurveyCell layoutIfNeeded];
-    CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height;
-
+    
+    Survey *survey = self.surveys[indexPath.row];
+    if (survey.question.isTextSurvey) {
+        [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
+        [self.prototypeSurveyCell layoutIfNeeded];
+        CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+        return size.height;
+    } else {
+        [self configureCell:self.prototypePhotoCell forRowAtIndexPath:indexPath];
+        [self.prototypePhotoCell layoutIfNeeded];
+        CGSize size = [self.prototypePhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+        return size.height;
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == self.surveys.count && !self.isUpdating) {
-        if (self.surveys.count == (self.pageIndex * ResultCount)) {
-            [self fetchSurveys];
-        }
-    }
     
     if(indexPath.section == 0){
         ProfileCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kProfileCellName];
         [self configureCell:cell forRowAtIndexPath:indexPath];
         return cell;
     } else {
-        SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCellName];
-        [self configureCell:cell forRowAtIndexPath:indexPath];
-        return cell;
+        if (indexPath.row == self.surveys.count && !self.isUpdating) {
+            if (self.surveys.count == (self.pageIndex * ResultCount)) {
+                [self fetchSurveys];
+            }
+        }
+
+        Survey *survey = self.surveys[indexPath.row];
+        if (survey.question.isTextSurvey) {
+            SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCellName];
+            [self configureCell:cell forRowAtIndexPath:indexPath];
+            return cell;
+        } else {
+            PhotoAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoViewCellName];
+            [self configureCell:cell forRowAtIndexPath:indexPath];
+            return cell;
+        }
     }
 }
 
@@ -175,6 +200,9 @@ NSString * const kSurveyViewCellName = @"SurveyViewCell";
     } else if ([pCell isKindOfClass:[ProfileCell class]]) {
         ProfileCell *cell = (ProfileCell *)pCell;
         cell.user = self.user;
+    } else if ([pCell isKindOfClass:[PhotoAnswerCell class]]) {
+        PhotoAnswerCell *cell = (PhotoAnswerCell *)pCell;
+        cell.survey = self.surveys[indexPath.row];
     }
 }
 

@@ -8,6 +8,10 @@
 
 #import "HomeProfileAnimation.h"
 #import "ProfileViewController.h"
+#import "HomeViewController.h"
+#import "SurveyViewCell.h"
+#import "PhotoAnswerCell.h"
+
 @interface HomeProfileAnimation()
 @property UINavigationController *navController;
 @end
@@ -37,7 +41,13 @@
         ProfileImageView *remoteProfileImageView = [vc getMainProfileImageView];
         remoteProfileImageView.hidden = YES;
         
-        UIImageView *selectedProfileImage = self.selectedCell.profileImageView;
+        
+        UIImageView *selectedProfileImage;
+        if ([self.selectedCell isKindOfClass:[SurveyViewCell class]]) {
+            selectedProfileImage = ((SurveyViewCell *)self.selectedCell).profileImageView;
+        } else if ([self.selectedCell isKindOfClass:[PhotoAnswerCell class]]) {
+            selectedProfileImage = ((PhotoAnswerCell *)self.selectedCell).profileImageView;
+        }
 
         
         CGRect frame = [selectedProfileImage convertRect:selectedProfileImage.frame toView:containerView];
@@ -93,12 +103,12 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     self.navController = navigationController;
     if (operation == UINavigationControllerOperationPush) {
-        if ([toVC isKindOfClass:[ProfileViewController class]]) {
+        if ([toVC isKindOfClass:[ProfileViewController class]] && [fromVC isKindOfClass:[HomeViewController class]] && self.selectedCell) {
         self.isPresenting = YES;
             return self;
         }
     } else if (operation == UINavigationControllerOperationPop) {
-        if ([fromVC isKindOfClass:[ProfileViewController class]]) {
+        if ([fromVC isKindOfClass:[ProfileViewController class]] && [toVC isKindOfClass:[HomeViewController class]] && self.selectedCell) {
             self.isPresenting = NO;
             return self;
         }

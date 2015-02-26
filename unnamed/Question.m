@@ -22,6 +22,8 @@ NSInteger const resultCount = 20;
 @dynamic anonymous;
 @dynamic complete;
 @dynamic createdAt;
+@dynamic isTextSurvey;
+@dynamic questionPhotos;
 
 - (id)initWithText:(NSString *)text {
     self = [super init];
@@ -44,12 +46,61 @@ NSInteger const resultCount = 20;
 }
 
 - (NSArray *)createAnswersFromQuestion {
+    if (self.isTextSurvey) {
+        return [self createTextAnswersFromQuestion];
+    } else {
+        return [self createPhotoAnswersFromQuestion];
+    }
+    
+}
+
+- (NSArray *)createTextAnswersFromQuestion {
     NSMutableArray *answers = [NSMutableArray array];
     for (int i = 0; i < self.numAnswers; i++) {
         Answer *answer = [[Answer alloc] init];
         answer.index = i;
         answer.count = [self.answerVoteCounts[i] integerValue];
         answer.text = self.answerTexts[i];
+        [answers addObject:answer];
+    }
+    return answers;
+}
+
+- (NSArray *)createPhotoAnswersFromQuestion {
+    NSMutableArray *answers = [NSMutableArray array];
+    for (int i = 0; i < self.numAnswers; i++) {
+        Answer *answer = [[Answer alloc] init];
+        answer.index = i;
+        answer.count = [self.answerVoteCounts[i] integerValue];
+        switch (i) {
+            case 0:
+            {
+                answer.photoFile = self.questionPhotos.answerPhoto1;
+                break;
+            }
+            case 1:
+            {
+                answer.photoFile = self.questionPhotos.answerPhoto2;
+                break;
+            }
+            case 2:
+            {
+                answer.photoFile = self.questionPhotos.answerPhoto1;
+                break;
+            }
+            case 3:
+            {
+                answer.photoFile = self.questionPhotos.answerPhoto1;
+                break;
+            }
+        }
+        [answer.photoFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                answer.photo = [UIImage imageWithData:imageData];
+            }
+        }];
+
+        
         [answers addObject:answer];
     }
     return answers;

@@ -7,6 +7,7 @@
 //
 
 #import <Parse/PFObject+Subclass.h>
+#import "QuestionPhotos.h"
 
 @interface Question : PFObject<PFSubclassing>
 + (NSString *)parseClassName;
@@ -18,7 +19,9 @@
 @property (nonatomic, strong) NSArray *answerVoteCounts;
 @property (nonatomic, assign) BOOL anonymous;
 @property (nonatomic, assign) BOOL complete;
-@property (nonatomic, readonly) NSDate *createdAt;
+@property (nonatomic, assign) NSDate *createdAt;
+@property (nonatomic, assign) BOOL isTextSurvey;
+@property (nonatomic, strong) QuestionPhotos *questionPhotos;
 
 - (id)initWithText:(NSString *)text;
 - (NSArray *)createAnswersFromQuestion;

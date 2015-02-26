@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "SurveyViewCell.h"
 
 @interface HomeProfileAnimation : NSObject  <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
-@property (nonatomic, strong) SurveyViewCell *selectedCell;
+@property (nonatomic, strong) UITableViewCell *selectedCell;
 @property (nonatomic, assign) BOOL isPresenting;
 @end

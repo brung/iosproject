@@ -9,14 +9,17 @@
 #import "HomeViewController.h"
 #import "SurveyViewController.h"
 #import "ProfileViewController.h"
+#import "ComposeViewController.h"
 #import "SurveyViewCell.h"
+#import "PhotoAnswerCell.h"
 #import "ParseClient.h"
 #import "UIColor+AppColor.h"
 #import "HomeProfileAnimation.h"
 
 NSString * const kSurveyViewCell = @"SurveyViewCell";
+NSString * const kPhotoViewCell = @"PhotoAnswerCell";
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, SurveyViewCellDelegate>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, SurveyViewCellDelegate, PhotoAnswerCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
 @property (nonatomic, strong) NSMutableArray *surveys;
@@ -24,6 +27,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 @property (nonatomic, assign) BOOL isUpdating;
 @property (nonatomic, assign) BOOL isInsertingNewPost;
 @property (nonatomic, strong) SurveyViewCell * prototypeSurveyCell;
+@property (nonatomic, strong) PhotoAnswerCell *prototypePhotoCell;
 @property (nonatomic, strong) HomeProfileAnimation *transitionAnimation;
 
 @end
@@ -62,6 +66,10 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     if (self) {
         self.title = @"Home";
         self.tabBarItem.image = [UIImage imageNamed:@"Home"];
+        UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"User Male"] style:UIBarButtonItemStylePlain target:self action:@selector(onProfileTap)];
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+        UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Poll Topic"] style:UIBarButtonItemStylePlain target:self action:@selector(onCreateTap)];
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem;
     }
     return self;
 }
@@ -91,6 +99,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:kSurveyViewCell bundle:nil] forCellReuseIdentifier:kSurveyViewCell];
+    [self.tableView registerNib:[UINib nibWithNibName:kPhotoViewCell bundle:nil] forCellReuseIdentifier:kPhotoViewCell];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.backgroundColor = [UIColor appBgColor];
 
@@ -107,6 +116,10 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
                 [self.tableView endUpdates];
             }];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    self.transitionAnimation.selectedCell = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,6 +166,13 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     return _prototypeSurveyCell;
 }
 
+- (PhotoAnswerCell *)prototypePhotoCell {
+    if (!_prototypePhotoCell) {
+        _prototypePhotoCell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoViewCell];
+    }
+    return _prototypePhotoCell;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.surveys.count;
 }
@@ -164,11 +184,16 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
             [self fetchSurveys];
         }
     }
-    
-    SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
-    cell.survey = self.surveys[indexPath.row];
-    cell.delegate = self;
-    return cell;
+    Survey *survey = self.surveys[indexPath.row];
+    if (survey.question.isTextSurvey) {
+        SurveyViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSurveyViewCell];
+        [self configureCell:cell forRowAtIndexPath:indexPath];
+        return cell;
+    } else {
+        PhotoAnswerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kPhotoViewCell];
+        [self configureCell:cell forRowAtIndexPath:indexPath];
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -185,17 +210,47 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
-    [self.prototypeSurveyCell layoutIfNeeded];
-    CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
-    return size.height + 1;
+    Survey *survey = self.surveys[indexPath.row];
+    if (survey.question.isTextSurvey) {
+        [self configureCell:self.prototypeSurveyCell forRowAtIndexPath:indexPath];
+        [self.prototypeSurveyCell layoutIfNeeded];
+        CGSize size = [self.prototypeSurveyCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+        return size.height + 1;
+    } else {
+        [self configureCell:self.prototypePhotoCell forRowAtIndexPath:indexPath];
+        [self.prototypePhotoCell layoutIfNeeded];
+        CGSize size = [self.prototypePhotoCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        //    NSLog(@"Row %ld has height %f", indexPath.row, size.height);
+        return size.height;
+    }
+}
+
+- (void)configureCell:(UITableViewCell *)pCell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([pCell isKindOfClass:[SurveyViewCell class]]) {
+        SurveyViewCell *cell = (SurveyViewCell *)pCell;
+        cell.survey = self.surveys[indexPath.row];
+        cell.delegate = self;
+    } else if ([pCell isKindOfClass:[PhotoAnswerCell class]]) {
+        PhotoAnswerCell *cell = (PhotoAnswerCell *)pCell;
+        cell.survey = self.surveys[indexPath.row];
+        cell.delegate = self;
+    }
 }
 
 #pragma mark - SurveyViewCellDelegate methods
 - (void)surveyViewCell:(SurveyViewCell *)cell didClickOnUser:(User *)user {
-    if ([user.objectId isEqualToString:[User currentUser].objectId]) {
-        [self.tabBarController setSelectedIndex:2];
+    [self clickedOnCell:cell userPhoto:user];
+}
+
+#pragma mark - PhotoAnswerCellDelegate methods
+- (void)photoAnswerCell:(PhotoAnswerCell *)cell didClickOnUser:(User *)user{
+    [self clickedOnCell:cell userPhoto:user];
+}
+
+- (void)clickedOnCell:(UITableViewCell *)cell userPhoto:(User *)user {
+    if ([user isEqualUser:[User currentUser]]) {
+        [self onProfileTap];
     } else {
         ProfileViewController *vc = [[ProfileViewController alloc] init];
         vc.user = user;
@@ -204,6 +259,7 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
 
 #pragma mark - Private Methods
 - (void)onNewPost:(NSNotification *)notification {
@@ -216,15 +272,21 @@ NSString * const kSurveyViewCell = @"SurveyViewCell";
     }
 }
 
-- (void)onUpdatePost {
-    [self.tableView reloadData];
+- (void)onProfileTap {
+    ProfileViewController *vc = [[ProfileViewController alloc] init];
+    vc.user = [User currentUser];
+    vc.view.frame = self.view.frame;
+    self.transitionAnimation.selectedCell = nil;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)configureCell:(UITableViewCell *)pCell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([pCell isKindOfClass:[SurveyViewCell class]]) {
-        SurveyViewCell *cell = (SurveyViewCell *)pCell;
-        cell.survey = self.surveys[indexPath.row];
-    }
+- (void)onCreateTap{
+    ComposeViewController *vc = [[ComposeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onUpdatePost {
+    [self.tableView reloadData];
 }
 
 @end

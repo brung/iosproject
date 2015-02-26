@@ -36,15 +36,15 @@ NSInteger const ResultCount = 8;
 //}
 
 + (void)getUser:(User *)user surveysComplete:(BOOL)complete onPage:(NSInteger)page withCompletion:(void(^)(NSArray *surveys, NSError *error))completion {
-    if (!user) {
+    if (!user || !user.parseUser) {
         completion([NSArray array], [[NSError alloc] initWithDomain:@"No user found" code:909 userInfo:nil]);
+        return;
     }
-    PFQuery *userQuery = [PFUser query];
-    [userQuery whereKey:@"objectId" equalTo:user.objectId];
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
-    [query whereKey:@"user" matchesQuery:userQuery];
+    [query whereKey:@"user" equalTo:user.parseUser];
     [query includeKey:@"user"];
+    [query includeKey:@"questionPhotos"];
     [query whereKey:@"complete" equalTo:@(complete)];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
@@ -62,6 +62,7 @@ NSInteger const ResultCount = 8;
     PFQuery *query = [Question query];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"user"];
+    [query includeKey:@"questionPhotos"];
     query.skip = page * ResultCount;
     query.limit = ResultCount;
 
@@ -109,7 +110,8 @@ NSInteger const ResultCount = 8;
     }];
 }
 
-+ (void)saveSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
+
++ (void)saveTextSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
     NSMutableArray *validAnswers = [NSMutableArray array];
     for (Answer *answer in survey.answers) {
         if ([answer.text length] >= 1) {
@@ -121,12 +123,12 @@ NSInteger const ResultCount = 8;
         survey.question.anonymous = NO;
         survey.question.complete = NO;
         survey.question.numAnswers = validAnswers.count;
-        survey.question.answerTexts = validAnswers;
         NSMutableArray *counts = [NSMutableArray array];
         for (int i = 0; i < validAnswers.count; i++) {
             [counts addObject:@(0)];
         }
         survey.question.answerVoteCounts = counts;
+        survey.question.answerTexts = [NSArray arrayWithArray:validAnswers];
         [survey.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 completion(YES, nil);
@@ -135,6 +137,76 @@ NSInteger const ResultCount = 8;
                 completion(NO, error);
             }
         }];
+    }
+}
+
++ (void)savePhotoSurvey:(Survey *)survey withCompletion:(void(^)(BOOL succeeded, NSError *error))completion{
+    NSMutableArray *validAnswers = [NSMutableArray array];
+    for (Answer *answer in survey.answers) {
+        if (answer.photo) {
+            [validAnswers addObject:answer.photo];
+        }
+    }
+    if ([survey.question.text length] >= 8 && validAnswers.count >= 2) {
+        //Submit question
+        survey.question.anonymous = NO;
+        survey.question.complete = NO;
+        survey.question.numAnswers = validAnswers.count;
+        NSMutableArray *counts = [NSMutableArray array];
+        for (int i = 0; i < validAnswers.count; i++) {
+            [counts addObject:@(0)];
+        }
+        survey.question.answerVoteCounts = counts;
+        QuestionPhotos *questionPhotos = [[QuestionPhotos alloc] init];
+        for (int i = 0; i < validAnswers.count && i < 4; i++) {
+            NSData *imageData = UIImagePNGRepresentation(validAnswers[i]);
+            switch (i) {
+                case 0:
+                {
+                    PFFile *imageFile = [PFFile fileWithName:@"answer1.png" data:imageData];
+                    questionPhotos.answerPhoto1 = imageFile;
+                    break;
+                }
+                case 1:
+                {
+                    PFFile *imageFile = [PFFile fileWithName:@"answer2.png" data:imageData];
+                    questionPhotos.answerPhoto2 = imageFile;
+                    break;
+                }
+                case 2:
+                {
+                    PFFile *imageFile = [PFFile fileWithName:@"answer3.png" data:imageData];
+                    questionPhotos.answerPhoto3 = imageFile;
+                    break;
+                }
+                case 3:
+                {
+                    PFFile *imageFile = [PFFile fileWithName:@"answer4.png" data:imageData];
+                    questionPhotos.answerPhoto4 = imageFile;
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+        [questionPhotos saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                survey.question.questionPhotos = questionPhotos;
+                [survey.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        completion(YES, nil);
+                    } else {
+                        NSLog(@"unable to save question");
+                        completion(NO, error);
+                    }
+                }];
+            } else {
+                completion(NO, error);
+            }
+        }];
+    } else {
+        completion([NSArray array], [[NSError alloc] initWithDomain:@"Not enough valid answers for question" code:500 userInfo:nil]);
+        return;
     }
 }
 

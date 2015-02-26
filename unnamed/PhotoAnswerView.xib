@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoAnswerView">
+            <connections>
+                <outlet property="barView" destination="Q0G-YW-g9F" id="FZg-Mn-Iii"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="dHJ-fU-r4z"/>
+                <outlet property="photoView" destination="0TJ-AY-mdA" id="1KZ-4K-bmK"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0TJ-AY-mdA">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="0TJ-AY-mdA" secondAttribute="height" multiplier="1:1" id="evS-2A-k9x"/>
+                    </constraints>
+                </imageView>
+                <view alpha="0.79999999999999982" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0G-YW-g9F" customClass="GRKBarGraphView">
+                    <rect key="frame" x="0.0" y="592" width="600" height="8"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="8" id="uxn-u4-avl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0TJ-AY-mdA" secondAttribute="trailing" id="8lk-ev-Zx3"/>
+                <constraint firstItem="0TJ-AY-mdA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Dah-7U-gLs"/>
+                <constraint firstAttribute="trailing" secondItem="Q0G-YW-g9F" secondAttribute="trailing" id="KGI-zN-TuZ"/>
+                <constraint firstAttribute="bottom" secondItem="0TJ-AY-mdA" secondAttribute="bottom" id="LDL-V2-iHd"/>
+                <constraint firstItem="Q0G-YW-g9F" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Xk0-um-mVy"/>
+                <constraint firstAttribute="bottom" secondItem="Q0G-YW-g9F" secondAttribute="bottom" id="s83-k0-CKH"/>
+                <constraint firstItem="0TJ-AY-mdA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yVt-9Q-mNF"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
