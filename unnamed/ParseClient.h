@@ -27,6 +27,6 @@ extern NSInteger const ResultCount;
 + (void)saveVoteOnSurvey:(Survey *)survey withAnswer:(Answer *)answer withCompletion:(void(^)(Survey *survey, NSError *error))completion;
 + (void)setImageView:(UIImageView *)iView fromAnswer:(Answer *)answer;
 
-+ (void)saveCommentOnSurvey:(Survey *)survey withComment:(Comment *)comment withCompletion:(void(^)(Survey *survey, NSError *error))completion;
++ (void)saveComment:(Comment *)comment withCompletion:(void(^)(NSError *error))completion;
 + (void)getCommentsOnSurvey:(Survey *)survey withCompletion:(void(^)(NSArray *comments, NSError *error))completion;
 @end
