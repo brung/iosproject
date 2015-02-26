@@ -17,12 +17,14 @@
 #import "GrayBarButtonItem.h"
 #import "UIColor+AppColor.h"
 #import "CmtViewController.h"
-#import "CommentCollectionView.h"
+#import "DetailCommentCell.h"
+
 
 
 NSString * const AnswerCellNib = @"DetailAnswerCell";
 NSString * const QuestionCellNib = @"DetailQuestionCell";
 NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
+NSString * const CommentCellNib = @"DetailCommentCell";
 
 @interface SurveyViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -50,12 +52,16 @@ NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
     [self.tableView registerNib:[UINib nibWithNibName:AnswerCellNib bundle:nil] forCellReuseIdentifier:AnswerCellNib];
     [self.tableView registerNib:[UINib nibWithNibName:QuestionCellNib bundle:nil] forCellReuseIdentifier:QuestionCellNib];
     [self.tableView registerNib:[UINib nibWithNibName:PhotoAnswerCellNib bundle:nil] forCellReuseIdentifier:PhotoAnswerCellNib];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:CommentCellNib bundle:nil] forCellReuseIdentifier:CommentCellNib];
     [self.tableView reloadData];
     
     [ParseClient getCommentsOnSurvey:_survey withCompletion:^(NSArray *comments, NSError *error) {
-        NSLog(@"just tried to get comments for this survey!");
-        [self.comments initWithArray:comments];
+        if(comments!=nil){
+            [self.comments initWithArray:comments];
+        }
+        else{
+            NSLog(@"Comments retrieval failed! Error is %@", [error localizedDescription]);
+        }
     }];
     
 }
@@ -96,7 +102,13 @@ NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.surveyContents.count;
+    if(section == 0) return self.surveyContents.count;
+    else return self.comments.count;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if(self.comments.count!=0) return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,6 +133,10 @@ NSString * const PhotoAnswerCellNib = @"DetailPhotoAnswerCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 1){
+        DetailCommentCell * cell = [self.tableView dequeueReusableCellWithIdentifier:CommentCellNib];
+        return cell;
+    }
     if ([self.surveyContents[indexPath.row] isKindOfClass:[Question class]]) {
         DetailQuestionCell *cell = [self.tableView dequeueReusableCellWithIdentifier:QuestionCellNib];
         [self configureCell:cell forRowAtIndexPath:indexPath];
