@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Survey.h"
+@class CmtViewController;
+
+@protocol CmtViewControllerDelegate <NSObject>
+- (void)didPostComment:(CmtViewController *)vc;
+@end
 
 @interface CmtViewController : UIViewController
 @property (nonatomic, strong) Survey *survey;
+@property (nonatomic, weak) id<CmtViewControllerDelegate> delegate;
+
 @end

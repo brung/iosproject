@@ -84,23 +84,28 @@ NSString * const WriteAComment = @"Leave a comment here . . .";
         self.isUpdating = YES;
         if ([self.commentTextView.text length] >= 8 ) {
             //Submit comment
-            NSLog(@"task: save comment to Parse");
+            //NSLog(@"task: save comment to Parse");
             //construct a comment here...
             Comment * comment = [[Comment alloc] init];
             comment.text = self.commentTextView.text;
             comment.user = [PFUser currentUser];
             comment.questionId = _survey.question.objectId;
-            NSLog(@"in CmtViewController: Comment.questionId is %@", comment.questionId);
+            NSLog(@"in CmtViewController: Comment.questionId is %@, comment user name is %@", comment.questionId, comment.user[@"profile"][@"name"]);
             [ParseClient saveComment: comment withCompletion:^(NSError *error) {
                 if(error==nil){
-                    NSLog(@"CmtViewController: comment saved successfully!");
+                     NSLog(@"CmtViewController: comment saved successfully!");
+                    [self.delegate didPostComment:self];
+                     NSLog(@"CmtViewController: just posted a comment!");
+                    [self.navigationController popViewControllerAnimated:YES];
                 }else{
                     NSLog(@"CmtViewController: comment saving failed - %@", [error localizedDescription]);
+                    [[[UIAlertView alloc] initWithTitle:@"Comment Post Failed" message:@"Unable to post comment at this time. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                 }
             }];
+        }else{
+            self.isUpdating = NO;
         }
     }
 }
-
 
 @end

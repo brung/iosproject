@@ -336,6 +336,9 @@
 				B8C704A71A97065600243C3B /* DetailQuestionCell.h */,
 				B8C704A81A97065600243C3B /* DetailQuestionCell.m */,
 				B8C704A91A97065600243C3B /* DetailQuestionCell.xib */,
+				E253726F1A9F0CB20023C8C1 /* DetailCommentCell.h */,
+				E25372701A9F0CB20023C8C1 /* DetailCommentCell.m */,
+				E25372711A9F0CB20023C8C1 /* DetailCommentCell.xib */,
 				B862A8891A970E25008B2310 /* DetailAnswerCell.h */,
 				B862A88A1A970E25008B2310 /* DetailAnswerCell.m */,
 				B862A88B1A970E25008B2310 /* DetailAnswerCell.xib */,
@@ -363,9 +366,6 @@
 				3E3C84BE1A9DB7FD00A053CA /* DetailPhotoAnswerCell.h */,
 				3E3C84BF1A9DB7FD00A053CA /* DetailPhotoAnswerCell.m */,
 				3E3C84C01A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib */,
-				E253726F1A9F0CB20023C8C1 /* DetailCommentCell.h */,
-				E25372701A9F0CB20023C8C1 /* DetailCommentCell.m */,
-				E25372711A9F0CB20023C8C1 /* DetailCommentCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -602,7 +602,6 @@
 				B8C0DBDC1A95138C0023BC39 /* ComposeAnswerCell.m in Sources */,
 				B827A9E81A9815E100AB43CE /* ProfileImageView.m in Sources */,
 				B87C15BC1A93113400191823 /* LoginViewController.m in Sources */,
-				E22436071A9F01A800DE9280 /* CommentCell.m in Sources */,
 				B82956BC1A9C553200D0ECFD /* CameraViewController.m in Sources */,
 				B895C4AF1A9D6516001DF829 /* PhotoAnswerCell.m in Sources */,
 				B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */,
