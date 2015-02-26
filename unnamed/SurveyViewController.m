@@ -32,7 +32,7 @@ NSString * const CommentCellNib = @"DetailCommentCell";
 @property (nonatomic, assign) NSInteger voteTotal;
 @property (nonatomic, strong) DetailQuestionCell *prototypeQuestionCell;
 @property (nonatomic, strong) DetailAnswerCell *prototypeAnswerCell;
-@property (nonatomic, strong) NSArray * comments;
+@property (nonatomic, strong) NSMutableArray * comments;
 @property (nonatomic, strong) DetailPhotoAnswerCell *prototypePhotoAnswerCell;
 
 @end
@@ -57,7 +57,10 @@ NSString * const CommentCellNib = @"DetailCommentCell";
     
     [ParseClient getCommentsOnSurvey:_survey withCompletion:^(NSArray *comments, NSError *error) {
         if(comments!=nil){
-            [self.comments initWithArray:comments];
+            self.comments = [NSMutableArray array];
+            [self.comments addObjectsFromArray:comments];
+            NSLog(@"Comments retrieval succeed! Get back %ld comments for current survey!", self.comments.count);
+            [self.tableView reloadData];
         }
         else{
             NSLog(@"Comments retrieval failed! Error is %@", [error localizedDescription]);
@@ -103,11 +106,18 @@ NSString * const CommentCellNib = @"DetailCommentCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0) return self.surveyContents.count;
-    else return self.comments.count;
+    else{
+        NSLog(@"section = 1 now!");
+        return self.comments.count;
+    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if(self.comments.count!=0) return 2;
+    if(self.comments.count!=0){
+        NSLog(@"table has 2 sections now");
+        return 2;
+    }
+     NSLog(@"table has 1 section now");
     return 1;
 }
 
