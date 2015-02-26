@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3E2BB7E01A94FF0000E78B3A /* AppNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BB7DE1A94FF0000E78B3A /* AppNavigationController.m */; };
 		3E2BB7E11A94FF0000E78B3A /* AppNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2BB7DF1A94FF0000E78B3A /* AppNavigationController.xib */; };
+		3E3C84C11A9DB7FD00A053CA /* DetailPhotoAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C84BF1A9DB7FD00A053CA /* DetailPhotoAnswerCell.m */; };
+		3E3C84C21A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3C84C01A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib */; };
 		3E4B809D1A9C41CF004F5D78 /* CommentCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4B809C1A9C41CF004F5D78 /* CommentCollectionView.m */; };
 		3E4B80A01A9C42FB004F5D78 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4B809F1A9C42FB004F5D78 /* CommentView.m */; };
 		3E4B80A21A9C4345004F5D78 /* CommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4B80A11A9C4345004F5D78 /* CommentView.xib */; };
@@ -79,6 +81,9 @@
 		3E2BB7DD1A94FF0000E78B3A /* AppNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppNavigationController.h; sourceTree = "<group>"; };
 		3E2BB7DE1A94FF0000E78B3A /* AppNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppNavigationController.m; sourceTree = "<group>"; };
 		3E2BB7DF1A94FF0000E78B3A /* AppNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppNavigationController.xib; sourceTree = "<group>"; };
+		3E3C84BE1A9DB7FD00A053CA /* DetailPhotoAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPhotoAnswerCell.h; sourceTree = "<group>"; };
+		3E3C84BF1A9DB7FD00A053CA /* DetailPhotoAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPhotoAnswerCell.m; sourceTree = "<group>"; };
+		3E3C84C01A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPhotoAnswerCell.xib; sourceTree = "<group>"; };
 		3E4B809B1A9C41CF004F5D78 /* CommentCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCollectionView.h; sourceTree = "<group>"; };
 		3E4B809C1A9C41CF004F5D78 /* CommentCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCollectionView.m; sourceTree = "<group>"; };
 		3E4B809E1A9C42FB004F5D78 /* CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
@@ -340,6 +345,9 @@
 				B895C4AC1A9D6516001DF829 /* PhotoAnswerCell.h */,
 				B895C4AD1A9D6516001DF829 /* PhotoAnswerCell.m */,
 				B895C4AE1A9D6516001DF829 /* PhotoAnswerCell.xib */,
+				3E3C84BE1A9DB7FD00A053CA /* DetailPhotoAnswerCell.h */,
+				3E3C84BF1A9DB7FD00A053CA /* DetailPhotoAnswerCell.m */,
+				3E3C84C01A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -482,6 +490,7 @@
 				B87C15BD1A93113400191823 /* LoginViewController.xib in Resources */,
 				B8C0DBDD1A95138C0023BC39 /* ComposeAnswerCell.xib in Resources */,
 				B895C4A51A9CD9D4001DF829 /* PhotoAnswerView.xib in Resources */,
+				3E3C84C21A9DB7FD00A053CA /* DetailPhotoAnswerCell.xib in Resources */,
 				3E58B4CC1A98229200AA14D4 /* SurveyViewCell.xib in Resources */,
 				B8C0DBCE1A94F71A0023BC39 /* ComposeViewController.xib in Resources */,
 				3E4B80A21A9C4345004F5D78 /* CommentView.xib in Resources */,
@@ -571,6 +580,7 @@
 				B895C4AF1A9D6516001DF829 /* PhotoAnswerCell.m in Sources */,
 				B862A88C1A970E25008B2310 /* DetailAnswerCell.m in Sources */,
 				B8BA93F71A947817003BD476 /* Vote.m in Sources */,
+				3E3C84C11A9DB7FD00A053CA /* DetailPhotoAnswerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
