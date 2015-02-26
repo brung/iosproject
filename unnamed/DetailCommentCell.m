@@ -1,14 +1,14 @@
 //
-//  CommentCell.m
+//  DetailCommentCell.m
 //  unnamed
 //
-//  Created by Xiangyu Zhang on 2/25/15.
+//  Created by Xiangyu Zhang on 2/26/15.
 //  Copyright (c) 2015 com.yahoo. All rights reserved.
 //
 
-#import "CommentCell.h"
+#import "DetailCommentCell.h"
 
-@implementation CommentCell
+@implementation DetailCommentCell
 
 - (void)awakeFromNib {
     // Initialization code
