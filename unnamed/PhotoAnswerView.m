@@ -9,6 +9,7 @@
 #import "PhotoAnswerView.h"
 #import "GRKBarGraphView.h"
 #import "UIColor+AppColor.h"
+#import "ParseClient.h"
 
 @interface PhotoAnswerView()
 @property (strong, nonatomic) IBOutlet UIView *contentView;
@@ -64,11 +65,10 @@
 - (void)setAnswer:(Answer *)answer andTotalVotes:(NSInteger)total {
     _answer = answer;
     _totalVotes = total;
-    self.photoView.image = answer.photo;
+    [ParseClient setImageView:self.photoView fromAnswer:self.answer];
     float percent = total > 0 ? (float)answer.count / (float)total : 0;
     self.barView.percent = percent;
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.

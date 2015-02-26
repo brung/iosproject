@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Add a Photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81f-KB-VHg">
-                        <rect key="frame" x="30" y="62" width="80.5" height="14.5"/>
+                        <rect key="frame" x="30" y="62" width="81" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.026506696430000001" green="0.025706745999999999" blue="0.025623465750000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
